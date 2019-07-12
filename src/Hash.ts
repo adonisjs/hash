@@ -10,6 +10,7 @@
 import { Manager, DriverNodesList, ExtractDriversImpl, ExtractDefaultDriverImpl } from '@poppinss/manager'
 import { HashConfigContract, HashDrivers, HashDriverContract } from './contracts'
 import { Bcrypt } from './Drivers/Bcrypt'
+import { Argon } from './Drivers/Argon'
 
 /**
  * The Hash module exposes the API to hash values using an underlying
@@ -50,27 +51,27 @@ export class Hash<
    * someone will ask for the `argon` driver.
    */
   protected createArgon () {
-    return new Bcrypt(this.config.argon!)
+    return new Argon(this.config.argon!)
   }
 
+  /**
+   * Hash value using the default driver
+   */
   public hash (value: string): ReturnType<DefaultDriver['hash']> {
     return this.driver().hash(value) as ReturnType<DefaultDriver['hash']>
   }
 
+  /**
+   * Verify value using the default driver
+   */
   public verify (hashedValue: string, plainValue: string): ReturnType<DefaultDriver['verify']> {
     return this.driver().verify(hashedValue, plainValue) as ReturnType<DefaultDriver['verify']>
   }
-}
 
-const config = {
-  driver: 'bcrypt' as 'bcrypt',
-  argon: {
-    memory: 1,
-    parallelism: 1,
-    variant: 'id' as 'id',
-    saltSize: 16,
-    iterations: 2,
-  },
+  /**
+   * Find if value needs to be re-hashed as per the default driver.
+   */
+  public needsReHash (hashedValue: string): ReturnType<DefaultDriver['needsReHash']> {
+    return this.driver().needsReHash(hashedValue) as ReturnType<DefaultDriver['needsReHash']>
+  }
 }
-
-const hash = new Hash({}, config)
