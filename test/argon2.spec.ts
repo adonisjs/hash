@@ -1,0 +1,106 @@
+/*
+* @poppinss/hash
+*
+* (c) Harminder Virk <virk@adonisjs.com>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
+import * as test from 'japa'
+import * as phc from '@phc/format'
+import { Argon } from '../src/Drivers/Argon'
+
+test.group('Argon', () => {
+  test('hash value', async (assert) => {
+    const bcrypt = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+
+    const hashed = await bcrypt.hash('hello-world')
+    const values = phc.deserialize(hashed)
+
+    assert.equal(values.id, 'argon2id')
+    assert.equal(values.version, 19)
+    assert.deepEqual(values.params, { t: 3, m: 4096, p: 1 })
+    assert.lengthOf(values.salt, 16)
+  })
+
+  test('verify hash value', async (assert) => {
+    const bcrypt = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+
+    const hashed = await bcrypt.hash('hello-world')
+    let matches = await bcrypt.verify(hashed, 'hello-world')
+    assert.isTrue(matches)
+
+    matches = await bcrypt.verify(hashed, 'hi-world')
+    assert.isFalse(matches)
+  })
+
+  test('return true for needsRehash when variant is different', async (assert) => {
+    const argon = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+
+    const argon2 = new Argon({
+      variant: 'i',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+
+    const hashed = await argon.hash('hello-world')
+    assert.isTrue(argon2.needsReHash(hashed))
+    assert.isFalse(argon.needsReHash(hashed))
+  })
+
+  test('return true for needsRehash when version is different', async (assert) => {
+    const argon = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+
+    const hashed = await argon.hash('hello-world')
+    assert.isTrue(argon.needsReHash(hashed.replace('$v=19', '$v=18')))
+  })
+
+  test('return true for needsRehash when one of the params is different', async (assert) => {
+    const argon = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+
+    const argon2 = new Argon({
+      variant: 'id',
+      iterations: 1,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+
+    const hashed = await argon.hash('hello-world')
+    assert.isTrue(argon2.needsReHash(hashed))
+    assert.isFalse(argon.needsReHash(hashed))
+  })
+})

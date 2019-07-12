@@ -75,5 +75,10 @@
   "np": {
     "contents": ".",
     "anyBranch": false
+  },
+  "dependencies": {
+    "@phc/argon2": "^1.0.9",
+    "@phc/bcrypt": "^1.0.2",
+    "@poppinss/manager": "^1.1.2"
   }
 }
