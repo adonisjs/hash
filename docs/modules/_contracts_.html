@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;src/Drivers/Bcrypt&quot; | @poppinss/hash</title>
+	<title>&quot;contracts&quot; | @poppinss/hash</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -49,13 +49,13 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="_src_drivers_bcrypt_.html">&quot;src/Drivers/Bcrypt&quot;</a>
+					<a href="_contracts_.html">&quot;contracts&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;src/Drivers/Bcrypt&quot;</h1>
+			<h1>External module &quot;contracts&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -67,11 +67,101 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_src_drivers_bcrypt_.bcrypt.html" class="tsd-kind-icon">Bcrypt</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_contracts_.argoncontract.html" class="tsd-kind-icon">Argon<wbr>Contract</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_contracts_.bcryptcontract.html" class="tsd-kind-icon">Bcrypt<wbr>Contract</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_contracts_.hashdrivercontract.html" class="tsd-kind-icon">Hash<wbr>Driver<wbr>Contract</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_contracts_.html#argonconfigcontract" class="tsd-kind-icon">Argon<wbr>Config<wbr>Contract</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_contracts_.html#bcryptconfigcontract" class="tsd-kind-icon">Bcrypt<wbr>Config<wbr>Contract</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_contracts_.html#hashconfigcontract" class="tsd-kind-icon">Hash<wbr>Config<wbr>Contract</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_contracts_.html#hashdrivers" class="tsd-kind-icon">Hash<wbr>Drivers</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="argonconfigcontract" class="tsd-anchor"></a>
+					<h3>Argon<wbr>Config<wbr>Contract</h3>
+					<div class="tsd-signature tsd-kind-icon">Argon<wbr>Config<wbr>Contract<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/poppinss/hash/blob/87b7d62/src/contracts.ts#L46">contracts.ts:46</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Shape of argon2 config</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="bcryptconfigcontract" class="tsd-anchor"></a>
+					<h3>Bcrypt<wbr>Config<wbr>Contract</h3>
+					<div class="tsd-signature tsd-kind-icon">Bcrypt<wbr>Config<wbr>Contract<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/poppinss/hash/blob/87b7d62/src/contracts.ts#L29">contracts.ts:29</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Shape of bcrypt config</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="hashconfigcontract" class="tsd-anchor"></a>
+					<h3>Hash<wbr>Config<wbr>Contract</h3>
+					<div class="tsd-signature tsd-kind-icon">Hash<wbr>Config<wbr>Contract<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">ExtractDriversConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DriversList</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/poppinss/hash/blob/87b7d62/src/contracts.ts#L84">contracts.ts:84</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Shape of config accepted by the Hash module</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="hashdrivers" class="tsd-anchor"></a>
+					<h3>Hash<wbr>Drivers</h3>
+					<div class="tsd-signature tsd-kind-icon">Hash<wbr>Drivers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/poppinss/hash/blob/87b7d62/src/contracts.ts#L70">contracts.ts:70</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A list of default hash drivers. Upon extending, do make
+							sure to extend the given type aswell.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
 					</div>
 				</section>
 			</section>
@@ -80,29 +170,44 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+						<a href="../index.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_index_.html">"index"</a>
+						<a href="_drivers_argon_.html">"<wbr>Drivers/<wbr>Argon"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_src_drivers_argon_.html">"src/<wbr>Drivers/<wbr>Argon"</a>
+						<a href="_drivers_bcrypt_.html">"<wbr>Drivers/<wbr>Bcrypt"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_hash_.html">"<wbr>Hash"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_src_drivers_bcrypt_.html">"src/<wbr>Drivers/<wbr>Bcrypt"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_src_hash_.html">"src/<wbr>Hash"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_src_contracts_.html">"src/contracts"</a>
+						<a href="_contracts_.html">"contracts"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_src_drivers_bcrypt_.bcrypt.html" class="tsd-kind-icon">Bcrypt</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_contracts_.argoncontract.html" class="tsd-kind-icon">Argon<wbr>Contract</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_contracts_.bcryptcontract.html" class="tsd-kind-icon">Bcrypt<wbr>Contract</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_contracts_.hashdrivercontract.html" class="tsd-kind-icon">Hash<wbr>Driver<wbr>Contract</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_contracts_.html#argonconfigcontract" class="tsd-kind-icon">Argon<wbr>Config<wbr>Contract</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_contracts_.html#bcryptconfigcontract" class="tsd-kind-icon">Bcrypt<wbr>Config<wbr>Contract</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_contracts_.html#hashconfigcontract" class="tsd-kind-icon">Hash<wbr>Config<wbr>Contract</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_contracts_.html#hashdrivers" class="tsd-kind-icon">Hash<wbr>Drivers</a>
 					</li>
 				</ul>
 			</nav>
