@@ -10,6 +10,7 @@
 
 * [ArgonContract](../interfaces/_contracts_.argoncontract.md)
 * [BcryptContract](../interfaces/_contracts_.bcryptcontract.md)
+* [HashContract](../interfaces/_contracts_.hashcontract.md)
 * [HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md)
 
 #### Type aliases

@@ -24,6 +24,7 @@ Hash driver.
 ## Implements
 
 * `ManagerContract<HashDriverContract, ExtractDriversImpl<Drivers>, DefaultDriver>`
+* [HashContract](../interfaces/_contracts_.hashcontract.md)‹*`Drivers`*›
 
 ### Index
 
@@ -115,6 +116,8 @@ ___
 
 ▸ **driver**<**K**>(`name`: `K`): *`DriversList[K]`*
 
+*Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
+
 *Inherited from void*
 
 **Type parameters:**
@@ -131,6 +134,8 @@ Name | Type |
 
 ▸ **driver**(`name`: string): *[HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md)*
 
+*Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
+
 *Inherited from void*
 
 **Parameters:**
@@ -142,6 +147,8 @@ Name | Type |
 **Returns:** *[HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md)*
 
 ▸ **driver**(): *`DefaultDriver`*
+
+*Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
 
 *Inherited from void*
 
@@ -189,6 +196,8 @@ ___
 
 ▸ **hash**(`value`: string): *`ReturnType<DefaultDriver["hash"]>`*
 
+*Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
+
 Hash value using the default driver
 
 **Parameters:**
@@ -205,6 +214,8 @@ ___
 
 ▸ **needsReHash**(`hashedValue`: string): *`ReturnType<DefaultDriver["needsReHash"]>`*
 
+*Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
+
 Find if value needs to be re-hashed as per the default driver.
 
 **Parameters:**
@@ -220,6 +231,8 @@ ___
 ###  verify
 
 ▸ **verify**(`hashedValue`: string, `plainValue`: string): *`ReturnType<DefaultDriver["verify"]>`*
+
+*Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
 
 Verify value using the default driver
 
