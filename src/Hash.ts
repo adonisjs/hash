@@ -8,7 +8,7 @@
 */
 
 import { Manager, DriverNodesList, ExtractDriversImpl, ExtractDefaultDriverImpl } from '@poppinss/manager'
-import { HashConfigContract, HashDrivers, HashDriverContract } from './contracts'
+import { HashConfigContract, HashDrivers, HashDriverContract, HashContract } from './contracts'
 import { Bcrypt } from './Drivers/Bcrypt'
 import { Argon } from './Drivers/Argon'
 
@@ -24,7 +24,7 @@ export class Hash<
   HashDriverContract,
   ExtractDriversImpl<Drivers>,
   DefaultDriver
-> {
+> implements HashContract<Drivers> {
   constructor (container, public config: Config) {
     super(container)
   }

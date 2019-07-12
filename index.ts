@@ -14,4 +14,5 @@ export {
   HashConfigContract,
   HashDrivers,
   HashDriverContract,
+  HashContract,
 } from './src/contracts'

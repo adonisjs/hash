@@ -7,7 +7,13 @@
 * file that was distributed with this source code.
 */
 
-import { DriverNodesList, ExtractDriversConfig } from '@poppinss/manager'
+import {
+  DriverNodesList,
+  ExtractDriversConfig,
+  ManagerContract,
+  ExtractDriversImpl,
+  ExtractDefaultDriverImpl,
+} from '@poppinss/manager'
 
 /**
  * Every driver must implement the Hash driver
@@ -86,3 +92,20 @@ export type HashConfigContract<
 > = {
   driver: keyof DriversList,
 } & ExtractDriversConfig<DriversList>
+
+/**
+ * Hash mananger interface
+ */
+export interface HashContract<
+  Drivers extends DriverNodesList<HashDriverContract, any>,
+  Config extends HashConfigContract<Drivers> = HashConfigContract<Drivers>,
+  DefaultDriver extends ExtractDefaultDriverImpl<Drivers, Config> = ExtractDefaultDriverImpl<Drivers, Config>
+> extends ManagerContract<
+  HashDriverContract,
+  ExtractDriversImpl<Drivers>,
+  DefaultDriver
+> {
+  hash (value: string): ReturnType<DefaultDriver['hash']>
+  verify (hashedValue: string, plainValue: string): ReturnType<DefaultDriver['verify']>
+  needsReHash (hashedValue: string): ReturnType<DefaultDriver['needsReHash']>
+}
