@@ -9,6 +9,7 @@
 
 import * as test from 'japa'
 import * as phc from '@phc/format'
+import * as argon2 from 'argon2'
 import { Argon } from '../src/Drivers/Argon'
 
 test.group('Argon', () => {
@@ -102,5 +103,17 @@ test.group('Argon', () => {
     const hashed = await argon.hash('hello-world')
     assert.isTrue(argon2.needsReHash(hashed))
     assert.isFalse(argon.needsReHash(hashed))
+  })
+
+  test('return true for needsRehash when hash value is not formatted as a phc string', async (assert) => {
+    const hash = await argon2.hash('hello-world')
+    const argon = new Argon({
+      variant: 'id',
+      iterations: 1,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+    assert.isTrue(argon.needsReHash(hash))
   })
 })

@@ -9,6 +9,7 @@
 
 import * as test from 'japa'
 import * as phc from '@phc/format'
+import * as PlainBcrypt from 'bcrypt'
 import { Bcrypt } from '../src/Drivers/Bcrypt'
 
 test.group('Bcrypt', () => {
@@ -48,5 +49,11 @@ test.group('Bcrypt', () => {
     const hashed = await bcrypt.hash('hello-world')
     assert.isTrue(bcrypt2.needsReHash(hashed))
     assert.isFalse(bcrypt.needsReHash(hashed))
+  })
+
+  test('return true for needsRehash when hash value is not formatted as a phc string', async (assert) => {
+    const hash = await PlainBcrypt.hash('hello-world', 10)
+    const bcrypt = new Bcrypt({ rounds: 10 })
+    assert.isTrue(bcrypt.needsReHash(hash))
   })
 })

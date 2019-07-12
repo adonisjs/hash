@@ -43,16 +43,27 @@ export class Bcrypt implements BcryptContract {
    */
   public needsReHash (value: string): boolean {
     const deserialized = phc.deserialize(value)
-    if (deserialized.id !== 'bcrypt') {
-      throw new Error('value is not a bcrypt hash')
+
+    /**
+     * Phc formatted Bycrpt hash
+     */
+    if (deserialized.id === 'bcrypt') {
+      if (this.version !== deserialized.version) {
+        return true
+      }
+
+      return !!Object.keys(this.params).find((key) => {
+        return deserialized.params[this.params[key]] !== this._config![key]
+      })
     }
 
-    if (this.version !== deserialized.version) {
+    /**
+     * Re-format non phc formatted bcrypt hashes.
+     */
+    if (value.startsWith('$2b') || value.startsWith('$2a')) {
       return true
     }
 
-    return !!Object.keys(this.params).find((key) => {
-      return deserialized.params[this.params[key]] !== this._config![key]
-    })
+    throw new Error('value is not a bcrypt hash')
   }
 }
