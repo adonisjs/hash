@@ -28,6 +28,8 @@ This module is used by [AdonisJs](https://adonisjs.com) to hash user password wi
 3. Wraps the hash output to a [PHC string format](https://github.com/P-H-C/phc-string-format/blob/master/phc-sf-spec.md), this allows upgrading user passwords, when the underlying configuration changes.
 
 ## Usage
+> The bcrypt driver doesn't work with Node v12 yet. We are waiting for bcrypt open issues to get fixed.
+
 Install the package from npm registry as follows:
 
 ```sh
