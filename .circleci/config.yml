@@ -31,6 +31,7 @@ jobs:
           paths:
             - node_modules
           key: 'v1-dependencies-{{ checksum "package.json" }}'
+      - run: npm rebuild
       - run: npm test
 workflows:
   version: 2
