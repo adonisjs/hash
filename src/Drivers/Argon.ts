@@ -7,10 +7,10 @@
 * file that was distributed with this source code.
 */
 
-import * as argon2 from '@phc/argon2'
 import * as phc from '@phc/format'
-
 import { ArgonConfigContract, ArgonContract } from '../contracts'
+
+let argon2: any
 
 /**
  * Hash driver built on top of argon hashing algorithm. The driver adheres
@@ -38,6 +38,9 @@ export class Argon implements ArgonContract {
   public version = 19
 
   constructor (private _config: ArgonConfigContract) {
+    if (!argon2) {
+      argon2 = require('@phc/argon2')
+    }
   }
 
   /**

@@ -8,8 +8,9 @@
 */
 
 import { BcryptConfigContract, BcryptContract } from '../contracts'
-import * as bcrypt from '@phc/bcrypt'
 import * as phc from '@phc/format'
+
+let bcrypt: any
 
 /**
  * Generates and verifies hash using Bcrypt as underlying
@@ -21,6 +22,9 @@ export class Bcrypt implements BcryptContract {
   public version = 98
 
   constructor (private _config: BcryptConfigContract) {
+    if (!bcrypt) {
+      bcrypt = require('@phc/bcrypt')
+    }
   }
 
   /**

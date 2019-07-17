@@ -31,6 +31,8 @@
   "homepage": "https://github.com/poppinss/hash#readme",
   "devDependencies": {
     "@adonisjs/mrm-preset": "^2.0.3",
+    "@phc/argon2": "^1.0.9",
+    "@phc/bcrypt": "^1.0.2",
     "@types/node": "^12.6.2",
     "commitizen": "^3.1.1",
     "cz-conventional-changelog": "^2.1.0",
@@ -78,8 +80,6 @@
     "anyBranch": false
   },
   "dependencies": {
-    "@phc/argon2": "^1.0.9",
-    "@phc/bcrypt": "^1.0.2",
     "@poppinss/manager": "^1.1.2"
   }
 }
