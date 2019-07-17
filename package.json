@@ -80,6 +80,7 @@
     "anyBranch": false
   },
   "dependencies": {
+    "@phc/format": "^0.5.0",
     "@poppinss/manager": "^1.1.2"
   }
 }
