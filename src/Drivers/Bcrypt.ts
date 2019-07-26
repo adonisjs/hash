@@ -7,10 +7,9 @@
 * file that was distributed with this source code.
 */
 
-import { BcryptConfigContract, BcryptContract } from '../contracts'
 import * as phc from '@phc/format'
-
-let bcrypt: any
+import * as bcrypt from '@phc/bcrypt'
+import { BcryptConfigContract, BcryptContract } from '../contracts'
 
 /**
  * Generates and verifies hash using Bcrypt as underlying
@@ -22,9 +21,6 @@ export class Bcrypt implements BcryptContract {
   public version = 98
 
   constructor (private _config: BcryptConfigContract) {
-    if (!bcrypt) {
-      bcrypt = require('@phc/bcrypt')
-    }
   }
 
   /**

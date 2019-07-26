@@ -9,8 +9,6 @@
 
 import { Manager, DriverNodesList, ExtractDriversImpl, ExtractDefaultDriverImpl } from '@poppinss/manager'
 import { HashConfigContract, HashDrivers, HashDriverContract, HashContract } from './contracts'
-import { Bcrypt } from './Drivers/Bcrypt'
-import { Argon } from './Drivers/Argon'
 
 /**
  * The Hash module exposes the API to hash values using an underlying
@@ -43,6 +41,7 @@ export class Hash<
    * someone will ask for the `bcrypt` driver.
    */
   protected createBcrypt () {
+    const { Bcrypt } = require('./Drivers/Bcrypt')
     return new Bcrypt(this.config.bcrypt!)
   }
 
@@ -51,6 +50,7 @@ export class Hash<
    * someone will ask for the `argon` driver.
    */
   protected createArgon () {
+    const { Argon } = require('./Drivers/Argon')
     return new Argon(this.config.argon!)
   }
 
