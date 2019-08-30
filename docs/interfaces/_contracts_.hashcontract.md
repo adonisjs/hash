@@ -1,6 +1,6 @@
-> **[@poppinss/hash](../README.md)**
+**[@poppinss/hash](../README.md)**
 
-[Globals](../README.md) / ["contracts"](../modules/_contracts_.md) / [HashContract](_contracts_.hashcontract.md) /
+[Globals](../README.md) › ["contracts"](../modules/_contracts_.md) › [HashContract](_contracts_.hashcontract.md)
 
 # Interface: HashContract <**Drivers, Config, DefaultDriver**>
 
@@ -8,15 +8,15 @@ Hash mananger interface
 
 ## Type parameters
 
-▪ **Drivers**: *`DriverNodesList<HashDriverContract, any>`*
+▪ **Drivers**: *DriverNodesList‹[HashDriverContract](_contracts_.hashdrivercontract.md), any›*
 
-▪ **Config**: *[HashConfigContract](../modules/_contracts_.md#hashconfigcontract)‹*`Drivers`*›*
+▪ **Config**: *[HashConfigContract](../modules/_contracts_.md#hashconfigcontract)‹Drivers›*
 
-▪ **DefaultDriver**: *`ExtractDefaultDriverImpl<Drivers, Config>`*
+▪ **DefaultDriver**: *ExtractDefaultDriverImpl‹Drivers, Config›*
 
 ## Hierarchy
 
-* `ManagerContract<HashDriverContract, ExtractDriversImpl<Drivers>, DefaultDriver>`
+* ManagerContract‹[HashDriverContract](_contracts_.hashdrivercontract.md), ExtractDriversImpl‹Drivers›, DefaultDriver›
 
   * **HashContract**
 
@@ -24,9 +24,9 @@ Hash mananger interface
 
 * [Hash](../classes/_hash_.hash.md)
 
-### Index
+## Index
 
-#### Methods
+### Methods
 
 * [driver](_contracts_.hashcontract.md#driver)
 * [extend](_contracts_.hashcontract.md#extend)
@@ -38,7 +38,7 @@ Hash mananger interface
 
 ###  driver
 
-▸ **driver**<**K**>(`name`: `K`): *`DriversList[K]`*
+▸ **driver**<**K**>(`name`: K): *DriversList[K]*
 
 *Inherited from void*
 
@@ -50,9 +50,9 @@ Hash mananger interface
 
 Name | Type |
 ------ | ------ |
-`name` | `K` |
+`name` | K |
 
-**Returns:** *`DriversList[K]`*
+**Returns:** *DriversList[K]*
 
 ▸ **driver**(`name`: string): *[HashDriverContract](_contracts_.hashdrivercontract.md)*
 
@@ -66,11 +66,11 @@ Name | Type |
 
 **Returns:** *[HashDriverContract](_contracts_.hashdrivercontract.md)*
 
-▸ **driver**(): *`DefaultDriver`*
+▸ **driver**(): *DefaultDriver*
 
 *Inherited from void*
 
-**Returns:** *`DefaultDriver`*
+**Returns:** *DefaultDriver*
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 ###  hash
 
-▸ **hash**(`value`: string): *`ReturnType<DefaultDriver["hash"]>`*
+▸ **hash**(`value`: string): *ReturnType‹DefaultDriver["hash"]›*
 
 **Parameters:**
 
@@ -108,13 +108,13 @@ Name | Type |
 ------ | ------ |
 `value` | string |
 
-**Returns:** *`ReturnType<DefaultDriver["hash"]>`*
+**Returns:** *ReturnType‹DefaultDriver["hash"]›*
 
 ___
 
 ###  needsReHash
 
-▸ **needsReHash**(`hashedValue`: string): *`ReturnType<DefaultDriver["needsReHash"]>`*
+▸ **needsReHash**(`hashedValue`: string): *ReturnType‹DefaultDriver["needsReHash"]›*
 
 **Parameters:**
 
@@ -122,13 +122,13 @@ Name | Type |
 ------ | ------ |
 `hashedValue` | string |
 
-**Returns:** *`ReturnType<DefaultDriver["needsReHash"]>`*
+**Returns:** *ReturnType‹DefaultDriver["needsReHash"]›*
 
 ___
 
 ###  verify
 
-▸ **verify**(`hashedValue`: string, `plainValue`: string): *`ReturnType<DefaultDriver["verify"]>`*
+▸ **verify**(`hashedValue`: string, `plainValue`: string): *ReturnType‹DefaultDriver["verify"]›*
 
 **Parameters:**
 
@@ -137,4 +137,4 @@ Name | Type |
 `hashedValue` | string |
 `plainValue` | string |
 
-**Returns:** *`ReturnType<DefaultDriver["verify"]>`*
+**Returns:** *ReturnType‹DefaultDriver["verify"]›*

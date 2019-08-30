@@ -7,8 +7,8 @@
 * file that was distributed with this source code.
 */
 
-import * as argon2 from '@phc/argon2'
-import * as phc from '@phc/format'
+import argon2 from '@phc/argon2'
+import phc from '@phc/format'
 import { ArgonConfigContract, ArgonContract } from '../contracts'
 
 /**

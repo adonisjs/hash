@@ -1,6 +1,6 @@
-> **[@poppinss/hash](../README.md)**
+**[@poppinss/hash](../README.md)**
 
-[Globals](../README.md) / ["Drivers/Bcrypt"](../modules/_drivers_bcrypt_.md) / [Bcrypt](_drivers_bcrypt_.bcrypt.md) /
+[Globals](../README.md) › ["Drivers/Bcrypt"](../modules/_drivers_bcrypt_.md) › [Bcrypt](_drivers_bcrypt_.bcrypt.md)
 
 # Class: Bcrypt
 
@@ -15,24 +15,24 @@ algorigthm.
 
 * [BcryptContract](../interfaces/_contracts_.bcryptcontract.md)
 
-### Index
+## Index
 
-#### Constructors
+### Constructors
 
 * [constructor](_drivers_bcrypt_.bcrypt.md#constructor)
 
-#### Properties
+### Properties
 
 * [ids](_drivers_bcrypt_.bcrypt.md#ids)
 * [version](_drivers_bcrypt_.bcrypt.md#version)
 
-#### Methods
+### Methods
 
 * [hash](_drivers_bcrypt_.bcrypt.md#hash)
 * [needsReHash](_drivers_bcrypt_.bcrypt.md#needsrehash)
 * [verify](_drivers_bcrypt_.bcrypt.md#verify)
 
-#### Object literals
+### Object literals
 
 * [params](_drivers_bcrypt_.bcrypt.md#params)
 
@@ -68,7 +68,7 @@ ___
 
 ###  hash
 
-▸ **hash**(`value`: string): *`Promise<string>`*
+▸ **hash**(`value`: string): *Promise‹string›*
 
 *Implementation of [BcryptContract](../interfaces/_contracts_.bcryptcontract.md)*
 
@@ -80,7 +80,7 @@ Name | Type |
 ------ | ------ |
 `value` | string |
 
-**Returns:** *`Promise<string>`*
+**Returns:** *Promise‹string›*
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 ###  verify
 
-▸ **verify**(`hashedValue`: string, `plainValue`: string): *`Promise<boolean>`*
+▸ **verify**(`hashedValue`: string, `plainValue`: string): *Promise‹boolean›*
 
 *Implementation of [BcryptContract](../interfaces/_contracts_.bcryptcontract.md)*
 
@@ -118,7 +118,7 @@ Name | Type |
 `hashedValue` | string |
 `plainValue` | string |
 
-**Returns:** *`Promise<boolean>`*
+**Returns:** *Promise‹boolean›*
 
 ## Object literals
 

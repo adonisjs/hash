@@ -7,9 +7,9 @@
 * file that was distributed with this source code.
 */
 
-import * as test from 'japa'
-import * as phc from '@phc/format'
-import * as argon2 from 'argon2'
+import test from 'japa'
+import phc from '@phc/format'
+import argon2 from 'argon2'
 import { Argon } from '../src/Drivers/Argon'
 
 test.group('Argon', () => {

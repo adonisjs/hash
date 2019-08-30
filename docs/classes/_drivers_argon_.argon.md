@@ -1,6 +1,6 @@
-> **[@poppinss/hash](../README.md)**
+**[@poppinss/hash](../README.md)**
 
-[Globals](../README.md) / ["Drivers/Argon"](../modules/_drivers_argon_.md) / [Argon](_drivers_argon_.argon.md) /
+[Globals](../README.md) › ["Drivers/Argon"](../modules/_drivers_argon_.md) › [Argon](_drivers_argon_.argon.md)
 
 # Class: Argon
 
@@ -15,24 +15,24 @@ to `phc` string format.
 
 * [ArgonContract](../interfaces/_contracts_.argoncontract.md)
 
-### Index
+## Index
 
-#### Constructors
+### Constructors
 
 * [constructor](_drivers_argon_.argon.md#constructor)
 
-#### Properties
+### Properties
 
 * [ids](_drivers_argon_.argon.md#ids)
 * [version](_drivers_argon_.argon.md#version)
 
-#### Methods
+### Methods
 
 * [hash](_drivers_argon_.argon.md#hash)
 * [needsReHash](_drivers_argon_.argon.md#needsrehash)
 * [verify](_drivers_argon_.argon.md#verify)
 
-#### Object literals
+### Object literals
 
 * [params](_drivers_argon_.argon.md#params)
 
@@ -73,7 +73,7 @@ The current argon version in use
 
 ###  hash
 
-▸ **hash**(`value`: string): *`Promise<string>`*
+▸ **hash**(`value`: string): *Promise‹string›*
 
 *Implementation of [ArgonContract](../interfaces/_contracts_.argoncontract.md)*
 
@@ -86,7 +86,7 @@ Name | Type |
 ------ | ------ |
 `value` | string |
 
-**Returns:** *`Promise<string>`*
+**Returns:** *Promise‹string›*
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 ###  verify
 
-▸ **verify**(`hashedValue`: string, `plainValue`: string): *`Promise<boolean>`*
+▸ **verify**(`hashedValue`: string, `plainValue`: string): *Promise‹boolean›*
 
 *Implementation of [ArgonContract](../interfaces/_contracts_.argoncontract.md)*
 
@@ -131,7 +131,7 @@ Name | Type |
 `hashedValue` | string |
 `plainValue` | string |
 
-**Returns:** *`Promise<boolean>`*
+**Returns:** *Promise‹boolean›*
 
 ## Object literals
 

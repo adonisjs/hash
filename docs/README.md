@@ -1,10 +1,10 @@
-> **[@poppinss/hash](README.md)**
+**[@poppinss/hash](README.md)**
 
-[Globals](README.md) /
+[Globals](README.md)
 
-### Index
+## Index
 
-#### External modules
+### External modules
 
 * ["Drivers/Argon"](modules/_drivers_argon_.md)
 * ["Drivers/Bcrypt"](modules/_drivers_bcrypt_.md)

@@ -1,11 +1,11 @@
-> **[@poppinss/hash](../README.md)**
+**[@poppinss/hash](../README.md)**
 
-[Globals](../README.md) / ["Drivers/Argon"](_drivers_argon_.md) /
+[Globals](../README.md) › ["Drivers/Argon"](_drivers_argon_.md)
 
 # External module: "Drivers/Argon"
 
-### Index
+## Index
 
-#### Classes
+### Classes
 
 * [Argon](../classes/_drivers_argon_.argon.md)

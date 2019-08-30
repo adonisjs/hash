@@ -1,6 +1,6 @@
-> **[@poppinss/hash](../README.md)**
+**[@poppinss/hash](../README.md)**
 
-[Globals](../README.md) / ["contracts"](../modules/_contracts_.md) / [HashDriverContract](_contracts_.hashdrivercontract.md) /
+[Globals](../README.md) › ["contracts"](../modules/_contracts_.md) › [HashDriverContract](_contracts_.hashdrivercontract.md)
 
 # Interface: HashDriverContract
 
@@ -15,14 +15,14 @@ contract
 
   * [ArgonContract](_contracts_.argoncontract.md)
 
-### Index
+## Index
 
-#### Properties
+### Properties
 
 * [ids](_contracts_.hashdrivercontract.md#ids)
 * [params](_contracts_.hashdrivercontract.md#params)
 
-#### Methods
+### Methods
 
 * [hash](_contracts_.hashdrivercontract.md#hash)
 * [needsReHash](_contracts_.hashdrivercontract.md#needsrehash)
@@ -42,13 +42,13 @@ ___
 
 #### Type declaration:
 
-● \[▪ **key**: *string*\]: string
+* \[ **key**: *string*\]: string
 
 ## Methods
 
 ###  hash
 
-▸ **hash**(`value`: string): *`Promise<string>`*
+▸ **hash**(`value`: string): *Promise‹string›*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ Name | Type |
 ------ | ------ |
 `value` | string |
 
-**Returns:** *`Promise<string>`*
+**Returns:** *Promise‹string›*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 ###  verify
 
-▸ **verify**(`hashedValue`: string, `plainValue`: string): *`Promise<boolean>`*
+▸ **verify**(`hashedValue`: string, `plainValue`: string): *Promise‹boolean›*
 
 **Parameters:**
 
@@ -85,4 +85,4 @@ Name | Type |
 `hashedValue` | string |
 `plainValue` | string |
 
-**Returns:** *`Promise<boolean>`*
+**Returns:** *Promise‹boolean›*

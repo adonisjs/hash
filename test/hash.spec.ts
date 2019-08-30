@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import * as test from 'japa'
+import test from 'japa'
 import { Hash } from '../src/Hash'
 import { Bcrypt } from '../src/Drivers/Bcrypt'
 import { Argon } from '../src/Drivers/Argon'

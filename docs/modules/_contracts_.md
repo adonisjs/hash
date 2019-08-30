@@ -1,19 +1,19 @@
-> **[@poppinss/hash](../README.md)**
+**[@poppinss/hash](../README.md)**
 
-[Globals](../README.md) / ["contracts"](_contracts_.md) /
+[Globals](../README.md) › ["contracts"](_contracts_.md)
 
 # External module: "contracts"
 
-### Index
+## Index
 
-#### Interfaces
+### Interfaces
 
 * [ArgonContract](../interfaces/_contracts_.argoncontract.md)
 * [BcryptContract](../interfaces/_contracts_.bcryptcontract.md)
 * [HashContract](../interfaces/_contracts_.hashcontract.md)
 * [HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md)
 
-#### Type aliases
+### Type aliases
 
 * [ArgonConfigContract](_contracts_.md#argonconfigcontract)
 * [BcryptConfigContract](_contracts_.md#bcryptconfigcontract)
@@ -44,7 +44,7 @@ ___
 
 ###  HashConfigContract
 
-Ƭ **HashConfigContract**: *object & `ExtractDriversConfig<DriversList>`*
+Ƭ **HashConfigContract**: *object & ExtractDriversConfig‹DriversList›*
 
 Shape of config accepted by the Hash module
 

@@ -7,8 +7,8 @@
 * file that was distributed with this source code.
 */
 
-import * as phc from '@phc/format'
-import * as bcrypt from '@phc/bcrypt'
+import phc from '@phc/format'
+import bcrypt from '@phc/bcrypt'
 import { BcryptConfigContract, BcryptContract } from '../contracts'
 
 /**

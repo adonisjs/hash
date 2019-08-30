@@ -7,9 +7,9 @@
 * file that was distributed with this source code.
 */
 
-import * as test from 'japa'
-import * as phc from '@phc/format'
-import * as PlainBcrypt from 'bcrypt'
+import test from 'japa'
+import phc from '@phc/format'
+import PlainBcrypt from 'bcrypt'
 import { Bcrypt } from '../src/Drivers/Bcrypt'
 
 test.group('Bcrypt', () => {

@@ -1,6 +1,6 @@
-> **[@poppinss/hash](../README.md)**
+**[@poppinss/hash](../README.md)**
 
-[Globals](../README.md) / ["Hash"](../modules/_hash_.md) / [Hash](_hash_.hash.md) /
+[Globals](../README.md) › ["Hash"](../modules/_hash_.md) › [Hash](_hash_.hash.md)
 
 # Class: Hash <**Drivers, Config, DefaultDriver**>
 
@@ -9,36 +9,36 @@ Hash driver.
 
 ## Type parameters
 
-▪ **Drivers**: *`DriverNodesList<HashDriverContract, any>`*
+▪ **Drivers**: *DriverNodesList‹[HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md), any›*
 
-▪ **Config**: *[HashConfigContract](../modules/_contracts_.md#hashconfigcontract)‹*`Drivers`*›*
+▪ **Config**: *[HashConfigContract](../modules/_contracts_.md#hashconfigcontract)‹Drivers›*
 
-▪ **DefaultDriver**: *`ExtractDefaultDriverImpl<Drivers, Config>`*
+▪ **DefaultDriver**: *ExtractDefaultDriverImpl‹Drivers, Config›*
 
 ## Hierarchy
 
-* `Manager<HashDriverContract, ExtractDriversImpl<Drivers>, DefaultDriver>`
+* Manager‹[HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md), ExtractDriversImpl‹Drivers›, DefaultDriver›
 
   * **Hash**
 
 ## Implements
 
-* `ManagerContract<HashDriverContract, ExtractDriversImpl<Drivers>, DefaultDriver>`
-* [HashContract](../interfaces/_contracts_.hashcontract.md)‹*`Drivers`*›
+* ManagerContract‹[HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md), ExtractDriversImpl‹Drivers›, DefaultDriver›
+* [HashContract](../interfaces/_contracts_.hashcontract.md)‹Drivers›
 
-### Index
+## Index
 
-#### Constructors
+### Constructors
 
 * [constructor](_hash_.hash.md#constructor)
 
-#### Properties
+### Properties
 
 * [$cacheDrivers](_hash_.hash.md#protected-$cachedrivers)
 * [$container](_hash_.hash.md#protected-$container)
 * [config](_hash_.hash.md#config)
 
-#### Methods
+### Methods
 
 * [createArgon](_hash_.hash.md#protected-createargon)
 * [createBcrypt](_hash_.hash.md#protected-createbcrypt)
@@ -53,7 +53,7 @@ Hash driver.
 
 ###  constructor
 
-\+ **new Hash**(`container`: any, `config`: `Config`): *[Hash](_hash_.hash.md)*
+\+ **new Hash**(`container`: any, `config`: Config): *[Hash](_hash_.hash.md)*
 
 *Overrides void*
 
@@ -62,7 +62,7 @@ Hash driver.
 Name | Type |
 ------ | ------ |
 `container` | any |
-`config` | `Config` |
+`config` | Config |
 
 **Returns:** *[Hash](_hash_.hash.md)*
 
@@ -86,35 +86,35 @@ ___
 
 ###  config
 
-• **config**: *`Config`*
+• **config**: *Config*
 
 ## Methods
 
 ### `Protected` createArgon
 
-▸ **createArgon**(): *[Argon](_drivers_argon_.argon.md)*
+▸ **createArgon**(): *any*
 
 Creating argon driver. The manager will call this method anytime
 someone will ask for the `argon` driver.
 
-**Returns:** *[Argon](_drivers_argon_.argon.md)*
+**Returns:** *any*
 
 ___
 
 ### `Protected` createBcrypt
 
-▸ **createBcrypt**(): *[Bcrypt](_drivers_bcrypt_.bcrypt.md)*
+▸ **createBcrypt**(): *any*
 
 Creating bcrypt driver. The manager will call this method anytime
 someone will ask for the `bcrypt` driver.
 
-**Returns:** *[Bcrypt](_drivers_bcrypt_.bcrypt.md)*
+**Returns:** *any*
 
 ___
 
 ###  driver
 
-▸ **driver**<**K**>(`name`: `K`): *`DriversList[K]`*
+▸ **driver**<**K**>(`name`: K): *DriversList[K]*
 
 *Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
 
@@ -128,9 +128,9 @@ ___
 
 Name | Type |
 ------ | ------ |
-`name` | `K` |
+`name` | K |
 
-**Returns:** *`DriversList[K]`*
+**Returns:** *DriversList[K]*
 
 ▸ **driver**(`name`: string): *[HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md)*
 
@@ -146,13 +146,13 @@ Name | Type |
 
 **Returns:** *[HashDriverContract](../interfaces/_contracts_.hashdrivercontract.md)*
 
-▸ **driver**(): *`DefaultDriver`*
+▸ **driver**(): *DefaultDriver*
 
 *Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
 
 *Inherited from void*
 
-**Returns:** *`DefaultDriver`*
+**Returns:** *DefaultDriver*
 
 ___
 
@@ -182,19 +182,19 @@ ___
 
 ### `Protected` getDefaultDriverName
 
-▸ **getDefaultDriverName**(): *`HashConfigContract<Drivers>["driver"]`*
+▸ **getDefaultDriverName**(): *HashConfigContract<Drivers>["driver"]*
 
 *Overrides void*
 
 Pulling the default driver name from the user config.
 
-**Returns:** *`HashConfigContract<Drivers>["driver"]`*
+**Returns:** *HashConfigContract<Drivers>["driver"]*
 
 ___
 
 ###  hash
 
-▸ **hash**(`value`: string): *`ReturnType<DefaultDriver["hash"]>`*
+▸ **hash**(`value`: string): *ReturnType‹DefaultDriver["hash"]›*
 
 *Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
 
@@ -206,13 +206,13 @@ Name | Type |
 ------ | ------ |
 `value` | string |
 
-**Returns:** *`ReturnType<DefaultDriver["hash"]>`*
+**Returns:** *ReturnType‹DefaultDriver["hash"]›*
 
 ___
 
 ###  needsReHash
 
-▸ **needsReHash**(`hashedValue`: string): *`ReturnType<DefaultDriver["needsReHash"]>`*
+▸ **needsReHash**(`hashedValue`: string): *ReturnType‹DefaultDriver["needsReHash"]›*
 
 *Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
 
@@ -224,13 +224,13 @@ Name | Type |
 ------ | ------ |
 `hashedValue` | string |
 
-**Returns:** *`ReturnType<DefaultDriver["needsReHash"]>`*
+**Returns:** *ReturnType‹DefaultDriver["needsReHash"]›*
 
 ___
 
 ###  verify
 
-▸ **verify**(`hashedValue`: string, `plainValue`: string): *`ReturnType<DefaultDriver["verify"]>`*
+▸ **verify**(`hashedValue`: string, `plainValue`: string): *ReturnType‹DefaultDriver["verify"]›*
 
 *Implementation of [HashContract](../interfaces/_contracts_.hashcontract.md)*
 
@@ -243,4 +243,4 @@ Name | Type |
 `hashedValue` | string |
 `plainValue` | string |
 
-**Returns:** *`ReturnType<DefaultDriver["verify"]>`*
+**Returns:** *ReturnType‹DefaultDriver["verify"]›*
