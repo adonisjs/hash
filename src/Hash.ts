@@ -7,71 +7,83 @@
 * file that was distributed with this source code.
 */
 
-import { Manager, DriverNodesList, ExtractDriversImpl, ExtractDefaultDriverImpl } from '@poppinss/manager'
-import { HashConfigContract, HashDrivers, HashDriverContract, HashContract } from './contracts'
+/// <reference path="../adonis-typings/hash.ts" />
+
+import { Manager } from '@poppinss/manager'
+import { HashContract, HashDriverContract, HashConfigContract, HashList } from '@ioc:Adonis/Core/Hash'
 
 /**
  * The Hash module exposes the API to hash values using an underlying
  * Hash driver.
  */
-export class Hash<
-  Drivers extends DriverNodesList<HashDriverContract, any> = HashDrivers,
-  Config extends HashConfigContract<Drivers> = HashConfigContract<Drivers>,
-  DefaultDriver extends ExtractDefaultDriverImpl<Drivers, Config> = ExtractDefaultDriverImpl<Drivers, Config>
-> extends Manager<
-  HashDriverContract,
-  ExtractDriversImpl<Drivers>,
-  DefaultDriver
-> implements HashContract<Drivers> {
-  constructor (container, public config: Config) {
+export class Hash <Config extends HashConfigContract>
+  extends Manager<HashDriverContract, { [P in keyof HashList]: HashList[P]['implementation'] }>
+  implements HashContract
+{
+  constructor (container: any, public config: Config) {
     super(container)
   }
 
-  protected $cacheDrivers = true
+  protected $cacheMappings = true
 
   /**
    * Pulling the default driver name from the user config.
    */
-  protected getDefaultDriverName (): HashConfigContract<Drivers>['driver'] {
-    return this.config.driver
+  protected getDefaultMappingName (): string {
+    return this.config.default
+  }
+
+  /**
+   * Returns the config for a mapping
+   */
+  protected getMappingConfig (name: string): any {
+    return this.config.list[name]
+  }
+
+  /**
+   * Returns the driver name for a mapping
+   */
+  protected getMappingDriver (name: string): string | undefined {
+    const config = this.getMappingConfig(name)
+    return config ? config.driver : undefined
   }
 
   /**
    * Creating bcrypt driver. The manager will call this method anytime
    * someone will ask for the `bcrypt` driver.
    */
-  protected createBcrypt () {
+  protected createBcrypt (_mappingName: string, config: any) {
     const { Bcrypt } = require('./Drivers/Bcrypt')
-    return new Bcrypt(this.config.bcrypt!)
+    return new Bcrypt(config)
   }
 
   /**
    * Creating argon driver. The manager will call this method anytime
    * someone will ask for the `argon` driver.
    */
-  protected createArgon () {
+  protected createArgon2 (_mappingName: string, config: any) {
     const { Argon } = require('./Drivers/Argon')
-    return new Argon(this.config.argon!)
+    return new Argon(config)
   }
 
   /**
    * Hash value using the default driver
    */
-  public hash (value: string): ReturnType<DefaultDriver['hash']> {
-    return this.driver().hash(value) as ReturnType<DefaultDriver['hash']>
+  public hash (value: string) {
+    return this.use().hash(value)
   }
 
   /**
    * Verify value using the default driver
    */
-  public verify (hashedValue: string, plainValue: string): ReturnType<DefaultDriver['verify']> {
-    return this.driver().verify(hashedValue, plainValue) as ReturnType<DefaultDriver['verify']>
+  public verify (hashedValue: string, plainValue: string) {
+    return this.use().verify(hashedValue, plainValue)
   }
 
   /**
    * Find if value needs to be re-hashed as per the default driver.
    */
-  public needsReHash (hashedValue: string): ReturnType<DefaultDriver['needsReHash']> {
-    return this.driver().needsReHash(hashedValue) as ReturnType<DefaultDriver['needsReHash']>
+  public needsReHash (hashedValue: string) {
+    return this.use().needsReHash(hashedValue)
   }
 }

@@ -8,11 +8,3 @@
 */
 
 export { Hash } from './src/Hash'
-export {
-  BcryptConfigContract,
-  ArgonConfigContract,
-  HashConfigContract,
-  HashDrivers,
-  HashDriverContract,
-  HashContract,
-} from './src/contracts'

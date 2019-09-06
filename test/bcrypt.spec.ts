@@ -14,7 +14,7 @@ import { Bcrypt } from '../src/Drivers/Bcrypt'
 
 test.group('Bcrypt', () => {
   test('hash value using defaults', async (assert) => {
-    const bcrypt = new Bcrypt({ rounds: 10 })
+    const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
     const hashed = await bcrypt.hash('hello-world')
     const values = phc.deserialize(hashed)
 
@@ -25,7 +25,7 @@ test.group('Bcrypt', () => {
   })
 
   test('verify hashed value', async (assert) => {
-    const bcrypt = new Bcrypt({ rounds: 10 })
+    const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
     const hashed = await bcrypt.hash('hello-world')
 
     let matched = await bcrypt.verify(hashed, 'hello-world')
@@ -36,15 +36,15 @@ test.group('Bcrypt', () => {
   })
 
   test('return true for needsRehash when version mismatch', async (assert) => {
-    const bcrypt = new Bcrypt({ rounds: 10 })
+    const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
 
     const hashed = await bcrypt.hash('hello-world')
     assert.isTrue(bcrypt.needsReHash(hashed.replace('$v=98', '$v=20')))
   })
 
   test('return true for needsRehash when one of the params are different', async (assert) => {
-    const bcrypt = new Bcrypt({ rounds: 10 })
-    const bcrypt2 = new Bcrypt({ rounds: 11 })
+    const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
+    const bcrypt2 = new Bcrypt({ rounds: 11, driver: 'bcrypt' })
 
     const hashed = await bcrypt.hash('hello-world')
     assert.isTrue(bcrypt2.needsReHash(hashed))
@@ -53,7 +53,7 @@ test.group('Bcrypt', () => {
 
   test('return true for needsRehash when hash value is not formatted as a phc string', async (assert) => {
     const hash = await PlainBcrypt.hash('hello-world', 10)
-    const bcrypt = new Bcrypt({ rounds: 10 })
+    const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
     assert.isTrue(bcrypt.needsReHash(hash))
   })
 })

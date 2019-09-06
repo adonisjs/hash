@@ -1,4 +1,4 @@
-**[@poppinss/hash](README.md)**
+**[@adonisjs/hash](README.md)**
 
 [Globals](README.md)
 
@@ -6,7 +6,8 @@
 
 ### External modules
 
-* ["Drivers/Argon"](modules/_drivers_argon_.md)
-* ["Drivers/Bcrypt"](modules/_drivers_bcrypt_.md)
-* ["Hash"](modules/_hash_.md)
-* ["contracts"](modules/_contracts_.md)
+* ["adonis-typings/hash"](modules/_adonis_typings_hash_.md)
+* ["src/Drivers/Argon"](modules/_src_drivers_argon_.md)
+* ["src/Drivers/Bcrypt"](modules/_src_drivers_bcrypt_.md)
+* ["src/Hash"](modules/_src_hash_.md)
+* ["standlone"](modules/_standlone_.md)

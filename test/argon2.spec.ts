@@ -15,6 +15,7 @@ import { Argon } from '../src/Drivers/Argon'
 test.group('Argon', () => {
   test('hash value', async (assert) => {
     const bcrypt = new Argon({
+      driver: 'argon2',
       variant: 'id',
       iterations: 3,
       memory: 4096,
@@ -33,6 +34,7 @@ test.group('Argon', () => {
 
   test('verify hash value', async (assert) => {
     const bcrypt = new Argon({
+      driver: 'argon2',
       variant: 'id',
       iterations: 3,
       memory: 4096,
@@ -50,6 +52,7 @@ test.group('Argon', () => {
 
   test('return true for needsRehash when variant is different', async (assert) => {
     const argon = new Argon({
+      driver: 'argon2',
       variant: 'id',
       iterations: 3,
       memory: 4096,
@@ -58,6 +61,7 @@ test.group('Argon', () => {
     })
 
     const argon2 = new Argon({
+      driver: 'argon2',
       variant: 'i',
       iterations: 3,
       memory: 4096,
@@ -72,6 +76,7 @@ test.group('Argon', () => {
 
   test('return true for needsRehash when version is different', async (assert) => {
     const argon = new Argon({
+      driver: 'argon2',
       variant: 'id',
       iterations: 3,
       memory: 4096,
@@ -85,6 +90,7 @@ test.group('Argon', () => {
 
   test('return true for needsRehash when one of the params is different', async (assert) => {
     const argon = new Argon({
+      driver: 'argon2',
       variant: 'id',
       iterations: 3,
       memory: 4096,
@@ -93,6 +99,7 @@ test.group('Argon', () => {
     })
 
     const argon2 = new Argon({
+      driver: 'argon2',
       variant: 'id',
       iterations: 1,
       memory: 4096,
@@ -108,6 +115,7 @@ test.group('Argon', () => {
   test('return true for needsRehash when hash value is not formatted as a phc string', async (assert) => {
     const hash = await argon2.hash('hello-world')
     const argon = new Argon({
+      driver: 'argon2',
       variant: 'id',
       iterations: 1,
       memory: 4096,

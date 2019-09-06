@@ -7,9 +7,11 @@
 * file that was distributed with this source code.
 */
 
+/// <reference path="../../adonis-typings/hash.ts" />
+
 import argon2 from '@phc/argon2'
 import phc from '@phc/format'
-import { ArgonConfigContract, ArgonContract } from '../contracts'
+import { ArgonConfigContract, ArgonContract } from '@ioc:Adonis/Core/Hash'
 
 /**
  * Hash driver built on top of argon hashing algorithm. The driver adheres

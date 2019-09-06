@@ -1,6 +1,6 @@
-**[@poppinss/hash](../README.md)**
+**[@adonisjs/hash](../README.md)**
 
-[Globals](../README.md) › ["Drivers/Argon"](../modules/_drivers_argon_.md) › [Argon](_drivers_argon_.argon.md)
+[Globals](../README.md) › ["src/Drivers/Argon"](../modules/_src_drivers_argon_.md) › [Argon](_src_drivers_argon_.argon.md)
 
 # Class: Argon
 
@@ -13,50 +13,48 @@ to `phc` string format.
 
 ## Implements
 
-* [ArgonContract](../interfaces/_contracts_.argoncontract.md)
+* ArgonContract
 
 ## Index
 
 ### Constructors
 
-* [constructor](_drivers_argon_.argon.md#constructor)
+* [constructor](_src_drivers_argon_.argon.md#constructor)
 
 ### Properties
 
-* [ids](_drivers_argon_.argon.md#ids)
-* [version](_drivers_argon_.argon.md#version)
+* [ids](_src_drivers_argon_.argon.md#ids)
+* [version](_src_drivers_argon_.argon.md#version)
 
 ### Methods
 
-* [hash](_drivers_argon_.argon.md#hash)
-* [needsReHash](_drivers_argon_.argon.md#needsrehash)
-* [verify](_drivers_argon_.argon.md#verify)
+* [hash](_src_drivers_argon_.argon.md#hash)
+* [needsReHash](_src_drivers_argon_.argon.md#needsrehash)
+* [verify](_src_drivers_argon_.argon.md#verify)
 
 ### Object literals
 
-* [params](_drivers_argon_.argon.md#params)
+* [params](_src_drivers_argon_.argon.md#params)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Argon**(`_config`: [ArgonConfigContract](../modules/_contracts_.md#argonconfigcontract)): *[Argon](_drivers_argon_.argon.md)*
+\+ **new Argon**(`_config`: ArgonConfigContract): *[Argon](_src_drivers_argon_.argon.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`_config` | [ArgonConfigContract](../modules/_contracts_.md#argonconfigcontract) |
+`_config` | ArgonConfigContract |
 
-**Returns:** *[Argon](_drivers_argon_.argon.md)*
+**Returns:** *[Argon](_src_drivers_argon_.argon.md)*
 
 ## Properties
 
 ###  ids
 
 • **ids**: *Object* =  ['argon2d', 'argon2i', 'argon2id']
-
-*Implementation of [ArgonContract](../interfaces/_contracts_.argoncontract.md).[ids](../interfaces/_contracts_.argoncontract.md#ids)*
 
 A list of ids to find if hash belongs to this driver
 or not.
@@ -75,8 +73,6 @@ The current argon version in use
 
 ▸ **hash**(`value`: string): *Promise‹string›*
 
-*Implementation of [ArgonContract](../interfaces/_contracts_.argoncontract.md)*
-
 Hash a value using argon algorithm. The options can be used to override
 default settings.
 
@@ -93,8 +89,6 @@ ___
 ###  needsReHash
 
 ▸ **needsReHash**(`value`: string): *boolean*
-
-*Implementation of [ArgonContract](../interfaces/_contracts_.argoncontract.md)*
 
 Returns a boolean telling if the hash needs a rehash or not. The rehash is
 required when
@@ -119,8 +113,6 @@ ___
 
 ▸ **verify**(`hashedValue`: string, `plainValue`: string): *Promise‹boolean›*
 
-*Implementation of [ArgonContract](../interfaces/_contracts_.argoncontract.md)*
-
 Verifies the hash against a plain value to find if it's
 a valid hash or not.
 
@@ -138,8 +130,6 @@ Name | Type |
 ###  params
 
 ### ▪ **params**: *object*
-
-*Implementation of [ArgonContract](../interfaces/_contracts_.argoncontract.md).[params](../interfaces/_contracts_.argoncontract.md#params)*
 
 A list of params encoded to the hash value.
 

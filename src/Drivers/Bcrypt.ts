@@ -7,9 +7,11 @@
 * file that was distributed with this source code.
 */
 
+/// <reference path="../../adonis-typings/hash.ts" />
+
 import phc from '@phc/format'
 import bcrypt from '@phc/bcrypt'
-import { BcryptConfigContract, BcryptContract } from '../contracts'
+import { BcryptConfigContract, BcryptContract } from '@ioc:Adonis/Core/Hash'
 
 /**
  * Generates and verifies hash using Bcrypt as underlying
