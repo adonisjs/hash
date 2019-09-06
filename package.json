@@ -90,12 +90,8 @@
   },
   "adonisjs": {
     "templates": {
-      "config": [
-        "config/hash.txt"
-      ],
-      "contracts": [
-        "contracts/hash.txt"
-      ]
+      "config": [{ "src": "config/hash.txt", "dest": "hash" }],
+      "contracts": [{ "src": "contracts/hash.txt", "dest": "hash" }]
     }
   }
 }
