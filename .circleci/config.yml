@@ -16,9 +16,9 @@ jobs:
             - node_modules
           key: 'v1-dependencies-10-{{ checksum "package.json" }}'
       - run: npm test
-  build_latest:
+  build_12.6.0:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:12.6.0'
     working_directory: ~/app
     steps:
       - checkout
@@ -38,4 +38,4 @@ workflows:
   workflow:
     jobs:
       - build_10.15.3
-      - build_latest
+      - build_12.6.0
