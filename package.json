@@ -5,6 +5,7 @@
   "files": [
     "build/adonis-typings",
     "build/providers",
+    "build/templates",
     "build/src",
     "build/standalone.d.ts",
     "build/standalone.js"
@@ -16,7 +17,8 @@
     "lint": "tslint --project tsconfig.json",
     "clean": "del build",
     "compile": "npm run lint && npm run clean && tsc",
-    "build": "npm run compile && typedoc --theme markdown --excludePrivate --hideSources && git add docs",
+    "copyfiles": "copyfiles \"templates/**/*.txt\" build",
+    "build": "npm run compile && npm run copyfiles && typedoc --theme markdown --excludePrivate --hideSources && git add docs",
     "commit": "git-cz",
     "release": "np",
     "version": "npm run build"
@@ -37,11 +39,13 @@
   },
   "homepage": "https://github.com/poppinss/hash#readme",
   "devDependencies": {
+    "@adonisjs/fold": "^6.1.6",
     "@adonisjs/mrm-preset": "^2.1.0",
     "@phc/argon2": "^1.0.9",
     "@phc/bcrypt": "^1.0.2",
     "@types/node": "^12.7.4",
     "commitizen": "^4.0.3",
+    "copyfiles": "^2.1.1",
     "cz-conventional-changelog": "^3.0.2",
     "del-cli": "^2.0.0",
     "doctoc": "^1.4.0",
@@ -83,5 +87,15 @@
   "dependencies": {
     "@phc/format": "^0.5.0",
     "@poppinss/manager": "^2.0.0"
+  },
+  "adonisjs": {
+    "templates": {
+      "config": [
+        "config/hash.txt"
+      ],
+      "contracts": [
+        "contracts/hash.txt"
+      ]
+    }
   }
 }

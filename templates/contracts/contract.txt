@@ -1,0 +1,12 @@
+declare module '@ioc:Adonis/Core/Hash' {
+  interface HashList {
+    bcrypt: {
+      config: BcryptConfigContract,
+      implementation: BcryptContract,
+    },
+    argon: {
+      config: ArgonConfigContract,
+      implementation: ArgonContract,
+    }
+  }
+}

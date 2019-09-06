@@ -67,8 +67,8 @@ declare module '@ioc:Adonis/Core/Hash' {
   }
 
   /**
-   * A list of default mappings. One must extend this interface to add
-   * their own
+   * List of hash mappings used by the app. Using declaration merging, one
+   * must extend this interface
    */
   export interface HashList {
   }
