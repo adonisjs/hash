@@ -1,6 +1,6 @@
 {
   "name": "@adonisjs/hash",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Multi driver hash module with support for PHC string formats",
   "files": [
     "build/adonis-typings",
@@ -90,8 +90,18 @@
   },
   "adonisjs": {
     "templates": {
-      "config": [{ "src": "config/hash.txt", "dest": "hash" }],
-      "contracts": [{ "src": "contracts/hash.txt", "dest": "hash" }]
+      "config": [
+        {
+          "src": "config/hash.txt",
+          "dest": "hash"
+        }
+      ],
+      "contracts": [
+        {
+          "src": "contracts/hash.txt",
+          "dest": "hash"
+        }
+      ]
     }
   }
 }

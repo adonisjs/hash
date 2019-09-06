@@ -22,7 +22,7 @@ Hash driver.
 ## Implements
 
 * ManagerContract‹HashDriverContract, object, DefaultItem›
-* HashContract
+* HashContract‹HashDriverContract›
 
 ## Index
 
@@ -202,7 +202,7 @@ ___
 
 ###  hash
 
-▸ **hash**(`value`: string): *Promise‹string›*
+▸ **hash**(`value`: string): *never | any*
 
 Hash value using the default driver
 
@@ -212,7 +212,7 @@ Name | Type |
 ------ | ------ |
 `value` | string |
 
-**Returns:** *Promise‹string›*
+**Returns:** *never | any*
 
 ___
 
