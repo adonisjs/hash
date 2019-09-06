@@ -1,5 +1,5 @@
 /*
-* @poppinss/hash
+* @adonisjs/hash
 *
 * (c) Harminder Virk <virk@adonisjs.com>
 *

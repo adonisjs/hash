@@ -1,5 +1,5 @@
 /*
-* @poppinss/hash
+* @adonisjs/hash
 *
 * (c) Harminder Virk <virk@adonisjs.com>
 *
@@ -10,7 +10,12 @@
 /// <reference path="../adonis-typings/hash.ts" />
 
 import { Manager } from '@poppinss/manager'
-import { HashContract, HashDriverContract, HashConfigContract, HashList } from '@ioc:Adonis/Core/Hash'
+import {
+  HashContract,
+  HashDriverContract,
+  HashConfigContract,
+  HashList,
+} from '@ioc:Adonis/Core/Hash'
 
 /**
  * The Hash module exposes the API to hash values using an underlying
@@ -18,7 +23,7 @@ import { HashContract, HashDriverContract, HashConfigContract, HashList } from '
  */
 export class Hash <Config extends HashConfigContract>
   extends Manager<HashDriverContract, { [P in keyof HashList]: HashList[P]['implementation'] }>
-  implements HashContract
+  implements HashContract<HashDriverContract>
 {
   constructor (container: any, public config: Config) {
     super(container)
@@ -69,7 +74,7 @@ export class Hash <Config extends HashConfigContract>
   /**
    * Hash value using the default driver
    */
-  public hash (value: string) {
+  public hash (value: string): never | any {
     return this.use().hash(value)
   }
 

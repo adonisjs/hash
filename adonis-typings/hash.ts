@@ -81,16 +81,22 @@ declare module '@ioc:Adonis/Core/Hash' {
     list: { [P in keyof HashList]: HashList[P]['config'] },
   }
 
+  export type DriverMethod<T, K extends keyof HashDriverContract> = T extends HashDriverContract
+    ? HashDriverContract[K]
+    : never
+
   /**
    * Hash mananger interface
    */
-  export interface HashContract extends ManagerContract<
+  export interface HashContract<
+    DefaultDriver = HashList[HashConfigContract['default']]['implementation']
+  > extends ManagerContract<
     HashDriverContract,
     { [P in keyof HashList]: HashList[P]['implementation'] }
   > {
-    hash (value: string): ReturnType<HashDriverContract['hash']>
-    verify (hashedValue: string, plainValue: string): ReturnType<HashDriverContract['verify']>
-    needsReHash (hashedValue: string): ReturnType<HashDriverContract['needsReHash']>
+    hash (value: string): ReturnType<DriverMethod<DefaultDriver, 'hash'>>
+    verify (hashedValue: string, plainValue: string): ReturnType<DriverMethod<DefaultDriver, 'verify'>>
+    needsReHash (hashedValue: string): ReturnType<DriverMethod<DefaultDriver, 'needsReHash'>>
   }
 
   const Hash: HashContract
