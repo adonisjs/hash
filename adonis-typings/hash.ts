@@ -81,6 +81,9 @@ declare module '@ioc:Adonis/Core/Hash' {
     list: { [P in keyof HashList]: HashList[P]['config'] },
   }
 
+  /**
+   * Piggy back on the driver method when driver exists, otherwise fallback to `never`
+   */
   export type DriverMethod<T, K extends keyof HashDriverContract> = T extends HashDriverContract
     ? HashDriverContract[K]
     : never
