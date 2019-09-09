@@ -1,6 +1,6 @@
 **[@adonisjs/hash](../README.md)**
 
-[Globals](../README.md) › ["src/Drivers/Argon"](../modules/_src_drivers_argon_.md) › [Argon](_src_drivers_argon_.argon.md)
+[Globals](../README.md) › [&quot;src/Drivers/Argon&quot;](../modules/_src_drivers_argon_.md) › [Argon](_src_drivers_argon_.argon.md)
 
 # Class: Argon
 

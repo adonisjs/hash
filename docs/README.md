@@ -2,6 +2,8 @@
 
 [Globals](README.md)
 
+# @adonisjs/hash
+
 ## Index
 
 ### External modules

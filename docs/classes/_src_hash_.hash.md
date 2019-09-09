@@ -1,6 +1,6 @@
 **[@adonisjs/hash](../README.md)**
 
-[Globals](../README.md) › ["src/Hash"](../modules/_src_hash_.md) › [Hash](_src_hash_.hash.md)
+[Globals](../README.md) › [&quot;src/Hash&quot;](../modules/_src_hash_.md) › [Hash](_src_hash_.hash.md)
 
 # Class: Hash <**Config, DefaultItem**>
 
