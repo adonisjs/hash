@@ -14,7 +14,7 @@
 import { IocContract } from '@adonisjs/fold'
 import { Hash } from '../src/Hash'
 
-export default class ConfigProvider {
+export default class HashProvider {
   constructor (protected $container: IocContract) {}
 
   public register () {
