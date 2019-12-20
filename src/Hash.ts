@@ -11,10 +11,10 @@
 
 import { Manager } from '@poppinss/manager'
 import {
+  HashList,
   HashContract,
   HashDriverContract,
   HashConfigContract,
-  HashList,
 } from '@ioc:Adonis/Core/Hash'
 
 /**
@@ -23,8 +23,7 @@ import {
  */
 export class Hash <Config extends HashConfigContract>
   extends Manager<HashDriverContract, { [P in keyof HashList]: HashList[P]['implementation'] }>
-  implements HashContract<HashDriverContract>
-{
+  implements HashContract<HashDriverContract> {
   constructor (container: any, public config: Config) {
     super(container)
   }
@@ -75,20 +74,20 @@ export class Hash <Config extends HashConfigContract>
    * Hash value using the default driver
    */
   public hash (value: string): never | any {
-    return this.use().hash(value)
+    return (this.use() as HashContract).hash(value)
   }
 
   /**
    * Verify value using the default driver
    */
   public verify (hashedValue: string, plainValue: string) {
-    return this.use().verify(hashedValue, plainValue)
+    return (this.use() as HashContract).verify(hashedValue, plainValue)
   }
 
   /**
    * Find if value needs to be re-hashed as per the default driver.
    */
   public needsReHash (hashedValue: string) {
-    return this.use().needsReHash(hashedValue)
+    return (this.use() as HashContract).needsReHash(hashedValue)
   }
 }

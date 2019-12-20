@@ -74,7 +74,7 @@ declare module '@ioc:Adonis/Core/Hash' {
   }
 
   /**
-   * Shape of config accepted by the Hash module
+   * Shape of config accepted by the Hash module.
    */
   export interface HashConfigContract {
     default: keyof HashList,
@@ -96,7 +96,7 @@ declare module '@ioc:Adonis/Core/Hash' {
   > extends ManagerContract<
     HashDriverContract,
     { [P in keyof HashList]: HashList[P]['implementation'] }
-  > {
+    > {
     hash (value: string): ReturnType<DriverMethod<DefaultDriver, 'hash'>>
     verify (hashedValue: string, plainValue: string): ReturnType<DriverMethod<DefaultDriver, 'verify'>>
     needsReHash (hashedValue: string): ReturnType<DriverMethod<DefaultDriver, 'needsReHash'>>

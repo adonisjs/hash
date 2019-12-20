@@ -14,7 +14,7 @@ import { Argon } from '../src/Drivers/Argon'
 
 test.group('Argon', () => {
   test('hash value', async (assert) => {
-    const bcrypt = new Argon({
+    const argon = new Argon({
       driver: 'argon2',
       variant: 'id',
       iterations: 3,
@@ -23,7 +23,7 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const hashed = await bcrypt.hash('hello-world')
+    const hashed = await argon.hash('hello-world')
     const values = phc.deserialize(hashed)
 
     assert.equal(values.id, 'argon2id')
@@ -33,7 +33,7 @@ test.group('Argon', () => {
   })
 
   test('verify hash value', async (assert) => {
-    const bcrypt = new Argon({
+    const argon = new Argon({
       driver: 'argon2',
       variant: 'id',
       iterations: 3,
@@ -42,11 +42,11 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const hashed = await bcrypt.hash('hello-world')
-    let matches = await bcrypt.verify(hashed, 'hello-world')
+    const hashed = await argon.hash('hello-world')
+    let matches = await argon.verify(hashed, 'hello-world')
     assert.isTrue(matches)
 
-    matches = await bcrypt.verify(hashed, 'hi-world')
+    matches = await argon.verify(hashed, 'hi-world')
     assert.isFalse(matches)
   })
 
@@ -60,7 +60,7 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const argon2 = new Argon({
+    const argon1 = new Argon({
       driver: 'argon2',
       variant: 'i',
       iterations: 3,
@@ -70,7 +70,7 @@ test.group('Argon', () => {
     })
 
     const hashed = await argon.hash('hello-world')
-    assert.isTrue(argon2.needsReHash(hashed))
+    assert.isTrue(argon1.needsReHash(hashed))
     assert.isFalse(argon.needsReHash(hashed))
   })
 
@@ -98,7 +98,7 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const argon2 = new Argon({
+    const argon1 = new Argon({
       driver: 'argon2',
       variant: 'id',
       iterations: 1,
@@ -108,7 +108,7 @@ test.group('Argon', () => {
     })
 
     const hashed = await argon.hash('hello-world')
-    assert.isTrue(argon2.needsReHash(hashed))
+    assert.isTrue(argon1.needsReHash(hashed))
     assert.isFalse(argon.needsReHash(hashed))
   })
 
@@ -122,6 +122,7 @@ test.group('Argon', () => {
       parallelism: 1,
       saltSize: 16,
     })
+
     assert.isTrue(argon.needsReHash(hash))
   })
 })
