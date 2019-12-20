@@ -56,7 +56,7 @@ export class Hash <Config extends HashConfigContract>
    * Creating bcrypt driver. The manager will call this method anytime
    * someone will ask for the `bcrypt` driver.
    */
-  protected createBcrypt (_mappingName: string, config: any) {
+  protected createBcrypt (_: string, config: any) {
     const { Bcrypt } = require('./Drivers/Bcrypt')
     return new Bcrypt(config)
   }
@@ -65,7 +65,7 @@ export class Hash <Config extends HashConfigContract>
    * Creating argon driver. The manager will call this method anytime
    * someone will ask for the `argon` driver.
    */
-  protected createArgon2 (_mappingName: string, config: any) {
+  protected createArgon2 (_: string, config: any) {
     const { Argon } = require('./Drivers/Argon')
     return new Argon(config)
   }

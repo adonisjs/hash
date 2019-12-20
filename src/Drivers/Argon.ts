@@ -38,7 +38,7 @@ export class Argon implements ArgonContract {
    */
   public version = 19
 
-  constructor (private _config: ArgonConfigContract) {
+  constructor (private config: ArgonConfigContract) {
   }
 
   /**
@@ -46,7 +46,7 @@ export class Argon implements ArgonContract {
    * default settings.
    */
   public hash (value: string): Promise<string> {
-    return argon2.hash(value, this._config)
+    return argon2.hash(value, this.config)
   }
 
   /**
@@ -83,7 +83,7 @@ export class Argon implements ArgonContract {
     /**
      * Variant mis-match
      */
-    if (deserialized.id !== `argon2${this._config.variant}`) {
+    if (deserialized.id !== `argon2${this.config.variant}`) {
       return true
     }
 
@@ -91,7 +91,7 @@ export class Argon implements ArgonContract {
      * Check for params mis-match
      */
     return !!Object.keys(this.params).find((key) => {
-      return deserialized.params[this.params[key]] !== this._config![key]
+      return deserialized.params[this.params[key]] !== this.config![key]
     })
   }
 }

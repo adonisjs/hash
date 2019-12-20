@@ -22,14 +22,14 @@ export class Bcrypt implements BcryptContract {
   public params: BcryptContract['params'] = { rounds: 'r' }
   public version = 98
 
-  constructor (private _config: BcryptConfigContract) {
+  constructor (private config: BcryptConfigContract) {
   }
 
   /**
    * Returns hash for a given value
    */
   public hash (value: string): Promise<string> {
-    return bcrypt.hash(value, this._config)
+    return bcrypt.hash(value, this.config)
   }
 
   /**
@@ -55,7 +55,7 @@ export class Bcrypt implements BcryptContract {
       }
 
       return !!Object.keys(this.params).find((key) => {
-        return deserialized.params[this.params[key]] !== this._config![key]
+        return deserialized.params[this.params[key]] !== this.config![key]
       })
     }
 
