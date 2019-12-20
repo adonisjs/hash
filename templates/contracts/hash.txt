@@ -6,14 +6,10 @@
  */
 
 declare module '@ioc:Adonis/Core/Hash' {
-  interface HashList {
-    bcrypt: {
-      config: BcryptConfigContract,
-      implementation: BcryptContract,
-    },
-    argon: {
-      config: ArgonConfigContract,
-      implementation: ArgonContract,
-    }
+  import { HashDrivers } from '@ioc:Adonis/Core/Hash'
+
+  interface HashersList {
+    bcrypt: HashDrivers.bcrypt,
+    argon: HashDrivers.argon,
   }
 }

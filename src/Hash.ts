@@ -11,7 +11,7 @@
 
 import { Manager } from '@poppinss/manager'
 import {
-  HashList,
+  HashersList,
   HashContract,
   HashDriverContract,
   HashConfigContract,
@@ -22,7 +22,7 @@ import {
  * Hash driver.
  */
 export class Hash <Config extends HashConfigContract>
-  extends Manager<HashDriverContract, { [P in keyof HashList]: HashList[P]['implementation'] }>
+  extends Manager<HashDriverContract, { [P in keyof HashersList]: HashersList[P]['implementation'] }>
   implements HashContract<HashDriverContract> {
   constructor (container: any, public config: Config) {
     super(container)

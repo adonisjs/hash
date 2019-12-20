@@ -67,18 +67,35 @@ declare module '@ioc:Adonis/Core/Hash' {
   }
 
   /**
-   * List of hash mappings used by the app. Using declaration merging, one
-   * must extend this interface
+   * Default list of available drivers. One can you reference this type
+   * to setup the `HashersList`.
    */
-  export interface HashList {
+  export type HashDrivers = {
+    bcrypt: {
+      config: BcryptConfigContract,
+      implementation: BcryptContract,
+    },
+    argon: {
+      config: ArgonConfigContract,
+      implementation: ArgonContract,
+    },
+  }
+
+  /**
+   * List of hash mappings used by the app. Using declaration merging, one
+   * must extend this interface.
+   *
+   * MUST BE SET IN THE USER LAND.
+   */
+  export interface HashersList {
   }
 
   /**
    * Shape of config accepted by the Hash module.
    */
   export interface HashConfigContract {
-    default: keyof HashList,
-    list: { [P in keyof HashList]: HashList[P]['config'] },
+    default: keyof HashersList,
+    list: { [P in keyof HashersList]: HashersList[P]['config'] },
   }
 
   /**
@@ -92,10 +109,10 @@ declare module '@ioc:Adonis/Core/Hash' {
    * Hash mananger interface
    */
   export interface HashContract<
-    DefaultDriver = HashList[HashConfigContract['default']]['implementation']
+    DefaultDriver = HashersList[HashConfigContract['default']]['implementation']
   > extends ManagerContract<
     HashDriverContract,
-    { [P in keyof HashList]: HashList[P]['implementation'] }
+    { [P in keyof HashersList]: HashersList[P]['implementation'] }
     > {
     hash (value: string): ReturnType<DriverMethod<DefaultDriver, 'hash'>>
     verify (hashedValue: string, plainValue: string): ReturnType<DriverMethod<DefaultDriver, 'verify'>>
