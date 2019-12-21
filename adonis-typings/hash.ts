@@ -19,8 +19,22 @@ declare module '@ioc:Adonis/Core/Hash' {
     params: {
       [key: string]: string,
     }
+
+    /**
+     * Hash plain text value using the default mapping
+     */
     hash (value: string): Promise<string>
+
+    /**
+     * Check the hash against the current config to find it needs
+     * to be re-hashed or not
+     */
     needsReHash (hashedValue: string): boolean
+
+    /**
+     * Verify plain value against the hashed value to find if it's
+     * valid or not
+     */
     verify (hashedValue: string, plainValue: string): Promise<boolean>
   }
 
@@ -114,8 +128,21 @@ declare module '@ioc:Adonis/Core/Hash' {
     HashDriverContract,
     { [P in keyof HashersList]: HashersList[P]['implementation'] }
     > {
+    /**
+     * Hash plain text value using the default mapping
+     */
     hash (value: string): ReturnType<DriverMethod<DefaultDriver, 'hash'>>
+
+    /**
+     * Verify plain value against the hashed value to find if it's
+     * valid or not
+     */
     verify (hashedValue: string, plainValue: string): ReturnType<DriverMethod<DefaultDriver, 'verify'>>
+
+    /**
+     * Check the hash against the current config to find it needs
+     * to be re-hashed or not
+     */
     needsReHash (hashedValue: string): ReturnType<DriverMethod<DefaultDriver, 'needsReHash'>>
   }
 
