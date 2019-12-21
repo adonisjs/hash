@@ -1,6 +1,4 @@
-**[@adonisjs/hash](../README.md)**
-
-[Globals](../README.md) › [&quot;providers/HashProvider&quot;](../modules/_providers_hashprovider_.md) › [HashProvider](_providers_hashprovider_.hashprovider.md)
+[@adonisjs/hash](../README.md) › ["providers/HashProvider"](../modules/_providers_hashprovider_.md) › [HashProvider](_providers_hashprovider_.hashprovider.md)
 
 # Class: HashProvider
 

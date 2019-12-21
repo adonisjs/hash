@@ -1,6 +1,4 @@
-**[@adonisjs/hash](../README.md)**
-
-[Globals](../README.md) › [&quot;src/Drivers/Bcrypt&quot;](_src_drivers_bcrypt_.md)
+[@adonisjs/hash](../README.md) › ["src/Drivers/Bcrypt"](_src_drivers_bcrypt_.md)
 
 # External module: "src/Drivers/Bcrypt"
 

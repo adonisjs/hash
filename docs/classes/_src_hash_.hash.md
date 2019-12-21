@@ -1,8 +1,6 @@
-**[@adonisjs/hash](../README.md)**
+[@adonisjs/hash](../README.md) › ["src/Hash"](../modules/_src_hash_.md) › [Hash](_src_hash_.hash.md)
 
-[Globals](../README.md) › [&quot;src/Hash&quot;](../modules/_src_hash_.md) › [Hash](_src_hash_.hash.md)
-
-# Class: Hash <**Config, DefaultItem**>
+# Class: Hash <**Config, MappingsList, DefaultItem**>
 
 The Hash module exposes the API to hash values using an underlying
 Hash driver.
@@ -11,17 +9,19 @@ Hash driver.
 
 ▪ **Config**: *HashConfigContract*
 
-▪ **DefaultItem**: *DriverContract*
+▪ **MappingsList**: *object*
+
+▪ **DefaultItem**: *ReturnValueContract*
 
 ## Hierarchy
 
 * Manager‹HashDriverContract, object›
 
-  * **Hash**
+  ↳ **Hash**
 
 ## Implements
 
-* ManagerContract‹HashDriverContract, object, DefaultItem›
+* ManagerContract‹HashDriverContract, object, MappingsList, DefaultItem›
 * HashContract‹HashDriverContract›
 
 ## Index
@@ -46,8 +46,10 @@ Hash driver.
 * [getMappingDriver](_src_hash_.hash.md#protected-getmappingdriver)
 * [hash](_src_hash_.hash.md#hash)
 * [needsReHash](_src_hash_.hash.md#needsrehash)
+* [release](_src_hash_.hash.md#release)
 * [use](_src_hash_.hash.md#use)
 * [verify](_src_hash_.hash.md#verify)
+* [wrapDriverResponse](_src_hash_.hash.md#protected-wrapdriverresponse)
 
 ## Constructors
 
@@ -92,7 +94,7 @@ ___
 
 ### `Protected` createArgon2
 
-▸ **createArgon2**(`_mappingName`: string, `config`: any): *any*
+▸ **createArgon2**(`_`: string, `config`: any): *any*
 
 Creating argon driver. The manager will call this method anytime
 someone will ask for the `argon` driver.
@@ -101,7 +103,7 @@ someone will ask for the `argon` driver.
 
 Name | Type |
 ------ | ------ |
-`_mappingName` | string |
+`_` | string |
 `config` | any |
 
 **Returns:** *any*
@@ -110,7 +112,7 @@ ___
 
 ### `Protected` createBcrypt
 
-▸ **createBcrypt**(`_mappingName`: string, `config`: any): *any*
+▸ **createBcrypt**(`_`: string, `config`: any): *any*
 
 Creating bcrypt driver. The manager will call this method anytime
 someone will ask for the `bcrypt` driver.
@@ -119,7 +121,7 @@ someone will ask for the `bcrypt` driver.
 
 Name | Type |
 ------ | ------ |
-`_mappingName` | string |
+`_` | string |
 `config` | any |
 
 **Returns:** *any*
@@ -131,6 +133,9 @@ ___
 ▸ **extend**(`name`: string, `callback`: function): *void*
 
 *Inherited from void*
+
+Extend by adding new driver. The compositon of driver
+is the responsibility of the callback function
 
 **Parameters:**
 
@@ -218,7 +223,7 @@ ___
 
 ###  needsReHash
 
-▸ **needsReHash**(`hashedValue`: string): *boolean*
+▸ **needsReHash**(`hashedValue`: string): *never*
 
 Find if value needs to be re-hashed as per the default driver.
 
@@ -228,19 +233,21 @@ Name | Type |
 ------ | ------ |
 `hashedValue` | string |
 
-**Returns:** *boolean*
+**Returns:** *never*
 
 ___
 
-###  use
+###  release
 
-▸ **use**<**K**>(`name`: K): *MappingsList[K]*
+▸ **release**<**K**>(`name`: K): *void*
 
 *Inherited from void*
 
+Removes the mapping from internal cache.
+
 **Type parameters:**
 
-▪ **K**: *keyof object*
+▪ **K**: *keyof MappingsList*
 
 **Parameters:**
 
@@ -248,9 +255,9 @@ Name | Type |
 ------ | ------ |
 `name` | K |
 
-**Returns:** *MappingsList[K]*
+**Returns:** *void*
 
-▸ **use**(`name`: string): *HashDriverContract*
+▸ **release**(`name`: string): *void*
 
 *Inherited from void*
 
@@ -260,7 +267,42 @@ Name | Type |
 ------ | ------ |
 `name` | string |
 
-**Returns:** *HashDriverContract*
+**Returns:** *void*
+
+___
+
+###  use
+
+▸ **use**<**K**>(`name`: K): *MappingsList[K]*
+
+*Inherited from void*
+
+Returns the instance of a given driver. If `name` is not defined
+the default driver will be resolved.
+
+**Type parameters:**
+
+▪ **K**: *keyof MappingsList*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`name` | K |
+
+**Returns:** *MappingsList[K]*
+
+▸ **use**(`name`: string): *object*
+
+*Inherited from void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`name` | string |
+
+**Returns:** *object*
 
 ▸ **use**(): *DefaultItem*
 
@@ -272,7 +314,7 @@ ___
 
 ###  verify
 
-▸ **verify**(`hashedValue`: string, `plainValue`: string): *Promise‹boolean›*
+▸ **verify**(`hashedValue`: string, `plainValue`: string): *never*
 
 Verify value using the default driver
 
@@ -283,4 +325,23 @@ Name | Type |
 `hashedValue` | string |
 `plainValue` | string |
 
-**Returns:** *Promise‹boolean›*
+**Returns:** *never*
+
+___
+
+### `Protected` wrapDriverResponse
+
+▸ **wrapDriverResponse**(`_`: string, `value`: HashDriverContract): *object*
+
+*Inherited from void*
+
+Optional method to wrap the driver response
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`_` | string |
+`value` | HashDriverContract |
+
+**Returns:** *object*

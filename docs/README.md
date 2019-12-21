@@ -1,6 +1,4 @@
-**[@adonisjs/hash](README.md)**
-
-[Globals](README.md)
+[@adonisjs/hash](README.md)
 
 # @adonisjs/hash
 
@@ -13,4 +11,4 @@
 * ["src/Drivers/Argon"](modules/_src_drivers_argon_.md)
 * ["src/Drivers/Bcrypt"](modules/_src_drivers_bcrypt_.md)
 * ["src/Hash"](modules/_src_hash_.md)
-* ["standlone"](modules/_standlone_.md)
+* ["standalone"](modules/_standalone_.md)

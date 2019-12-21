@@ -1,6 +1,4 @@
-**[@adonisjs/hash](../README.md)**
-
-[Globals](../README.md) › [&quot;src/Drivers/Argon&quot;](../modules/_src_drivers_argon_.md) › [Argon](_src_drivers_argon_.argon.md)
+[@adonisjs/hash](../README.md) › ["src/Drivers/Argon"](../modules/_src_drivers_argon_.md) › [Argon](_src_drivers_argon_.argon.md)
 
 # Class: Argon
 
@@ -40,13 +38,13 @@ to `phc` string format.
 
 ###  constructor
 
-\+ **new Argon**(`_config`: ArgonConfigContract): *[Argon](_src_drivers_argon_.argon.md)*
+\+ **new Argon**(`config`: ArgonConfigContract): *[Argon](_src_drivers_argon_.argon.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`_config` | ArgonConfigContract |
+`config` | ArgonConfigContract |
 
 **Returns:** *[Argon](_src_drivers_argon_.argon.md)*
 

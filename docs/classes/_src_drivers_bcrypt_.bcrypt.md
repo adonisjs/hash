@@ -1,6 +1,4 @@
-**[@adonisjs/hash](../README.md)**
-
-[Globals](../README.md) › [&quot;src/Drivers/Bcrypt&quot;](../modules/_src_drivers_bcrypt_.md) › [Bcrypt](_src_drivers_bcrypt_.bcrypt.md)
+[@adonisjs/hash](../README.md) › ["src/Drivers/Bcrypt"](../modules/_src_drivers_bcrypt_.md) › [Bcrypt](_src_drivers_bcrypt_.bcrypt.md)
 
 # Class: Bcrypt
 
@@ -40,13 +38,13 @@ algorigthm.
 
 ###  constructor
 
-\+ **new Bcrypt**(`_config`: BcryptConfigContract): *[Bcrypt](_src_drivers_bcrypt_.bcrypt.md)*
+\+ **new Bcrypt**(`config`: BcryptConfigContract): *[Bcrypt](_src_drivers_bcrypt_.bcrypt.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`_config` | BcryptConfigContract |
+`config` | BcryptConfigContract |
 
 **Returns:** *[Bcrypt](_src_drivers_bcrypt_.bcrypt.md)*
 

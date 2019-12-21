@@ -1,6 +1,4 @@
-**[@adonisjs/hash](../README.md)**
-
-[Globals](../README.md) › [&quot;src/Hash&quot;](_src_hash_.md)
+[@adonisjs/hash](../README.md) › ["src/Hash"](_src_hash_.md)
 
 # External module: "src/Hash"
 
