@@ -19,10 +19,10 @@ import { HashConfigContract } from '@ioc:Adonis/Core/Hash'
 const hashConfig: HashConfigContract = {
   /*
   |--------------------------------------------------------------------------
-  | Default mapping
+  | Default hasher
   |--------------------------------------------------------------------------
   |
-  | By default we make use of the bcrypt mapping to hash values. However, feel
+  | By default we make use of the bcrypt hasher to hash values. However, feel
   | free to change the default value
   |
   */
