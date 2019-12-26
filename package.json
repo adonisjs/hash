@@ -44,13 +44,13 @@
     "@adonisjs/mrm-preset": "^2.2.3",
     "@phc/argon2": "^1.0.9",
     "@phc/bcrypt": "^1.0.2",
-    "@types/node": "^12.12.21",
+    "@types/node": "^13.1.0",
     "commitizen": "^4.0.3",
     "copyfiles": "^2.1.1",
     "cz-conventional-changelog": "^3.0.2",
     "del-cli": "^3.0.0",
     "doctoc": "^1.4.0",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-plugin-adonis": "^1.0.4",
     "husky": "^3.1.0",
     "japa": "^3.0.1",
@@ -60,7 +60,7 @@
     "typedoc": "^0.15.5",
     "typedoc-plugin-external-module-name": "^2.1.0",
     "typedoc-plugin-markdown": "^2.2.14",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.4"
   },
   "nyc": {
     "exclude": [
