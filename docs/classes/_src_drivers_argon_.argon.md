@@ -52,7 +52,7 @@ Name | Type |
 
 ###  ids
 
-• **ids**: *Object* =  ['argon2d', 'argon2i', 'argon2id']
+• **ids**: *ArgonContract["ids"]* = ['argon2d', 'argon2i', 'argon2id']
 
 A list of ids to find if hash belongs to this driver
 or not.

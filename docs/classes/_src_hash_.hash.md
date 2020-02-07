@@ -32,8 +32,8 @@ Hash driver.
 
 ### Properties
 
-* [$cacheMappings](_src_hash_.hash.md#protected-$cachemappings)
-* [$container](_src_hash_.hash.md#protected-$container)
+* [$cacheMappings](_src_hash_.hash.md#protected-cachemappings)
+* [$container](_src_hash_.hash.md#protected-container)
 * [config](_src_hash_.hash.md#config)
 
 ### Methods
@@ -82,7 +82,7 @@ ___
 
 • **$container**: *any*
 
-*Inherited from void*
+*Inherited from [Hash](_src_hash_.hash.md).[$container](_src_hash_.hash.md#protected-container)*
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 ▸ **extend**(`name`: string, `callback`: function): *void*
 
-*Inherited from void*
+*Inherited from [Hash](_src_hash_.hash.md).[extend](_src_hash_.hash.md#extend)*
 
 Extend by adding new driver. The compositon of driver
 is the responsibility of the callback function
@@ -241,7 +241,7 @@ ___
 
 ▸ **release**<**K**>(`name`: K): *void*
 
-*Inherited from void*
+*Inherited from [Hash](_src_hash_.hash.md).[release](_src_hash_.hash.md#release)*
 
 Removes the mapping from internal cache.
 
@@ -259,7 +259,7 @@ Name | Type |
 
 ▸ **release**(`name`: string): *void*
 
-*Inherited from void*
+*Inherited from [Hash](_src_hash_.hash.md).[release](_src_hash_.hash.md#release)*
 
 **Parameters:**
 
@@ -275,7 +275,7 @@ ___
 
 ▸ **use**<**K**>(`name`: K): *MappingsList[K]*
 
-*Inherited from void*
+*Inherited from [Hash](_src_hash_.hash.md).[use](_src_hash_.hash.md#use)*
 
 Returns the instance of a given driver. If `name` is not defined
 the default driver will be resolved.
@@ -294,7 +294,7 @@ Name | Type |
 
 ▸ **use**(`name`: string): *object*
 
-*Inherited from void*
+*Inherited from [Hash](_src_hash_.hash.md).[use](_src_hash_.hash.md#use)*
 
 **Parameters:**
 
@@ -306,7 +306,7 @@ Name | Type |
 
 ▸ **use**(): *DefaultItem*
 
-*Inherited from void*
+*Inherited from [Hash](_src_hash_.hash.md).[use](_src_hash_.hash.md#use)*
 
 **Returns:** *DefaultItem*
 
@@ -333,7 +333,7 @@ ___
 
 ▸ **wrapDriverResponse**(`_`: string, `value`: HashDriverContract): *object*
 
-*Inherited from void*
+*Inherited from [Hash](_src_hash_.hash.md).[wrapDriverResponse](_src_hash_.hash.md#protected-wrapdriverresponse)*
 
 Optional method to wrap the driver response
 

@@ -2,4 +2,14 @@
 
 # External module: "standalone"
 
+## Index
 
+### References
+
+* [Hash](_standalone_.md#hash)
+
+## References
+
+###  Hash
+
+• **Hash**:

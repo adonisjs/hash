@@ -14,7 +14,7 @@
 
 ### Properties
 
-* [$container](_providers_hashprovider_.hashprovider.md#protected-$container)
+* [$container](_providers_hashprovider_.hashprovider.md#protected-container)
 
 ### Methods
 

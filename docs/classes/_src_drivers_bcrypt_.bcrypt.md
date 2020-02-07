@@ -52,7 +52,7 @@ Name | Type |
 
 ###  ids
 
-• **ids**: *Object* =  ['bcrypt']
+• **ids**: *BcryptContract["ids"]* = ['bcrypt']
 
 ___
 
