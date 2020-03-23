@@ -1,6 +1,6 @@
 [@adonisjs/hash](../README.md) › ["src/Hash"](../modules/_src_hash_.md) › [Hash](_src_hash_.hash.md)
 
-# Class: Hash <**Config, MappingsList, DefaultItem**>
+# Class: Hash <**Config, DefaultItem**>
 
 The Hash module exposes the API to hash values using an underlying
 Hash driver.
@@ -9,19 +9,17 @@ Hash driver.
 
 ▪ **Config**: *HashConfigContract*
 
-▪ **MappingsList**: *object*
-
 ▪ **DefaultItem**: *ReturnValueContract*
 
 ## Hierarchy
 
-* Manager‹HashDriverContract, object›
+* Manager‹HashDriverContract, HashDriverContract, object›
 
   ↳ **Hash**
 
 ## Implements
 
-* ManagerContract‹HashDriverContract, object, MappingsList, DefaultItem›
+* ManagerContract‹HashDriverContract, HashDriverContract, object, DefaultItem›
 * HashContract‹HashDriverContract›
 
 ## Index
@@ -223,7 +221,7 @@ ___
 
 ###  needsReHash
 
-▸ **needsReHash**(`hashedValue`: string): *never*
+▸ **needsReHash**(`hashedValue`: string): *boolean*
 
 Find if value needs to be re-hashed as per the default driver.
 
@@ -233,7 +231,7 @@ Name | Type |
 ------ | ------ |
 `hashedValue` | string |
 
-**Returns:** *never*
+**Returns:** *boolean*
 
 ___
 
@@ -247,7 +245,7 @@ Removes the mapping from internal cache.
 
 **Type parameters:**
 
-▪ **K**: *keyof MappingsList*
+▪ **K**: *keyof object*
 
 **Parameters:**
 
@@ -273,7 +271,7 @@ ___
 
 ###  use
 
-▸ **use**<**K**>(`name`: K): *MappingsList[K]*
+▸ **use**<**K**>(`name`: K): *object[K]*
 
 *Inherited from [Hash](_src_hash_.hash.md).[use](_src_hash_.hash.md#use)*
 
@@ -282,7 +280,7 @@ the default driver will be resolved.
 
 **Type parameters:**
 
-▪ **K**: *keyof MappingsList*
+▪ **K**: *keyof object*
 
 **Parameters:**
 
@@ -290,9 +288,9 @@ Name | Type |
 ------ | ------ |
 `name` | K |
 
-**Returns:** *MappingsList[K]*
+**Returns:** *object[K]*
 
-▸ **use**(`name`: string): *object*
+▸ **use**(`name`: string): *HashDriverContract*
 
 *Inherited from [Hash](_src_hash_.hash.md).[use](_src_hash_.hash.md#use)*
 
@@ -302,7 +300,7 @@ Name | Type |
 ------ | ------ |
 `name` | string |
 
-**Returns:** *object*
+**Returns:** *HashDriverContract*
 
 ▸ **use**(): *DefaultItem*
 
@@ -314,7 +312,7 @@ ___
 
 ###  verify
 
-▸ **verify**(`hashedValue`: string, `plainValue`: string): *never*
+▸ **verify**(`hashedValue`: string, `plainValue`: string): *Promise‹boolean›*
 
 Verify value using the default driver
 
@@ -325,13 +323,13 @@ Name | Type |
 `hashedValue` | string |
 `plainValue` | string |
 
-**Returns:** *never*
+**Returns:** *Promise‹boolean›*
 
 ___
 
 ### `Protected` wrapDriverResponse
 
-▸ **wrapDriverResponse**(`_`: string, `value`: HashDriverContract): *object*
+▸ **wrapDriverResponse**(`_`: string, `value`: HashDriverContract): *HashDriverContract*
 
 *Inherited from [Hash](_src_hash_.hash.md).[wrapDriverResponse](_src_hash_.hash.md#protected-wrapdriverresponse)*
 
@@ -344,4 +342,4 @@ Name | Type |
 `_` | string |
 `value` | HashDriverContract |
 
-**Returns:** *object*
+**Returns:** *HashDriverContract*

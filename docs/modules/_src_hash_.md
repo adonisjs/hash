@@ -1,6 +1,6 @@
 [@adonisjs/hash](../README.md) › ["src/Hash"](_src_hash_.md)
 
-# External module: "src/Hash"
+# Module: "src/Hash"
 
 ## Index
 

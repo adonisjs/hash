@@ -1,6 +1,6 @@
 [@adonisjs/hash](../README.md) › ["providers/HashProvider"](_providers_hashprovider_.md)
 
-# External module: "providers/HashProvider"
+# Module: "providers/HashProvider"
 
 ## Index
 

@@ -4,7 +4,7 @@
 
 ## Index
 
-### External modules
+### Modules
 
 * ["adonis-typings/hash"](modules/_adonis_typings_hash_.md)
 * ["providers/HashProvider"](modules/_providers_hashprovider_.md)
