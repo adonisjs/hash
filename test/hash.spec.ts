@@ -47,7 +47,7 @@ test.group('Hash', () => {
   test('find if value needsReHash for the default driver', async (assert) => {
     const hash = new Hash({}, config as any)
     const hashedValue = await hash.hash('hello-world')
-    const needsReHash = await hash.needsReHash(hashedValue)
+    const needsReHash = hash.needsReHash(hashedValue)
     assert.isFalse(needsReHash)
   })
 

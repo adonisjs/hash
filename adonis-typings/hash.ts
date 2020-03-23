@@ -102,6 +102,7 @@ declare module '@ioc:Adonis/Core/Hash' {
    * MUST BE SET IN THE USER LAND.
    */
   export interface HashersList {
+    bcrypt: HashDrivers['bcrypt']
   }
 
   /**
@@ -125,6 +126,7 @@ declare module '@ioc:Adonis/Core/Hash' {
   export interface HashContract<
     DefaultDriver = HashersList[HashConfigContract['default']]['implementation']
   > extends ManagerContract<
+    HashDriverContract,
     HashDriverContract,
     { [P in keyof HashersList]: HashersList[P]['implementation'] }
     > {
