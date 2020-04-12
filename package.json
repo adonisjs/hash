@@ -87,7 +87,7 @@
   },
   "dependencies": {
     "@phc/format": "^0.5.0",
-    "@poppinss/manager": "^2.1.4"
+    "@poppinss/manager": "^2.1.5"
   },
   "adonisjs": {
     "templates": {
