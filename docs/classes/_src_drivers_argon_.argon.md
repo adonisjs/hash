@@ -38,13 +38,13 @@ to `phc` string format.
 
 ###  constructor
 
-\+ **new Argon**(`config`: ArgonConfigContract): *[Argon](_src_drivers_argon_.argon.md)*
+\+ **new Argon**(`config`: ArgonConfig): *[Argon](_src_drivers_argon_.argon.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`config` | ArgonConfigContract |
+`config` | ArgonConfig |
 
 **Returns:** *[Argon](_src_drivers_argon_.argon.md)*
 

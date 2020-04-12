@@ -7,7 +7,7 @@ Hash driver.
 
 ## Type parameters
 
-▪ **Config**: *HashConfigContract*
+▪ **Config**: *HashConfig*
 
 ▪ **DefaultItem**: *ReturnValueContract*
 

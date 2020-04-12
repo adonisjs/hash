@@ -38,13 +38,13 @@ algorigthm.
 
 ###  constructor
 
-\+ **new Bcrypt**(`config`: BcryptConfigContract): *[Bcrypt](_src_drivers_bcrypt_.bcrypt.md)*
+\+ **new Bcrypt**(`config`: BcryptConfig): *[Bcrypt](_src_drivers_bcrypt_.bcrypt.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`config` | BcryptConfigContract |
+`config` | BcryptConfig |
 
 **Returns:** *[Bcrypt](_src_drivers_bcrypt_.bcrypt.md)*
 
