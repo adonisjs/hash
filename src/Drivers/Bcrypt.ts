@@ -11,7 +11,7 @@
 
 import phc from '@phc/format'
 import bcrypt from '@phc/bcrypt'
-import { BcryptConfigContract, BcryptContract } from '@ioc:Adonis/Core/Hash'
+import { BcryptConfig, BcryptContract } from '@ioc:Adonis/Core/Hash'
 
 /**
  * Generates and verifies hash using Bcrypt as underlying
@@ -22,7 +22,7 @@ export class Bcrypt implements BcryptContract {
   public params: BcryptContract['params'] = { rounds: 'r' }
   public version = 98
 
-  constructor (private config: BcryptConfigContract) {
+  constructor (private config: BcryptConfig) {
   }
 
   /**

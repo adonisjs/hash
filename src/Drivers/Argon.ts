@@ -11,7 +11,7 @@
 
 import argon2 from '@phc/argon2'
 import phc from '@phc/format'
-import { ArgonConfigContract, ArgonContract } from '@ioc:Adonis/Core/Hash'
+import { ArgonConfig, ArgonContract } from '@ioc:Adonis/Core/Hash'
 
 /**
  * Hash driver built on top of argon hashing algorithm. The driver adheres
@@ -38,7 +38,7 @@ export class Argon implements ArgonContract {
    */
   public version = 19
 
-  constructor (private config: ArgonConfigContract) {
+  constructor (private config: ArgonConfig) {
   }
 
   /**

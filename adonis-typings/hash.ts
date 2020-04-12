@@ -41,7 +41,7 @@ declare module '@ioc:Adonis/Core/Hash' {
   /**
    * Shape of bcrypt config
    */
-  export type BcryptConfigContract = {
+  export type BcryptConfig = {
     driver: 'bcrypt',
     rounds: number,
   }
@@ -59,7 +59,7 @@ declare module '@ioc:Adonis/Core/Hash' {
   /**
    * Shape of argon2 config
    */
-  export type ArgonConfigContract = {
+  export type ArgonConfig = {
     driver: 'argon2',
     variant: 'd' | 'i' | 'id',
     iterations: number,
@@ -86,11 +86,11 @@ declare module '@ioc:Adonis/Core/Hash' {
    */
   export type HashDrivers = {
     bcrypt: {
-      config: BcryptConfigContract,
+      config: BcryptConfig,
       implementation: BcryptContract,
     },
     argon: {
-      config: ArgonConfigContract,
+      config: ArgonConfig,
       implementation: ArgonContract,
     },
   }
@@ -102,13 +102,12 @@ declare module '@ioc:Adonis/Core/Hash' {
    * MUST BE SET IN THE USER LAND.
    */
   export interface HashersList {
-    bcrypt: HashDrivers['bcrypt']
   }
 
   /**
    * Shape of config accepted by the Hash module.
    */
-  export interface HashConfigContract {
+  export interface HashConfig {
     default: keyof HashersList,
     list: { [P in keyof HashersList]: HashersList[P]['config'] },
   }
@@ -124,7 +123,7 @@ declare module '@ioc:Adonis/Core/Hash' {
    * Hash mananger interface
    */
   export interface HashContract<
-    DefaultDriver = HashersList[HashConfigContract['default']]['implementation']
+    DefaultDriver = HashersList[HashConfig['default']]['implementation']
   > extends ManagerContract<
     HashDriverContract,
     HashDriverContract,

@@ -11,17 +11,17 @@
 
 import { Manager } from '@poppinss/manager'
 import {
+  HashConfig,
   HashersList,
   HashContract,
   HashDriverContract,
-  HashConfigContract,
 } from '@ioc:Adonis/Core/Hash'
 
 /**
  * The Hash module exposes the API to hash values using an underlying
  * Hash driver.
  */
-export class Hash <Config extends HashConfigContract> extends Manager<
+export class Hash <Config extends HashConfig> extends Manager<
   HashDriverContract,
   HashDriverContract,
   { [P in keyof HashersList]: HashersList[P]['implementation'] }
