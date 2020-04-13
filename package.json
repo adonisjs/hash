@@ -88,6 +88,10 @@
     "@phc/format": "^0.5.0",
     "@poppinss/manager": "^2.1.6"
   },
+  "optionalDependencies": {
+    "@phc/argon2": "^1.0.9",
+    "@phc/bcrypt": "^1.0.2"
+  },
   "adonisjs": {
     "templates": {
       "config": [
