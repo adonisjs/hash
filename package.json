@@ -45,6 +45,8 @@
     "@phc/argon2": "^1.0.9",
     "@phc/bcrypt": "^1.0.2",
     "@types/node": "^13.11.1",
+    "argon2": "^0.26.2",
+    "bcrypt": "^4.0.1",
     "commitizen": "^4.0.4",
     "copyfiles": "^2.2.0",
     "cz-conventional-changelog": "^3.1.0",
