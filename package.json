@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/poppinss/hash#readme",
   "devDependencies": {
-    "@adonisjs/fold": "^6.3.2",
+    "@adonisjs/fold": "^6.3.5",
     "@adonisjs/mrm-preset": "^2.3.0",
     "@phc/argon2": "^1.0.9",
     "@phc/bcrypt": "^1.0.2",
@@ -87,7 +87,7 @@
   },
   "dependencies": {
     "@phc/format": "^0.5.0",
-    "@poppinss/manager": "^2.1.5"
+    "@poppinss/manager": "^2.1.6"
   },
   "adonisjs": {
     "templates": {
