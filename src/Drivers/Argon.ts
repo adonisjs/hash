@@ -9,8 +9,8 @@
 
 /// <reference path="../../adonis-typings/hash.ts" />
 
-import argon2 from '@phc/argon2'
 import phc from '@phc/format'
+import argon2 from '@phc/argon2'
 import { ArgonConfig, ArgonContract } from '@ioc:Adonis/Core/Hash'
 
 /**

@@ -6,7 +6,6 @@
   "files": [
     "build/adonis-typings",
     "build/providers",
-    "build/templates",
     "build/src",
     "build/standalone.d.ts",
     "build/standalone.js"
@@ -18,8 +17,7 @@
     "lint": "eslint . --ext=.ts",
     "clean": "del build",
     "compile": "npm run lint && npm run clean && tsc",
-    "copyfiles": "copyfiles \"templates/**/*.txt\" build",
-    "build": "npm run compile && npm run copyfiles",
+    "build": "npm run compile",
     "commit": "git-cz",
     "release": "np",
     "version": "npm run build"
@@ -48,7 +46,6 @@
     "argon2": "^0.26.2",
     "bcrypt": "^4.0.1",
     "commitizen": "^4.0.4",
-    "copyfiles": "^2.2.0",
     "cz-conventional-changelog": "^3.1.0",
     "del-cli": "^3.0.0",
     "doctoc": "^1.4.0",
@@ -91,21 +88,5 @@
   "optionalDependencies": {
     "@phc/argon2": "^1.0.9",
     "@phc/bcrypt": "^1.0.2"
-  },
-  "adonisjs": {
-    "templates": {
-      "config": [
-        {
-          "src": "config/hash.txt",
-          "dest": "hash"
-        }
-      ],
-      "contracts": [
-        {
-          "src": "contracts/hash.txt",
-          "dest": "hash"
-        }
-      ]
-    }
   }
 }
