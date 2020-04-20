@@ -10,6 +10,8 @@
 /// <reference path="../adonis-typings/hash.ts" />
 
 import { Manager } from '@poppinss/manager'
+import { ManagerConfigValidator } from '@poppinss/utils'
+
 import {
   HashConfig,
   HashersList,
@@ -25,9 +27,19 @@ export class Hash <Config extends HashConfig> extends Manager<
   HashDriverContract,
   HashDriverContract,
   { [P in keyof HashersList]: HashersList[P]['implementation'] }
-> implements HashContract<HashDriverContract> {
+> implements HashContract {
   constructor (container: any, public config: Config) {
     super(container)
+    this.validateConfig()
+  }
+
+  /**
+   * Validate config
+   */
+  private validateConfig () {
+    const validator = new ManagerConfigValidator(this.config, 'hash', 'config/hash')
+    validator.validateDefault('default')
+    validator.validateList('list', 'default')
   }
 
   protected $cacheMappings = true
@@ -36,7 +48,7 @@ export class Hash <Config extends HashConfig> extends Manager<
    * Pulling the default driver name from the user config.
    */
   protected getDefaultMappingName (): string {
-    return this.config.default
+    return this.config.default!
   }
 
   /**
