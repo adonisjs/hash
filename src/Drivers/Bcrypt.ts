@@ -10,7 +10,7 @@
 /// <reference path="../../adonis-typings/hash.ts" />
 
 import phc from '@phc/format'
-import bcrypt from '@phc/bcrypt'
+import bcrypt from 'phc-bcrypt'
 import { BcryptConfig, BcryptContract } from '@ioc:Adonis/Core/Hash'
 
 /**

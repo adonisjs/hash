@@ -23,7 +23,7 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const hashed = await argon.hash('hello-world')
+    const hashed = await argon.make('hello-world')
     const values = phc.deserialize(hashed)
 
     assert.equal(values.id, 'argon2id')
