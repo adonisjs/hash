@@ -42,20 +42,20 @@
     "@adonisjs/mrm-preset": "^2.3.0",
     "@phc/argon2": "^1.0.9",
     "@phc/bcrypt": "^1.0.2",
-    "@types/node": "^13.13.4",
+    "@types/node": "^13.13.5",
     "argon2": "^0.26.2",
     "bcrypt": "^4.0.1",
-    "commitizen": "^4.0.4",
-    "cz-conventional-changelog": "^3.1.0",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "^3.2.0",
     "del-cli": "^3.0.0",
     "doctoc": "^1.4.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-plugin-adonis": "^1.0.9",
     "husky": "^4.2.5",
     "japa": "^3.0.1",
-    "mrm": "^2.2.1",
+    "mrm": "^2.3.0",
     "np": "^5.2.1",
-    "ts-node": "^8.9.1",
+    "ts-node": "^8.10.1",
     "typescript": "^3.8.3"
   },
   "nyc": {
@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "@phc/format": "^0.5.0",
-    "@poppinss/manager": "^2.1.6",
+    "@poppinss/manager": "^2.1.7",
     "@poppinss/utils": "^2.2.6"
   },
   "optionalDependencies": {
