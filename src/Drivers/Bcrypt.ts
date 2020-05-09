@@ -26,9 +26,17 @@ export class Bcrypt implements BcryptContract {
   }
 
   /**
-   * Returns hash for a given value
+   * Alias for [[this.make]]
    */
   public hash (value: string): Promise<string> {
+    process.emitWarning('DeprecationWarning', 'Hash.hash() is deprecated. Use Hash.make() instead')
+    return this.make(value)
+  }
+
+  /**
+   * Returns hash for a given value
+   */
+  public make (value: string) {
     return bcrypt.hash(value, this.config)
   }
 

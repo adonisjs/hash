@@ -85,10 +85,17 @@ export class Hash <Config extends HashConfig> extends Manager<
   }
 
   /**
-   * Hash value using the default driver
+   * Alias for [[this.make]]
    */
   public hash (value: string): never | any {
     return (this.use() as HashDriverContract).hash(value)
+  }
+
+  /**
+   * Hash value using the default driver
+   */
+  public make (value: string) {
+    return (this.use() as HashDriverContract).make(value)
   }
 
   /**

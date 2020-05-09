@@ -42,7 +42,7 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const hashed = await argon.hash('hello-world')
+    const hashed = await argon.make('hello-world')
     let matches = await argon.verify(hashed, 'hello-world')
     assert.isTrue(matches)
 
@@ -69,7 +69,7 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const hashed = await argon.hash('hello-world')
+    const hashed = await argon.make('hello-world')
     assert.isTrue(argon1.needsReHash(hashed))
     assert.isFalse(argon.needsReHash(hashed))
   })
@@ -84,7 +84,7 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const hashed = await argon.hash('hello-world')
+    const hashed = await argon.make('hello-world')
     assert.isTrue(argon.needsReHash(hashed.replace('$v=19', '$v=18')))
   })
 
@@ -107,7 +107,7 @@ test.group('Argon', () => {
       saltSize: 16,
     })
 
-    const hashed = await argon.hash('hello-world')
+    const hashed = await argon.make('hello-world')
     assert.isTrue(argon1.needsReHash(hashed))
     assert.isFalse(argon.needsReHash(hashed))
   })

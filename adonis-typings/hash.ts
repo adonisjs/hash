@@ -24,6 +24,7 @@ declare module '@ioc:Adonis/Core/Hash' {
      * Hash plain text value using the default mapping
      */
     hash (value: string): Promise<string>
+    make (value: string): Promise<string>
 
     /**
      * Check the hash against the current config to find it needs
@@ -127,6 +128,7 @@ declare module '@ioc:Adonis/Core/Hash' {
      * Hash plain text value using the default mapping
      */
     hash (value: string): ReturnType<HashDriverContract['hash']>
+    make (value: string): ReturnType<HashDriverContract['make']>
 
     /**
      * Verify plain value against the hashed value to find if it's

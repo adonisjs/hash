@@ -33,20 +33,20 @@ const config = {
 test.group('Hash', () => {
   test('hash value using the default driver', async (assert) => {
     const hash = new Hash({}, config as any)
-    const hashedValue = await hash.hash('hello-world')
+    const hashedValue = await hash.make('hello-world')
     assert.match(hashedValue, /^\$bcrypt/)
   })
 
   test('verify value using the default driver', async (assert) => {
     const hash = new Hash({}, config as any)
-    const hashedValue = await hash.hash('hello-world')
+    const hashedValue = await hash.make('hello-world')
     const isSame = await hash.verify(hashedValue, 'hello-world')
     assert.isTrue(isSame)
   })
 
   test('find if value needsReHash for the default driver', async (assert) => {
     const hash = new Hash({}, config as any)
-    const hashedValue = await hash.hash('hello-world')
+    const hashedValue = await hash.make('hello-world')
     const needsReHash = hash.needsReHash(hashedValue)
     assert.isFalse(needsReHash)
   })
@@ -71,6 +71,10 @@ test.group('Hash', () => {
       public params = {}
 
       public async hash (): Promise<string> {
+        return 'foo'
+      }
+
+      public async make (): Promise<string> {
         return 'foo'
       }
 
