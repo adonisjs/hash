@@ -81,6 +81,10 @@ declare module '@ioc:Adonis/Core/Hash' {
     }
   }
 
+  export interface PlainContract extends HashDriverContract {
+    ids: ['plain']
+  }
+
   /**
    * Default list of available drivers. One can you reference this type
    * to setup the `HashersList`.
@@ -96,6 +100,9 @@ declare module '@ioc:Adonis/Core/Hash' {
     argon: {
       config: ArgonConfig,
       implementation: ArgonContract,
+    },
+    plain: {
+      implementation: PlainContract,
     },
   }
 

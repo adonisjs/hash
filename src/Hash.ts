@@ -85,6 +85,15 @@ export class Hash <Config extends HashConfig> extends Manager<
   }
 
   /**
+   * Creating plain driver. The manager will call this method anytime
+   * someone will ask for the `plain` driver.
+   */
+  protected createPlain () {
+    const { Plain } = require('./Drivers/Plain')
+    return new Plain()
+  }
+
+  /**
    * Alias for [[this.make]]
    */
   public hash (value: string): never | any {
