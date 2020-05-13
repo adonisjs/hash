@@ -85,12 +85,12 @@ export class Hash <Config extends HashConfig> extends Manager<
   }
 
   /**
-   * Creating plain driver. The manager will call this method anytime
-   * someone will ask for the `plain` driver.
+   * Creating fake driver. The manager will call this method anytime
+   * someone will ask for the `fake` driver.
    */
-  protected createPlain () {
-    const { Plain } = require('./Drivers/Plain')
-    return new Plain()
+  protected createFake () {
+    const { Fake } = require('./Drivers/Fake')
+    return new Fake()
   }
 
   /**

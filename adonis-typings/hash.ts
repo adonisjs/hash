@@ -81,8 +81,8 @@ declare module '@ioc:Adonis/Core/Hash' {
     }
   }
 
-  export interface PlainContract extends HashDriverContract {
-    ids: ['plain']
+  export interface FakeContract extends HashDriverContract {
+    ids: ['fake']
   }
 
   /**
@@ -101,8 +101,8 @@ declare module '@ioc:Adonis/Core/Hash' {
       config: ArgonConfig,
       implementation: ArgonContract,
     },
-    plain: {
-      implementation: PlainContract,
+    fake: {
+      implementation: FakeContract,
     },
   }
 

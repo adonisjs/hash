@@ -8,24 +8,24 @@
  */
 
 import test from 'japa'
-import { Plain } from '../src/Drivers/Plain'
+import { Fake } from '../src/Drivers/Fake'
 
-test.group('Plain', () => {
+test.group('Fake', () => {
   test('hash value', async (assert) => {
-    const plain = new Plain()
-    const hashed = await plain.make('hello-world')
+    const driver = new Fake()
+    const hashed = await driver.make('hello-world')
 
     assert.equal(hashed, 'hello-world')
   })
 
   test('verify hashed value', async (assert) => {
-    const plain = new Plain()
-    const hashed = await plain.make('hello-world')
+    const driver = new Fake()
+    const hashed = await driver.make('hello-world')
 
-    let matched = await plain.verify(hashed, 'hello-world')
+    let matched = await driver.verify(hashed, 'hello-world')
     assert.isTrue(matched)
 
-    matched = await plain.verify(hashed, 'hi-world')
+    matched = await driver.verify(hashed, 'hi-world')
     assert.isFalse(matched)
   })
 })

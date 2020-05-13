@@ -9,13 +9,13 @@
 
 /// <reference path="../../adonis-typings/hash.ts" />
 
-import { PlainContract } from '@ioc:Adonis/Core/Hash'
+import { FakeContract } from '@ioc:Adonis/Core/Hash'
 
 /**
  * Generates and verifies hash using no algorigthm.
  */
-export class Plain implements PlainContract {
-  public ids: PlainContract['ids'] = ['plain']
+export class Fake implements FakeContract {
+  public ids: FakeContract['ids'] = ['fake']
   public params: { [key: string]: string }
 
   /**
