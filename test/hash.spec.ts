@@ -122,4 +122,42 @@ test.group('Hash', () => {
       'Invalid "hash" config. "bcrypt" is not defined inside "list". Make sure set it inside "config/hash',
     )
   })
+
+  test('fake hash.make calls', async (assert) => {
+    const hash = new Hash({}, config as any)
+    hash.fake()
+    const hashedValue = await hash.make('hello-world')
+    assert.equal(hashedValue, 'hello-world')
+  })
+
+  test('fake hash.verify calls', async (assert) => {
+    const hash = new Hash({}, config as any)
+    hash.fake()
+    const isVerified = await hash.verify('hello-world', 'hello-world')
+    assert.isTrue(isVerified)
+  })
+
+  test('fake hash.needsReHash calls', async (assert) => {
+    const hash = new Hash({}, config as any)
+    hash.fake()
+    const needsReHash = hash.needsReHash('hello-world')
+    assert.isFalse(needsReHash)
+  })
+
+  test('return the fake instance when trying to use a named driver', async (assert) => {
+    const hash = new Hash({}, config as any)
+    hash.fake()
+    assert.instanceOf(hash.use('bcrypt'), Fake)
+  })
+
+  test('restore fake calls', async (assert) => {
+    const hash = new Hash({}, config as any)
+    hash.fake()
+    const hashedValue = await hash.make('hello-world')
+    assert.equal(hashedValue, 'hello-world')
+
+    hash.restore()
+    const hashedValueReal = await hash.make('hello-world')
+    assert.match(hashedValueReal, /^\$bcrypt/)
+  })
 })

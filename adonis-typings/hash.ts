@@ -130,12 +130,20 @@ declare module '@ioc:Adonis/Core/Hash' {
     HashDriverContract,
     HashDriverContract,
     { [P in keyof HashersList]: HashersList[P]['implementation'] }
-    > {
+  > {
+    readonly isFaked: boolean
+
     /**
      * Hash plain text value using the default mapping
      */
     hash (value: string): ReturnType<HashDriverContract['hash']>
     make (value: string): ReturnType<HashDriverContract['make']>
+
+    /**
+     * Fake/restore hash implementations
+     */
+    fake (): void
+    restore (): void
 
     /**
      * Verify plain value against the hashed value to find if it's
