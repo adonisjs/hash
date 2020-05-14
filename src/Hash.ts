@@ -85,6 +85,15 @@ export class Hash <Config extends HashConfig> extends Manager<
   }
 
   /**
+   * Creating fake driver. The manager will call this method anytime
+   * someone will ask for the `fake` driver.
+   */
+  protected createFake () {
+    const { Fake } = require('./Drivers/Fake')
+    return new Fake()
+  }
+
+  /**
    * Alias for [[this.make]]
    */
   public hash (value: string): never | any {

@@ -9,8 +9,9 @@
 
 import test from 'japa'
 import { Hash } from '../src/Hash'
-import { Bcrypt } from '../src/Drivers/Bcrypt'
+import { Fake } from '../src/Drivers/Fake'
 import { Argon } from '../src/Drivers/Argon'
+import { Bcrypt } from '../src/Drivers/Bcrypt'
 
 const config = {
   default: 'bcrypt' as const,
@@ -26,6 +27,9 @@ const config = {
     bcrypt: {
       driver: 'bcrypt' as const,
       rounds: 10,
+    },
+    fake: {
+      driver: 'fake' as const,
     },
   },
 }
@@ -55,6 +59,7 @@ test.group('Hash', () => {
     const hash = new Hash({}, config as any)
     assert.instanceOf(hash.use('bcrypt'), Bcrypt)
     assert.instanceOf(hash.use('argon'), Argon)
+    assert.instanceOf(hash.use('fake'), Fake)
   })
 
   test('create extended driver', async (assert) => {
