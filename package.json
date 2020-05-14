@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "@phc/format": "^0.5.0",
-    "@poppinss/manager": "^2.1.7",
+    "@poppinss/manager": "^2.1.8",
     "@poppinss/utils": "^2.2.6"
   },
   "optionalDependencies": {
