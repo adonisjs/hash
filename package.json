@@ -20,7 +20,8 @@
     "build": "npm run compile",
     "commit": "git-cz",
     "release": "np",
-    "version": "npm run build"
+    "version": "npm run build",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -48,13 +49,16 @@
     "del-cli": "^3.0.1",
     "doctoc": "^1.4.0",
     "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-adonis": "^1.0.14",
+    "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "japa": "^3.1.1",
     "mrm": "^2.3.3",
     "np": "^6.3.0",
     "phc-argon2": "^1.0.10",
     "phc-bcrypt": "^1.0.3",
+    "prettier": "^2.0.5",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.6"
   },
