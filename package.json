@@ -39,24 +39,24 @@
   "homepage": "https://github.com/poppinss/hash#readme",
   "devDependencies": {
     "@adonisjs/fold": "^6.3.5",
-    "@adonisjs/mrm-preset": "^2.3.0",
-    "@types/node": "^14.0.13",
+    "@adonisjs/mrm-preset": "^2.3.7",
+    "@types/node": "^14.0.14",
     "argon2": "^0.26.2",
     "bcrypt": "^5.0.0",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
     "del-cli": "^3.0.1",
     "doctoc": "^1.4.0",
-    "eslint": "^7.2.0",
-    "eslint-plugin-adonis": "^1.0.10",
+    "eslint": "^7.4.0",
+    "eslint-plugin-adonis": "^1.0.14",
     "husky": "^4.2.5",
     "japa": "^3.1.1",
     "mrm": "^2.3.3",
-    "np": "^6.2.4",
-    "phc-argon2": "^1.0.0",
-    "phc-bcrypt": "^1.0.0",
+    "np": "^6.3.0",
+    "phc-argon2": "^1.0.10",
+    "phc-bcrypt": "^1.0.3",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
   },
   "nyc": {
     "exclude": [
@@ -82,12 +82,9 @@
     "anyBranch": false
   },
   "dependencies": {
-    "@phc/format": "^0.5.0",
-    "@poppinss/manager": "^2.1.8",
+    "@phc/format": "^1.0.0",
+    "@poppinss/manager": "^3.0.1",
     "@poppinss/utils": "^2.2.7"
   },
-  "optionalDependencies": {
-    "phc-argon2": "^1.0.0",
-    "phc-bcrypt": "^1.0.0"
-  }
+  "optionalDependencies": {}
 }
