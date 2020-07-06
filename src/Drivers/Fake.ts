@@ -15,35 +15,35 @@ import { FakeContract } from '@ioc:Adonis/Core/Hash'
  * Generates and verifies hash using no algorigthm.
  */
 export class Fake implements FakeContract {
-  public ids: FakeContract['ids'] = ['fake']
-  public params: { [key: string]: string }
+	public ids: FakeContract['ids'] = ['fake']
+	public params: { [key: string]: string }
 
-  /**
-   * Alias for [[this.make]]
-   */
-  public hash (value: string): Promise<string> {
-    return Promise.resolve(value)
-  }
+	/**
+	 * Alias for [[this.make]]
+	 */
+	public hash(value: string): Promise<string> {
+		return Promise.resolve(value)
+	}
 
-  /**
-   * Returns hash for a given value
-   */
-  public make (value: string) {
-    return this.hash(value)
-  }
+	/**
+	 * Returns hash for a given value
+	 */
+	public make(value: string) {
+		return this.hash(value)
+	}
 
-  /**
-   * Verify hash to know if two values are same.
-   */
-  public verify (hashedValue: string, plainValue: string): Promise<boolean> {
-    return Promise.resolve(hashedValue === plainValue)
-  }
+	/**
+	 * Verify hash to know if two values are same.
+	 */
+	public verify(hashedValue: string, plainValue: string): Promise<boolean> {
+		return Promise.resolve(hashedValue === plainValue)
+	}
 
-  /**
-   * Returns a boolean telling if hash needs a rehash. Returns true when
-   * one of the original params have been changed.
-   */
-  public needsReHash (_value: string): boolean {
-    return false
-  }
+	/**
+	 * Returns a boolean telling if hash needs a rehash. Returns true when
+	 * one of the original params have been changed.
+	 */
+	public needsReHash(_value: string): boolean {
+		return false
+	}
 }
