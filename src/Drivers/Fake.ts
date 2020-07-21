@@ -16,7 +16,6 @@ import { FakeContract } from '@ioc:Adonis/Core/Hash'
  */
 export class Fake implements FakeContract {
 	public ids: FakeContract['ids'] = ['fake']
-	public params: { [key: string]: string }
 
 	/**
 	 * Alias for [[this.make]]

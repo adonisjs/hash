@@ -59,10 +59,9 @@ test.group('Hash', () => {
 		const hash = new Hash({}, config as any)
 		assert.instanceOf(hash.use('bcrypt'), Bcrypt)
 		assert.instanceOf(hash.use('argon'), Argon)
-		assert.instanceOf(hash.use('fake'), Fake)
 	})
 
-	test('create extended driver', async (assert) => {
+	test('add custom driver', async (assert) => {
 		const hash = new Hash(
 			{},
 			Object.assign({}, config, {
@@ -74,6 +73,7 @@ test.group('Hash', () => {
 				},
 			}) as any
 		)
+
 		class MyAlgo {
 			public ids = []
 			public params = {}
@@ -99,10 +99,10 @@ test.group('Hash', () => {
 			return new MyAlgo()
 		})
 
-		assert.instanceOf(hash.use('foo'), MyAlgo)
+		assert.instanceOf(hash.use('foo' as any), MyAlgo)
 	})
 
-	test('raise exception when default driver is missing', async (assert) => {
+	test('raise exception when default hasher is missing', async (assert) => {
 		const hash = () => new Hash({}, {} as any)
 		assert.throw(
 			hash,
@@ -118,7 +118,7 @@ test.group('Hash', () => {
 		)
 	})
 
-	test('raise exception when default driver value is missing inside list', async (assert) => {
+	test('raise exception when default hasher value is missing inside list', async (assert) => {
 		const hash = () => new Hash({}, { default: 'bcrypt', list: {} } as any)
 		assert.throw(
 			hash,

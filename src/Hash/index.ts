@@ -10,9 +10,16 @@
 /// <reference path="../../adonis-typings/hash.ts" />
 
 import { Manager } from '@poppinss/manager'
+import { IocContract } from '@adonisjs/fold'
 import { ManagerConfigValidator } from '@poppinss/utils'
 
-import { HashConfig, HashersList, HashContract, HashDriverContract } from '@ioc:Adonis/Core/Hash'
+import {
+	HashConfig,
+	HashersList,
+	HashContract,
+	HashDriverContract,
+	FakeContract,
+} from '@ioc:Adonis/Core/Hash'
 
 /**
  * The Hash module exposes the API to hash values using an underlying
@@ -20,12 +27,13 @@ import { HashConfig, HashersList, HashContract, HashDriverContract } from '@ioc:
  */
 export class Hash<Config extends HashConfig>
 	extends Manager<
+		IocContract,
 		HashDriverContract,
 		HashDriverContract,
 		{ [P in keyof HashersList]: HashersList[P]['implementation'] }
 	>
 	implements HashContract {
-	private fakeDriver: HashDriverContract | undefined
+	private fakeDriver: FakeContract | undefined
 
 	/**
 	 * A boolean to know, if hash module is running in fake
@@ -72,21 +80,21 @@ export class Hash<Config extends HashConfig>
 	/**
 	 * Pulling the default driver name from the user config.
 	 */
-	protected getDefaultMappingName(): string {
+	protected getDefaultMappingName() {
 		return this.config.default!
 	}
 
 	/**
 	 * Returns the config for a mapping
 	 */
-	protected getMappingConfig(name: string): any {
+	protected getMappingConfig(name: keyof HashersList) {
 		return this.config.list[name]
 	}
 
 	/**
 	 * Returns the driver name for a mapping
 	 */
-	protected getMappingDriver(name: string): string | undefined {
+	protected getMappingDriver(name: keyof HashersList): string | undefined {
 		const config = this.getMappingConfig(name)
 		return config ? config.driver : undefined
 	}
@@ -126,7 +134,7 @@ export class Hash<Config extends HashConfig>
 			return this.fakeDriver.hash(value)
 		}
 
-		return (this.use() as HashDriverContract).hash(value)
+		return this.use().hash(value)
 	}
 
 	/**
@@ -137,7 +145,7 @@ export class Hash<Config extends HashConfig>
 			return this.fakeDriver.make(value)
 		}
 
-		return (this.use() as HashDriverContract).make(value)
+		return this.use().make(value)
 	}
 
 	/**
@@ -148,7 +156,7 @@ export class Hash<Config extends HashConfig>
 			return this.fakeDriver.verify(hashedValue, plainValue)
 		}
 
-		return (this.use() as HashDriverContract).verify(hashedValue, plainValue)
+		return this.use().verify(hashedValue, plainValue)
 	}
 
 	/**
@@ -159,17 +167,17 @@ export class Hash<Config extends HashConfig>
 			return this.fakeDriver.needsReHash(hashedValue)
 		}
 
-		return (this.use() as HashDriverContract).needsReHash(hashedValue)
+		return this.use().needsReHash(hashedValue)
 	}
 
 	/**
 	 * Pull pre-configured driver instance
 	 */
-	public use(name?: string) {
+	public use<K extends keyof HashersList>(name?: K) {
 		if (this.fakeDriver) {
 			return this.fakeDriver
 		}
 
-		return super.use(name as any)
+		return name ? super.use(name) : super.use()
 	}
 }

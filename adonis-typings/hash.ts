@@ -8,6 +8,7 @@
  */
 
 declare module '@ioc:Adonis/Core/Hash' {
+	import { IocContract } from '@adonisjs/fold'
 	import { ManagerContract } from '@poppinss/manager'
 
 	/**
@@ -16,9 +17,7 @@ declare module '@ioc:Adonis/Core/Hash' {
 	 */
 	export interface HashDriverContract {
 		ids: string[]
-		params: {
-			[key: string]: string
-		}
+		params?: any
 
 		/**
 		 * Hash plain text value using the default mapping
@@ -128,6 +127,7 @@ declare module '@ioc:Adonis/Core/Hash' {
 	 */
 	export interface HashContract
 		extends ManagerContract<
+			IocContract,
 			HashDriverContract,
 			HashDriverContract,
 			{ [P in keyof HashersList]: HashersList[P]['implementation'] }
@@ -141,9 +141,13 @@ declare module '@ioc:Adonis/Core/Hash' {
 		make(value: string): ReturnType<HashDriverContract['make']>
 
 		/**
-		 * Fake/restore hash implementations
+		 * Fake hash
 		 */
 		fake(): void
+
+		/**
+		 * Remove fake
+		 */
 		restore(): void
 
 		/**
