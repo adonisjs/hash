@@ -1,7 +1,3 @@
-/**
- * @module @adonisjs/hash
- */
-
 /*
  * @adonisjs/hash
  *
@@ -12,7 +8,6 @@
  */
 
 import { IocContract } from '@adonisjs/fold'
-import { Hash } from '../src/Hash'
 
 export default class HashProvider {
 	constructor(protected container: IocContract) {}
@@ -20,6 +15,7 @@ export default class HashProvider {
 	public register() {
 		this.container.singleton('Adonis/Core/Hash', () => {
 			const config = this.container.use('Adonis/Core/Config').get('hash', {})
+			const { Hash } = require('../src/Hash')
 			return new Hash(this, config)
 		})
 	}

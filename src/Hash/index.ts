@@ -33,7 +33,12 @@ export class Hash<Config extends HashConfig>
 		{ [P in keyof HashersList]: HashersList[P]['implementation'] }
 	>
 	implements HashContract {
+	/**
+	 * Reference to fake driver. Created when `Hash.fake` is called
+	 */
 	private fakeDriver: FakeContract | undefined
+
+	protected singleton = true
 
 	/**
 	 * A boolean to know, if hash module is running in fake
@@ -49,24 +54,6 @@ export class Hash<Config extends HashConfig>
 	}
 
 	/**
-	 * Initiate faking hash calls. All methods invoked on the main hash
-	 * module and the underlying drivers will be faked using the
-	 * fake driver.
-	 *
-	 * To restore the fake. Run the `Hash.restore` method.
-	 */
-	public fake() {
-		this.fakeDriver = this.fakeDriver || this.createFake()
-	}
-
-	/**
-	 * Restore fake
-	 */
-	public restore() {
-		this.fakeDriver = undefined
-	}
-
-	/**
 	 * Validate config
 	 */
 	private validateConfig() {
@@ -74,8 +61,6 @@ export class Hash<Config extends HashConfig>
 		validator.validateDefault('default')
 		validator.validateList('list', 'default')
 	}
-
-	protected singleton = true
 
 	/**
 	 * Pulling the default driver name from the user config.
@@ -124,6 +109,24 @@ export class Hash<Config extends HashConfig>
 	protected createFake() {
 		const { Fake } = require('../Drivers/Fake')
 		return new Fake()
+	}
+
+	/**
+	 * Initiate faking hash calls. All methods invoked on the main hash
+	 * module and the underlying drivers will be faked using the
+	 * fake driver.
+	 *
+	 * To restore the fake. Run the `Hash.restore` method.
+	 */
+	public fake() {
+		this.fakeDriver = this.fakeDriver || this.createFake()
+	}
+
+	/**
+	 * Restore fake
+	 */
+	public restore() {
+		this.fakeDriver = undefined
 	}
 
 	/**
