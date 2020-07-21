@@ -104,12 +104,18 @@ test.group('Hash', () => {
 
 	test('raise exception when default driver is missing', async (assert) => {
 		const hash = () => new Hash({}, {} as any)
-		assert.throw(hash, 'Invalid "hash" config. Missing value for "default". Make sure set it inside "config/hash')
+		assert.throw(
+			hash,
+			'Invalid "hash" config. Missing value for "default". Make sure set it inside "config/hash'
+		)
 	})
 
 	test('raise exception when list is missing', async (assert) => {
 		const hash = () => new Hash({}, { default: 'bcrypt' } as any)
-		assert.throw(hash, 'Invalid "hash" config. Missing value for "list". Make sure set it inside "config/hash')
+		assert.throw(
+			hash,
+			'Invalid "hash" config. Missing value for "list". Make sure set it inside "config/hash'
+		)
 	})
 
 	test('raise exception when default driver value is missing inside list', async (assert) => {
