@@ -57,6 +57,24 @@ declare module '@ioc:Adonis/Core/Hash' {
 	}
 
 	/**
+	 * Shape of bcryptLegacy config
+	 */
+	export type BcryptLegacyConfig = {
+		driver: 'bcryptLegacy'
+		rounds: number
+	}
+
+	/**
+	 * BcryptLegacy driver contract
+	 */
+	export interface BcryptLegacyContract extends HashDriverContract {
+		ids: ['bcryptLegacy']
+		params: {
+			rounds: 'r'
+		}
+	}
+
+	/**
 	 * Shape of argon2 config
 	 */
 	export type ArgonConfig = {
@@ -95,6 +113,10 @@ declare module '@ioc:Adonis/Core/Hash' {
 		bcrypt: {
 			config: BcryptConfig
 			implementation: BcryptContract
+		}
+		bcryptLegacy: {
+			config: BcryptLegacyConfig
+			implementation: BcryptLegacyContract
 		}
 		argon: {
 			config: ArgonConfig

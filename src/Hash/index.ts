@@ -94,6 +94,15 @@ export class Hash<Config extends HashConfig>
 	}
 
 	/**
+	 * Creating bcryptLegacy driver. The manager will call this method anytime
+	 * someone will ask for the `bcrypt` driver.
+	 */
+	protected createBcryptLegacy(_: string, config: any) {
+		const { BcryptLegacy } = require('../Drivers/BcryptLegacy')
+		return new BcryptLegacy(config)
+	}
+
+	/**
 	 * Creating argon driver. The manager will call this method anytime
 	 * someone will ask for the `argon` driver.
 	 */
