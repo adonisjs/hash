@@ -106,7 +106,7 @@ test.group('Hash', () => {
 		const hash = () => new Hash({}, {} as any)
 		assert.throw(
 			hash,
-			'Invalid "hash" config. Missing value for "default". Make sure set it inside "config/hash'
+			'Invalid "hash" config. Missing value for "default". Make sure to set it inside the "config/hash" file'
 		)
 	})
 
@@ -114,7 +114,7 @@ test.group('Hash', () => {
 		const hash = () => new Hash({}, { default: 'bcrypt' } as any)
 		assert.throw(
 			hash,
-			'Invalid "hash" config. Missing value for "list". Make sure set it inside "config/hash'
+			'Invalid "hash" config. Missing value for "list". Make sure to set it inside the "config/hash" file'
 		)
 	})
 
@@ -122,7 +122,7 @@ test.group('Hash', () => {
 		const hash = () => new Hash({}, { default: 'bcrypt', list: {} } as any)
 		assert.throw(
 			hash,
-			'Invalid "hash" config. "bcrypt" is not defined inside "list". Make sure set it inside "config/hash'
+			'Invalid "hash" config. "bcrypt" is not defined inside "list". Make sure to set it inside the "config/hash" file'
 		)
 	})
 
