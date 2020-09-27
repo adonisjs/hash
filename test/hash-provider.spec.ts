@@ -9,45 +9,59 @@
 
 import test from 'japa'
 import { join } from 'path'
-import { Registrar, Ioc } from '@adonisjs/fold'
-import { Config } from '@adonisjs/config/build/standalone'
+import { Filesystem } from '@poppinss/dev-utils'
+import { Application } from '@adonisjs/application'
 
 import { Hash } from '../src/Hash'
+const fs = new Filesystem(join(__dirname, 'app'))
 
-test.group('Hash Provider', () => {
-	test('register hash provider', async (assert) => {
-		const ioc = new Ioc()
-		ioc.bind('Adonis/Core/Config', () => {
-			return new Config({
-				hash: {
-					default: 'bcrypt',
-					list: {
-						bcrypt: {},
-					},
-				},
-			})
-		})
+async function setup(setupConfig: boolean = true) {
+	await fs.add('.env', '')
+	await fs.fsExtra.ensureDir(join(fs.basePath, 'config'))
 
-		const registrar = new Registrar(ioc, join(__dirname, '..'))
-		await registrar.useProviders(['./providers/HashProvider']).registerAndBoot()
+	if (setupConfig) {
+		await fs.add(
+			'config/hash.ts',
+			`
+			const hashConfig = {
+				default: 'bcrypt',
+				list: {
+					bcrypt: {}
+				}
+			}
+			export default hashConfig
+		`
+		)
+	}
 
-		assert.instanceOf(ioc.use('Adonis/Core/Hash'), Hash)
-		assert.deepEqual(ioc.use('Adonis/Core/Hash'), ioc.use('Adonis/Core/Hash'))
+	const app = new Application(fs.basePath, 'web', {
+		providers: ['../../providers/HashProvider'],
 	})
 
-	test('raise error when config is missing', async (assert) => {
-		const ioc = new Ioc()
-		ioc.bind('Adonis/Core/Config', () => {
-			return new Config({})
-		})
+	app.setup()
+	app.registerProviders()
+	await app.bootProviders()
 
-		const registrar = new Registrar(ioc, join(__dirname, '..'))
-		await registrar.useProviders(['./providers/HashProvider']).registerAndBoot()
+	return app
+}
 
-		const fn = () => ioc.use('Adonis/Core/Hash')
+test.group('Hash Provider', (group) => {
+	group.afterEach(async () => {
+		await fs.cleanup()
+	})
+
+	test('register hash provider', async (assert) => {
+		const app = await setup()
+		assert.instanceOf(app.container.use('Adonis/Core/Hash'), Hash)
+		assert.deepEqual(app.container.use('Adonis/Core/Hash'), app.container.use('Adonis/Core/Hash'))
+	})
+
+	test('raise error when hash config is missing', async (assert) => {
+		const app = await setup(false)
+		const fn = () => app.container.use('Adonis/Core/Hash')
 		assert.throw(
 			fn,
-			'Invalid "hash" config. Missing value for "default". Make sure set it inside "config/hash"'
+			'Invalid "hash" config. Missing value for "default". Make sure to set it inside the "config/hash" file'
 		)
 	})
 })

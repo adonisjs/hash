@@ -16,9 +16,9 @@ import { ManagerConfigValidator } from '@poppinss/utils'
 import {
 	HashConfig,
 	HashersList,
+	FakeContract,
 	HashContract,
 	HashDriverContract,
-	FakeContract,
 } from '@ioc:Adonis/Core/Hash'
 
 /**

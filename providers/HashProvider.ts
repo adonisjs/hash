@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import { IocContract } from '@adonisjs/fold'
+import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 export default class HashProvider {
-	constructor(protected container: IocContract) {}
+	constructor(protected app: ApplicationContract) {}
 
 	public register() {
-		this.container.singleton('Adonis/Core/Hash', () => {
-			const config = this.container.use('Adonis/Core/Config').get('hash', {})
+		this.app.container.singleton('Adonis/Core/Hash', () => {
+			const config = this.app.container.use('Adonis/Core/Config').get('hash', {})
 			const { Hash } = require('../src/Hash')
 			return new Hash(this, config)
 		})
