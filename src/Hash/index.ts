@@ -15,10 +15,10 @@ import { ManagerConfigValidator } from '@poppinss/utils'
 
 import {
 	HashConfig,
-	HashersList,
 	FakeContract,
 	HashContract,
 	HashDriverContract,
+	HashersList,
 } from '@ioc:Adonis/Core/Hash'
 
 /**
@@ -81,7 +81,7 @@ export class Hash<Config extends HashConfig>
 	 */
 	protected getMappingDriver(name: keyof HashersList): string | undefined {
 		const config = this.getMappingConfig(name)
-		return config ? config.driver : undefined
+		return config ? (config as any).driver : undefined
 	}
 
 	/**
@@ -137,7 +137,7 @@ export class Hash<Config extends HashConfig>
 			return this.fakeDriver.hash(value)
 		}
 
-		return this.use().hash(value)
+		return (this.use() as any).hash(value)
 	}
 
 	/**
@@ -148,7 +148,7 @@ export class Hash<Config extends HashConfig>
 			return this.fakeDriver.make(value)
 		}
 
-		return this.use().make(value)
+		return (this.use() as any).make(value)
 	}
 
 	/**
@@ -159,7 +159,7 @@ export class Hash<Config extends HashConfig>
 			return this.fakeDriver.verify(hashedValue, plainValue)
 		}
 
-		return this.use().verify(hashedValue, plainValue)
+		return (this.use() as any).verify(hashedValue, plainValue)
 	}
 
 	/**
@@ -170,17 +170,17 @@ export class Hash<Config extends HashConfig>
 			return this.fakeDriver.needsReHash(hashedValue)
 		}
 
-		return this.use().needsReHash(hashedValue)
+		return (this.use() as any).needsReHash(hashedValue)
 	}
 
 	/**
 	 * Pull pre-configured driver instance
 	 */
-	public use<K extends keyof HashersList>(name?: K) {
+	public use<K extends keyof HashersList>(name?: K): ReturnType<HashContract['use']> {
 		if (this.fakeDriver) {
-			return this.fakeDriver
+			return this.fakeDriver as ReturnType<HashContract['use']>
 		}
 
-		return name ? super.use(name) : super.use()
+		return (name ? super.use(name) : super.use()) as ReturnType<HashContract['use']>
 	}
 }

@@ -57,8 +57,8 @@ test.group('Hash', () => {
 
 	test('create named driver', async (assert) => {
 		const hash = new Hash({}, config as any)
-		assert.instanceOf(hash.use('bcrypt'), Bcrypt)
-		assert.instanceOf(hash.use('argon'), Argon)
+		assert.instanceOf(hash.use('bcrypt' as any), Bcrypt)
+		assert.instanceOf(hash.use('argon' as any), Argon)
 	})
 
 	test('add custom driver', async (assert) => {
@@ -150,7 +150,7 @@ test.group('Hash', () => {
 	test('return the fake instance when trying to use a named driver', async (assert) => {
 		const hash = new Hash({}, config as any)
 		hash.fake()
-		assert.instanceOf(hash.use('bcrypt'), Fake)
+		assert.instanceOf(hash.use('bcrypt' as any), Fake)
 	})
 
 	test('restore fake calls', async (assert) => {
