@@ -130,17 +130,6 @@ export class Hash<Config extends HashConfig>
   }
 
   /**
-   * Alias for [[this.make]]
-   */
-  public hash(value: string): never | any {
-    if (this.fakeDriver) {
-      return this.fakeDriver.hash(value)
-    }
-
-    return (this.use() as any).hash(value)
-  }
-
-  /**
    * Hash value using the default driver
    */
   public make(value: string) {

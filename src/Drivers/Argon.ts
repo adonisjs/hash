@@ -41,14 +41,6 @@ export class Argon implements ArgonContract {
   constructor(private config: ArgonConfig) {}
 
   /**
-   * Alias for [[this.make]]
-   */
-  public hash(value: string): Promise<string> {
-    process.emitWarning('DeprecationWarning', 'Hash.hash() is deprecated. Use Hash.make() instead')
-    return this.make(value)
-  }
-
-  /**
    * Hash a value using argon algorithm. The options can be used to override
    * default settings.
    */

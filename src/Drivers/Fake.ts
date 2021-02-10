@@ -18,17 +18,10 @@ export class Fake implements FakeContract {
   public ids: FakeContract['ids'] = ['fake']
 
   /**
-   * Alias for [[this.make]]
-   */
-  public hash(value: string): Promise<string> {
-    return Promise.resolve(value)
-  }
-
-  /**
    * Returns hash for a given value
    */
   public make(value: string) {
-    return this.hash(value)
+    return Promise.resolve(value)
   }
 
   /**
