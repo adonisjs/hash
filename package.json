@@ -41,30 +41,30 @@
 	},
 	"homepage": "https://github.com/poppinss/hash#readme",
 	"devDependencies": {
-		"@adonisjs/application": "^3.0.21",
-		"@adonisjs/mrm-preset": "^2.4.0",
-		"@adonisjs/require-ts": "^1.1.0",
-		"@poppinss/dev-utils": "^1.0.11",
-		"@types/node": "^14.14.9",
-		"argon2": "^0.27.0",
+		"@adonisjs/application": "^4.0.2",
+		"@adonisjs/mrm-preset": "^3.0.0",
+		"@adonisjs/require-ts": "^2.0.2",
+		"@poppinss/dev-utils": "^1.1.0",
+		"@types/node": "^14.14.25",
+		"argon2": "^0.27.1",
 		"bcrypt": "^5.0.0",
-		"commitizen": "^4.2.2",
+		"commitizen": "^4.2.3",
 		"cz-conventional-changelog": "^3.3.0",
 		"del-cli": "^3.0.1",
-		"eslint": "^7.14.0",
-		"eslint-config-prettier": "^6.15.0",
-		"eslint-plugin-adonis": "^1.0.15",
-		"eslint-plugin-prettier": "^3.1.4",
+		"eslint": "^7.19.0",
+		"eslint-config-prettier": "^7.2.0",
+		"eslint-plugin-adonis": "^1.2.0",
+		"eslint-plugin-prettier": "^3.3.1",
 		"github-label-sync": "^2.0.0",
-		"husky": "^4.3.0",
+		"husky": "^5.0.9",
 		"japa": "^3.1.1",
-		"mrm": "^2.5.12",
-		"np": "^7.0.0",
+		"mrm": "^2.5.18",
+		"np": "^7.3.0",
 		"npm-audit-html": "^1.5.0",
-		"phc-argon2": "^1.0.11",
-		"phc-bcrypt": "^1.0.4",
-		"prettier": "^2.2.0",
-		"typescript": "^4.1.2"
+		"phc-argon2": "^1.1.0",
+		"phc-bcrypt": "^1.0.5",
+		"prettier": "^2.2.1",
+		"typescript": "^4.1.4"
 	},
 	"nyc": {
 		"exclude": [
@@ -91,8 +91,8 @@
 	},
 	"dependencies": {
 		"@phc/format": "^1.0.0",
-		"@poppinss/manager": "^3.0.8",
-		"@poppinss/utils": "^2.5.9"
+		"@poppinss/manager": "^4.0.0",
+		"@poppinss/utils": "^3.0.2"
 	},
 	"peerDependencies": {
 		"@adonisjs/application": "^3.0.0"

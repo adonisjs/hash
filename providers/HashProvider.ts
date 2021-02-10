@@ -15,7 +15,7 @@ export default class HashProvider {
 
 	public register() {
 		this.app.container.singleton('Adonis/Core/Hash', () => {
-			const config = this.app.container.use('Adonis/Core/Config').get('hash', {})
+			const config = this.app.container.resolveBinding('Adonis/Core/Config').get('hash', {})
 			const { Hash } = require('../src/Hash')
 			return new Hash(this, config)
 		})
