@@ -10,8 +10,8 @@
 /// <reference path="../../adonis-typings/hash.ts" />
 
 import { Manager } from '@poppinss/manager'
-import { IocContract } from '@adonisjs/fold'
 import { ManagerConfigValidator } from '@poppinss/utils'
+import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 import {
   HashConfig,
@@ -27,7 +27,7 @@ import {
  */
 export class Hash<Config extends HashConfig>
   extends Manager<
-    IocContract,
+    ApplicationContract,
     HashDriverContract,
     HashDriverContract,
     { [P in keyof HashersList]: HashersList[P]['implementation'] }
@@ -48,8 +48,8 @@ export class Hash<Config extends HashConfig>
     return !!this.fakeDriver
   }
 
-  constructor(container: any, public config: Config) {
-    super(container)
+  constructor(application: ApplicationContract, public config: Config) {
+    super(application)
     this.validateConfig()
   }
 

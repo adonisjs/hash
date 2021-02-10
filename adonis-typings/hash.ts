@@ -8,7 +8,7 @@
  */
 
 declare module '@ioc:Adonis/Core/Hash' {
-  import { IocContract } from '@adonisjs/fold'
+  import { ApplicationContract } from '@ioc:Adonis/Core/Application'
   import { ManagerContract } from '@poppinss/manager'
 
   /**
@@ -127,7 +127,7 @@ declare module '@ioc:Adonis/Core/Hash' {
    */
   export interface HashContract
     extends ManagerContract<
-      IocContract,
+      ApplicationContract,
       HashDriverContract,
       HashDriverContract,
       { [P in keyof HashersList]: HashersList[P]['implementation'] }
