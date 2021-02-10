@@ -1,102 +1,102 @@
 {
-	"name": "@adonisjs/hash",
-	"version": "6.0.7",
-	"description": "Multi driver hash module with support for PHC string formats",
-	"main": "build/providers/HashProvider",
-	"files": [
-		"build/adonis-typings",
-		"build/providers",
-		"build/src",
-		"build/standalone.d.ts",
-		"build/standalone.js"
-	],
-	"scripts": {
-		"mrm": "mrm --preset=@adonisjs/mrm-preset",
-		"pretest": "npm run lint",
-		"test": "node japaFile.js",
-		"clean": "del build",
-		"compile": "npm run lint && npm run clean && tsc",
-		"build": "npm run compile",
-		"commit": "git-cz",
-		"release": "np",
-		"version": "npm run build",
-		"format": "prettier --write .",
-		"prepublishOnly": "npm run build",
-		"lint": "eslint . --ext=.ts",
-		"sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json adonisjs/hash"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+ssh://git@github.com/poppinss/hash.git"
-	},
-	"keywords": [
-		"hash",
-		"bcrypt",
-		"argon2"
-	],
-	"author": "poppinss,virk",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/poppinss/hash/issues"
-	},
-	"homepage": "https://github.com/poppinss/hash#readme",
-	"devDependencies": {
-		"@adonisjs/application": "^4.0.2",
-		"@adonisjs/mrm-preset": "^3.0.0",
-		"@adonisjs/require-ts": "^2.0.2",
-		"@poppinss/dev-utils": "^1.1.0",
-		"@types/node": "^14.14.25",
-		"argon2": "^0.27.1",
-		"bcrypt": "^5.0.0",
-		"commitizen": "^4.2.3",
-		"cz-conventional-changelog": "^3.3.0",
-		"del-cli": "^3.0.1",
-		"eslint": "^7.19.0",
-		"eslint-config-prettier": "^7.2.0",
-		"eslint-plugin-adonis": "^1.2.0",
-		"eslint-plugin-prettier": "^3.3.1",
-		"github-label-sync": "^2.0.0",
-		"husky": "^5.0.9",
-		"japa": "^3.1.1",
-		"mrm": "^2.5.18",
-		"np": "^7.3.0",
-		"phc-argon2": "^1.1.0",
-		"phc-bcrypt": "^1.0.5",
-		"prettier": "^2.2.1",
-		"typescript": "^4.1.4"
-	},
-	"nyc": {
-		"exclude": [
-			"test"
-		],
-		"extension": [
-			".ts"
-		]
-	},
-	"husky": {
-		"hooks": {
-			"commit-msg": "node ./node_modules/@adonisjs/mrm-preset/validateCommit/conventional/validate.js"
-		}
-	},
-	"config": {
-		"commitizen": {
-			"path": "cz-conventional-changelog"
-		}
-	},
-	"np": {
-		"contents": ".",
-		"anyBranch": false
-	},
-	"dependencies": {
-		"@phc/format": "^1.0.0",
-		"@poppinss/manager": "^4.0.0",
-		"@poppinss/utils": "^3.0.2"
-	},
-	"peerDependencies": {
-		"@adonisjs/application": "^3.0.0"
-	},
-	"publishConfig": {
-		"access": "public",
-		"tag": "latest"
-	}
+  "name": "@adonisjs/hash",
+  "version": "6.0.7",
+  "description": "Multi driver hash module with support for PHC string formats",
+  "main": "build/providers/HashProvider",
+  "files": [
+    "build/adonis-typings",
+    "build/providers",
+    "build/src",
+    "build/standalone.d.ts",
+    "build/standalone.js"
+  ],
+  "scripts": {
+    "mrm": "mrm --preset=@adonisjs/mrm-preset",
+    "pretest": "npm run lint",
+    "test": "node japaFile.js",
+    "clean": "del build",
+    "compile": "npm run lint && npm run clean && tsc",
+    "build": "npm run compile",
+    "commit": "git-cz",
+    "release": "np",
+    "version": "npm run build",
+    "format": "prettier --write .",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint . --ext=.ts",
+    "sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json adonisjs/hash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/poppinss/hash.git"
+  },
+  "keywords": [
+    "hash",
+    "bcrypt",
+    "argon2"
+  ],
+  "author": "poppinss,virk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/poppinss/hash/issues"
+  },
+  "homepage": "https://github.com/poppinss/hash#readme",
+  "devDependencies": {
+    "@adonisjs/application": "^4.0.2",
+    "@adonisjs/mrm-preset": "^3.0.0",
+    "@adonisjs/require-ts": "^2.0.2",
+    "@poppinss/dev-utils": "^1.1.0",
+    "@types/node": "^14.14.25",
+    "argon2": "^0.27.1",
+    "bcrypt": "^5.0.0",
+    "commitizen": "^4.2.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "del-cli": "^3.0.1",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-adonis": "^1.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "github-label-sync": "^2.0.0",
+    "husky": "^5.0.9",
+    "japa": "^3.1.1",
+    "mrm": "^2.5.18",
+    "np": "^7.3.0",
+    "phc-argon2": "^1.1.0",
+    "phc-bcrypt": "^1.0.5",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.4"
+  },
+  "nyc": {
+    "exclude": [
+      "test"
+    ],
+    "extension": [
+      ".ts"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node ./node_modules/@adonisjs/mrm-preset/validateCommit/conventional/validate.js"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "np": {
+    "contents": ".",
+    "anyBranch": false
+  },
+  "dependencies": {
+    "@phc/format": "^1.0.0",
+    "@poppinss/manager": "^4.0.0",
+    "@poppinss/utils": "^3.0.2"
+  },
+  "peerDependencies": {
+    "@adonisjs/application": "^4.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
 }

@@ -8,8 +8,8 @@
  */
 
 declare module '@ioc:Adonis/Core/Application' {
-	import { HashContract } from '@ioc:Adonis/Core/Hash'
-	export interface ContainerBindings {
-		'Adonis/Core/Hash': HashContract
-	}
+  import { HashContract } from '@ioc:Adonis/Core/Hash'
+  export interface ContainerBindings {
+    'Adonis/Core/Hash': HashContract
+  }
 }
