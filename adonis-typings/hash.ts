@@ -81,6 +81,7 @@ declare module '@ioc:Adonis/Core/Hash' {
 
   export interface FakeContract extends HashDriverContract {
     ids: ['fake']
+    needsReHash(hashedValue: string): boolean
   }
 
   /**
@@ -158,7 +159,7 @@ declare module '@ioc:Adonis/Core/Hash' {
      * Check the hash against the current config to find it needs
      * to be re-hashed or not
      */
-    needsReHash(hashedValue: string): ReturnType<HashDriverContract['needsReHash']>
+    needsReHash(hashedValue: string): boolean
   }
 
   const Hash: HashContract

@@ -159,7 +159,12 @@ export class Hash<Config extends HashConfig>
       return this.fakeDriver.needsReHash(hashedValue)
     }
 
-    return (this.use() as any).needsReHash(hashedValue)
+    const driver = this.use() as any
+    if (typeof driver.needsReHash !== 'function') {
+      return false
+    }
+
+    return driver.needsReHash(hashedValue)
   }
 
   /**
