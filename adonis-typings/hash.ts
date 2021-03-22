@@ -16,7 +16,7 @@ declare module '@ioc:Adonis/Core/Hash' {
    * contract
    */
   export interface HashDriverContract {
-    ids: string[]
+    ids?: string[]
     params?: any
 
     /**
@@ -28,7 +28,7 @@ declare module '@ioc:Adonis/Core/Hash' {
      * Check the hash against the current config to find it needs
      * to be re-hashed or not
      */
-    needsReHash(hashedValue: string): boolean
+    needsReHash?(hashedValue: string): boolean
 
     /**
      * Verify plain value against the hashed value to find if it's
