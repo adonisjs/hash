@@ -32,7 +32,8 @@ export class Hash<Config extends HashConfig>
     HashDriverContract,
     { [P in keyof HashersList]: HashersList[P]['implementation'] }
   >
-  implements HashContract {
+  implements HashContract
+{
   /**
    * Reference to fake driver. Created when `Hash.fake` is called
    */
