@@ -1,6 +1,6 @@
 {
   "name": "@adonisjs/hash",
-  "version": "7.0.9",
+  "version": "7.0.10",
   "description": "Multi driver hash module with support for PHC string formats",
   "main": "build/providers/HashProvider",
   "files": [
