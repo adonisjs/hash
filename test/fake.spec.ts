@@ -7,18 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import test from 'japa'
+import { test } from '@japa/runner'
 import { Fake } from '../src/Drivers/Fake'
 
 test.group('Fake', () => {
-  test('hash value', async (assert) => {
+  test('hash value', async ({ assert }) => {
     const driver = new Fake()
     const hashed = await driver.make('hello-world')
 
     assert.equal(hashed, 'hello-world')
   })
 
-  test('verify hashed value', async (assert) => {
+  test('verify hashed value', async ({ assert }) => {
     const driver = new Fake()
     const hashed = await driver.make('hello-world')
 

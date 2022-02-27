@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import test from 'japa'
+import { test } from '@japa/runner'
 import { Application } from '@adonisjs/application'
 
 import { Hash } from '../src/Hash'
@@ -37,33 +37,33 @@ const config = {
 }
 
 test.group('Hash', () => {
-  test('hash value using the default driver', async (assert) => {
+  test('hash value using the default driver', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     const hashedValue = await hash.make('hello-world')
     assert.match(hashedValue, /^\$bcrypt/)
   })
 
-  test('verify value using the default driver', async (assert) => {
+  test('verify value using the default driver', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     const hashedValue = await hash.make('hello-world')
     const isSame = await hash.verify(hashedValue, 'hello-world')
     assert.isTrue(isSame)
   })
 
-  test('find if value needsReHash for the default driver', async (assert) => {
+  test('find if value needsReHash for the default driver', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     const hashedValue = await hash.make('hello-world')
     const needsReHash = hash.needsReHash(hashedValue)
     assert.isFalse(needsReHash)
   })
 
-  test('create named driver', async (assert) => {
+  test('create named driver', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     assert.instanceOf(hash.use('bcrypt' as any), Bcrypt)
     assert.instanceOf(hash.use('argon' as any), Argon)
   })
 
-  test('add custom driver', async (assert) => {
+  test('add custom driver', async ({ assert }) => {
     const hash = new Hash(
       new Application(__dirname, 'web', {}),
       Object.assign({}, config, {
@@ -104,59 +104,59 @@ test.group('Hash', () => {
     assert.instanceOf(hash.use('foo' as any), MyAlgo)
   })
 
-  test('raise exception when default hasher is missing', async (assert) => {
+  test('raise exception when default hasher is missing', async ({ assert }) => {
     const hash = () => new Hash(new Application(__dirname, 'web', {}), {} as any)
-    assert.throw(
+    assert.throws(
       hash,
       'Invalid "hash" config. Missing value for "default". Make sure to set it inside the "config/hash" file'
     )
   })
 
-  test('raise exception when list is missing', async (assert) => {
+  test('raise exception when list is missing', async ({ assert }) => {
     const hash = () => new Hash(new Application(__dirname, 'web', {}), { default: 'bcrypt' } as any)
-    assert.throw(
+    assert.throws(
       hash,
       'Invalid "hash" config. Missing value for "list". Make sure to set it inside the "config/hash" file'
     )
   })
 
-  test('raise exception when default hasher value is missing inside list', async (assert) => {
+  test('raise exception when default hasher value is missing inside list', async ({ assert }) => {
     const hash = () =>
       new Hash(new Application(__dirname, 'web', {}), { default: 'bcrypt', list: {} } as any)
-    assert.throw(
+    assert.throws(
       hash,
       'Invalid "hash" config. "bcrypt" is not defined inside "list". Make sure to set it inside the "config/hash" file'
     )
   })
 
-  test('fake hash.make calls', async (assert) => {
+  test('fake hash.make calls', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     hash.fake()
     const hashedValue = await hash.make('hello-world')
     assert.equal(hashedValue, 'hello-world')
   })
 
-  test('fake hash.verify calls', async (assert) => {
+  test('fake hash.verify calls', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     hash.fake()
     const isVerified = await hash.verify('hello-world', 'hello-world')
     assert.isTrue(isVerified)
   })
 
-  test('fake hash.needsReHash calls', async (assert) => {
+  test('fake hash.needsReHash calls', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     hash.fake()
     const needsReHash = hash.needsReHash('hello-world')
     assert.isFalse(needsReHash)
   })
 
-  test('return the fake instance when trying to use a named driver', async (assert) => {
+  test('return the fake instance when trying to use a named driver', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     hash.fake()
     assert.instanceOf(hash.use('bcrypt' as any), Fake)
   })
 
-  test('restore fake calls', async (assert) => {
+  test('restore fake calls', async ({ assert }) => {
     const hash = new Hash(new Application(__dirname, 'web', {}), config as any)
     hash.fake()
     const hashedValue = await hash.make('hello-world')
