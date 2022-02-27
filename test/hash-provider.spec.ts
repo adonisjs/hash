@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import test from 'japa'
+import { test } from '@japa/runner'
 import { join } from 'path'
 import { Filesystem } from '@poppinss/dev-utils'
 import { Application } from '@adonisjs/application'
@@ -46,20 +46,20 @@ async function setup(setupConfig: boolean = true) {
 }
 
 test.group('Hash Provider', (group) => {
-  group.afterEach(async () => {
+  group.each.teardown(async () => {
     await fs.cleanup()
   })
 
-  test('register hash provider', async (assert) => {
+  test('register hash provider', async ({ assert }) => {
     const app = await setup()
     assert.instanceOf(app.container.use('Adonis/Core/Hash'), Hash)
     assert.deepEqual(app.container.use('Adonis/Core/Hash'), app.container.use('Adonis/Core/Hash'))
   })
 
-  test('raise error when hash config is missing', async (assert) => {
+  test('raise error when hash config is missing', async ({ assert }) => {
     const app = await setup(false)
     const fn = () => app.container.use('Adonis/Core/Hash')
-    assert.throw(
+    assert.throws(
       fn,
       'Invalid "hash" config. Missing value for "default". Make sure to set it inside the "config/hash" file'
     )

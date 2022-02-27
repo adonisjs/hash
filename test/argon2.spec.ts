@@ -7,13 +7,13 @@
  * file that was distributed with this source code.
  */
 
-import test from 'japa'
+import { test } from '@japa/runner'
 import phc from '@phc/format'
 import argon2 from 'argon2'
 import { Argon } from '../src/Drivers/Argon'
 
 test.group('Argon', () => {
-  test('hash value', async (assert) => {
+  test('hash value', async ({ assert }) => {
     const argon = new Argon({
       driver: 'argon2',
       variant: 'id',
@@ -32,7 +32,7 @@ test.group('Argon', () => {
     assert.lengthOf(values.salt, 16)
   })
 
-  test('verify hash value', async (assert) => {
+  test('verify hash value', async ({ assert }) => {
     const argon = new Argon({
       driver: 'argon2',
       variant: 'id',
@@ -50,7 +50,7 @@ test.group('Argon', () => {
     assert.isFalse(matches)
   })
 
-  test('return true for needsRehash when variant is different', async (assert) => {
+  test('return true for needsRehash when variant is different', async ({ assert }) => {
     const argon = new Argon({
       driver: 'argon2',
       variant: 'id',
@@ -74,7 +74,7 @@ test.group('Argon', () => {
     assert.isFalse(argon.needsReHash(hashed))
   })
 
-  test('return true for needsRehash when version is different', async (assert) => {
+  test('return true for needsRehash when version is different', async ({ assert }) => {
     const argon = new Argon({
       driver: 'argon2',
       variant: 'id',
@@ -88,7 +88,7 @@ test.group('Argon', () => {
     assert.isTrue(argon.needsReHash(hashed.replace('$v=19', '$v=18')))
   })
 
-  test('return true for needsRehash when one of the params is different', async (assert) => {
+  test('return true for needsRehash when one of the params is different', async ({ assert }) => {
     const argon = new Argon({
       driver: 'argon2',
       variant: 'id',
@@ -112,7 +112,9 @@ test.group('Argon', () => {
     assert.isFalse(argon.needsReHash(hashed))
   })
 
-  test('return true for needsRehash when hash value is not formatted as a phc string', async (assert) => {
+  test('return true for needsRehash when hash value is not formatted as a phc string', async ({
+    assert,
+  }) => {
     const hash = await argon2.hash('hello-world')
     const argon = new Argon({
       driver: 'argon2',

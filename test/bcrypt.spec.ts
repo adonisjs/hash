@@ -7,13 +7,13 @@
  * file that was distributed with this source code.
  */
 
-import test from 'japa'
+import { test } from '@japa/runner'
 import phc from '@phc/format'
 import PlainBcrypt from 'bcrypt'
 import { Bcrypt } from '../src/Drivers/Bcrypt'
 
 test.group('Bcrypt', () => {
-  test('hash value using defaults', async (assert) => {
+  test('hash value using defaults', async ({ assert }) => {
     const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
     const hashed = await bcrypt.make('hello-world')
     const values = phc.deserialize(hashed)
@@ -24,7 +24,7 @@ test.group('Bcrypt', () => {
     assert.lengthOf(values.salt, 16)
   })
 
-  test('verify hashed value', async (assert) => {
+  test('verify hashed value', async ({ assert }) => {
     const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
     const hashed = await bcrypt.make('hello-world')
 
@@ -35,14 +35,14 @@ test.group('Bcrypt', () => {
     assert.isFalse(matched)
   })
 
-  test('return true for needsRehash when version mismatch', async (assert) => {
+  test('return true for needsRehash when version mismatch', async ({ assert }) => {
     const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
 
     const hashed = await bcrypt.make('hello-world')
     assert.isTrue(bcrypt.needsReHash(hashed.replace('$v=98', '$v=20')))
   })
 
-  test('return true for needsRehash when one of the params are different', async (assert) => {
+  test('return true for needsRehash when one of the params are different', async ({ assert }) => {
     const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
     const bcrypt2 = new Bcrypt({ rounds: 11, driver: 'bcrypt' })
 
@@ -51,7 +51,9 @@ test.group('Bcrypt', () => {
     assert.isFalse(bcrypt.needsReHash(hashed))
   })
 
-  test('return true for needsRehash when hash value is not formatted as a phc string', async (assert) => {
+  test('return true for needsRehash when hash value is not formatted as a phc string', async ({
+    assert,
+  }) => {
     const hash = await PlainBcrypt.hash('hello-world', 10)
     const bcrypt = new Bcrypt({ rounds: 10, driver: 'bcrypt' })
     assert.isTrue(bcrypt.needsReHash(hash))
