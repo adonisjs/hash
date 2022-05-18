@@ -91,12 +91,12 @@ declare module '@ioc:Adonis/Core/Hash' {
    * We will remove this later. Make sure all stubs are not using this
    * type.
    */
-  export type HashDrivers = {
+  export interface HashDrivers {
     bcrypt: {
       config: BcryptConfig
       implementation: BcryptContract
     }
-    argon: {
+    argon2: {
       config: ArgonConfig
       implementation: ArgonContract
     }
