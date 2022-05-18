@@ -7,6 +7,8 @@
     "build/adonis-typings",
     "build/providers",
     "build/src",
+    "build/config.d.ts",
+    "build/config.js",
     "build/standalone.d.ts",
     "build/standalone.js"
   ],

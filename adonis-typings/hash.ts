@@ -100,10 +100,6 @@ declare module '@ioc:Adonis/Core/Hash' {
       config: ArgonConfig
       implementation: ArgonContract
     }
-    fake: {
-      config: undefined
-      implementation: FakeContract
-    }
   }
 
   /**
