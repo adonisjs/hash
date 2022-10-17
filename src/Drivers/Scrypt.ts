@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { scrypt } from 'node:crypto'
+import { scrypt } from 'crypto'
 import tsse from 'tsse'
 import phc from '@phc/format'
 import gensalt from '@kdf/salt'
-import type { ScryptOptions } from 'node:crypto'
+import type { ScryptOptions } from 'crypto'
 import type { ScryptConfig, ScryptContract } from '@ioc:Adonis/Core/Hash'
 
 const kMaxUint24 = 16777215 // 2**24 - 1
