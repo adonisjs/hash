@@ -79,6 +79,62 @@ declare module '@ioc:Adonis/Core/Hash' {
     }
   }
 
+  /**
+   * Shape of scrypt config
+   */
+  export type ScryptConfig = {
+    driver: 'scrypt'
+
+    /**
+     * CPU/memory cost parameter. Must be a power of two greater than one.
+     * Default: 16384
+     */
+    cost: number
+
+    /**
+     * Block size parameter.
+     * Default: 8
+     */
+    blockSize: number
+
+    /**
+     * Parallelization parameter.
+     * Default: 1
+     */
+    parallelization: number
+
+    /**
+     * Size of the salt.
+     * Minimum: 16
+     * Default: 16
+     */
+    saltSize: number
+
+    /**
+     * Memory upper bound.
+     * Default: 16777216
+     */
+    maxmem: number
+
+    /**
+     * Desired key length in bytes.
+     * Default: 64
+     */
+    keylen: number
+  }
+
+  /**
+   * Scrypt driver contract
+   */
+  export interface ScryptContract extends HashDriverContract {
+    ids: ['scrypt']
+    params: {
+      cost: 'n'
+      blockSize: 'r'
+      parallelization: 'p'
+    }
+  }
+
   export interface FakeContract extends HashDriverContract {
     ids: ['fake']
     needsReHash(hashedValue: string): boolean
