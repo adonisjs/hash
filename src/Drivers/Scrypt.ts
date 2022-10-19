@@ -7,14 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { scrypt } from 'crypto'
-import tsse from 'tsse'
+import { scrypt, timingSafeEqual } from 'crypto'
 import phc from '@phc/format'
-import gensalt from '@kdf/salt'
-import type { ScryptOptions } from 'crypto'
+import { kMaxUint24, randomBytesAsync } from '../utils'
+import type { BinaryLike, ScryptOptions } from 'crypto'
 import type { ScryptConfig, ScryptContract } from '@ioc:Adonis/Core/Hash'
-
-const kMaxUint24 = 16777215 // 2**24 - 1
 
 const defaultConfig = Object.freeze({
   cost: 16384,
@@ -26,8 +23,8 @@ const defaultConfig = Object.freeze({
 })
 
 function scryptAsync(
-  password: string,
-  salt: string,
+  password: BinaryLike,
+  salt: BinaryLike,
   keylen: number,
   options: ScryptOptions
 ): Promise<Buffer> {
@@ -99,7 +96,7 @@ export class Scrypt implements ScryptContract {
    * default settings.
    */
   public async make(value: string) {
-    const salt = await gensalt(this.config.saltSize)
+    const salt = await randomBytesAsync(this.config.saltSize)
 
     const derivedKey = await scryptAsync(value, salt, this.config.keylen, this.config)
 
@@ -180,7 +177,7 @@ export class Scrypt implements ScryptContract {
       }
     )
 
-    return tsse(deserializedHash.hash.toString('hex'), derivedKey.toString('hex'))
+    return timingSafeEqual(deserializedHash.hash, derivedKey)
   }
 
   /**
