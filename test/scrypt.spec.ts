@@ -19,8 +19,8 @@ test.group('Scrypt', () => {
       blockSize: 8,
       parallelization: 1,
       saltSize: 16,
-      maxmem: 32 * 1024 * 1024,
-      keylen: 64,
+      maxMemory: 32 * 1024 * 1024,
+      keyLength: 64,
     })
 
     const hashed = await scrypt.make('Romain Lanz')
@@ -38,8 +38,8 @@ test.group('Scrypt', () => {
       blockSize: 8,
       parallelization: 1,
       saltSize: 16,
-      maxmem: 32 * 1024 * 1024,
-      keylen: 64,
+      maxMemory: 32 * 1024 * 1024,
+      keyLength: 64,
     })
 
     const hashed = await scrypt.make('Romain Lanz')
@@ -57,8 +57,8 @@ test.group('Scrypt', () => {
       blockSize: 8,
       parallelization: 1,
       saltSize: 16,
-      maxmem: 32 * 1024 * 1024,
-      keylen: 64,
+      maxMemory: 32 * 1024 * 1024,
+      keyLength: 64,
     })
 
     const scrypt2 = new Scrypt({
@@ -67,8 +67,8 @@ test.group('Scrypt', () => {
       blockSize: 8,
       parallelization: 2,
       saltSize: 16,
-      maxmem: 32 * 1024 * 1024,
-      keylen: 64,
+      maxMemory: 32 * 1024 * 1024,
+      keyLength: 64,
     })
 
     const hashed = await scrypt.make('Romain Lanz')
@@ -87,8 +87,8 @@ test.group('Scrypt', () => {
       blockSize: 8,
       parallelization: 1,
       saltSize: 16,
-      maxmem: 32 * 1024 * 1024,
-      keylen: 64,
+      maxMemory: 32 * 1024 * 1024,
+      keyLength: 64,
     })
 
     assert.isTrue(scrypt.needsReHash(hash))

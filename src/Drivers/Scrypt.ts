@@ -18,18 +18,18 @@ const defaultConfig = Object.freeze({
   blockSize: 8,
   parallelization: 1,
   saltSize: 16,
-  keylen: 64,
-  maxmem: 32 * 1024 * 1024,
+  keyLength: 64,
+  maxMemory: 32 * 1024 * 1024,
 })
 
 function scryptAsync(
   password: BinaryLike,
   salt: BinaryLike,
-  keylen: number,
+  keyLength: number,
   options: ScryptOptions
 ): Promise<Buffer> {
   return new Promise((resolve, reject) => {
-    scrypt(password, salt, keylen, options, (error, derivedKey) => {
+    scrypt(password, salt, keyLength, options, (error, derivedKey) => {
       if (error) {
         reject(error)
       } else {
@@ -73,9 +73,9 @@ export class Scrypt implements ScryptContract {
     }
 
     // Memory Validation
-    const maxmem = 128 * config.cost * config.blockSize
-    if (config.maxmem > maxmem) {
-      new TypeError(`The 'maxmem' option must be less than ${maxmem})`)
+    const maxMemory = 128 * config.cost * config.blockSize
+    if (config.maxMemory > maxMemory) {
+      new TypeError(`The 'maxmem' option must be less than ${maxMemory})`)
     }
 
     // Salt Size Validation
@@ -84,7 +84,7 @@ export class Scrypt implements ScryptContract {
     }
 
     // Key Length Validation
-    if (config.keylen < 64 || config.keylen > 128) {
+    if (config.keyLength < 64 || config.keyLength > 128) {
       new TypeError("The 'keylen' option must be in the range (64 <= keylen <= 128)")
     }
 
@@ -98,7 +98,7 @@ export class Scrypt implements ScryptContract {
   public async make(value: string) {
     const salt = await randomBytesAsync(this.config.saltSize)
 
-    const derivedKey = await scryptAsync(value, salt, this.config.keylen, this.config)
+    const derivedKey = await scryptAsync(value, salt, this.config.keyLength, this.config)
 
     return phc.serialize({
       id: this.ids[0],
@@ -170,7 +170,7 @@ export class Scrypt implements ScryptContract {
       deserializedHash.salt,
       deserializedHash.hash.length,
       {
-        maxmem: this.config.maxmem,
+        maxmem: this.config.maxMemory,
         cost: deserializedHash.params.n,
         blockSize: deserializedHash.params.r,
         parallelization: deserializedHash.params.p,

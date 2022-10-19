@@ -114,13 +114,13 @@ declare module '@ioc:Adonis/Core/Hash' {
      * Memory upper bound.
      * Default: 16777216
      */
-    maxmem: number
+    maxMemory: number
 
     /**
      * Desired key length in bytes.
      * Default: 64
      */
-    keylen: number
+    keyLength: number
   }
 
   /**
