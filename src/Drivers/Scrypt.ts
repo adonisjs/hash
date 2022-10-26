@@ -19,7 +19,7 @@ const defaultConfig = Object.freeze({
   parallelization: 1,
   saltSize: 16,
   keyLength: 64,
-  maxMemory: 32 * 1024 * 1024,
+  maxMemory: 128 * 16384 * 8,
 })
 
 function scryptAsync(
@@ -65,27 +65,29 @@ export class Scrypt implements ScryptContract {
       throw new TypeError("The 'cost' option must be a power of 2 greater than 1")
     }
 
-    // Parallelization validation
+    // Parallelization Validation
     if (config.parallelization < 1 || config.parallelization > kMaxUint24) {
-      new TypeError(
+      throw new TypeError(
         `The 'parallelism' option must be in the range (1 <= parallelism <= ${kMaxUint24})`
       )
     }
 
     // Memory Validation
     const maxMemory = 128 * config.cost * config.blockSize
-    if (config.maxMemory > maxMemory) {
-      new TypeError(`The 'maxmem' option must be less than ${maxMemory})`)
+    if (maxMemory > config.maxMemory) {
+      throw new TypeError(
+        `The 'maxmem' option must be less than ${maxMemory}, found ${config.maxMemory}`
+      )
     }
 
     // Salt Size Validation
     if (config.saltSize < 16 || config.saltSize > 1024) {
-      new TypeError("The 'saltSize' option must be in the range (8 <= saltSize <= 1024)")
+      throw new TypeError("The 'saltSize' option must be in the range (8 <= saltSize <= 1024)")
     }
 
     // Key Length Validation
     if (config.keyLength < 64 || config.keyLength > 128) {
-      new TypeError("The 'keylen' option must be in the range (64 <= keylen <= 128)")
+      throw new TypeError("The 'keylen' option must be in the range (64 <= keylen <= 128)")
     }
 
     this.config = Object.assign({}, defaultConfig, config)
@@ -117,7 +119,13 @@ export class Scrypt implements ScryptContract {
    * a valid hash or not. The hash must be a valid `phc` string
    */
   public async verify(hashedValue: string, plainValue: string): Promise<boolean> {
-    const deserializedHash = phc.deserialize(hashedValue)
+    let deserializedHash: phc.ParsedHash
+
+    try {
+      deserializedHash = phc.deserialize(hashedValue)
+    } catch (error) {
+      throw new TypeError('The hash must be a valid phc string')
+    }
 
     // Identifier Validation
     if (!this.ids.includes(deserializedHash.id)) {
@@ -137,6 +145,11 @@ export class Scrypt implements ScryptContract {
       throw new TypeError("The 'n' param must be an integer")
     }
 
+    // Cost Validation
+    if (deserializedHash.params.n < 1 || deserializedHash.params.n % 2 !== 0) {
+      throw new TypeError("The 'n' param must be a power of 2 greater than 1")
+    }
+
     // Block size Validation
     if (
       typeof deserializedHash.params.r !== 'number' ||
@@ -151,6 +164,11 @@ export class Scrypt implements ScryptContract {
       !Number.isInteger(deserializedHash.params.p)
     ) {
       throw new TypeError("The 'p' param must be an integer")
+    }
+
+    // Parallelization Validation
+    if (deserializedHash.params.p < 1 || deserializedHash.params.p > kMaxUint24) {
+      throw new TypeError(`The 'p' param must be in the range (1 <= parallelism <= ${kMaxUint24})`)
     }
 
     // Salt Validation
@@ -192,7 +210,7 @@ export class Scrypt implements ScryptContract {
     }
 
     if (!this.ids.includes(deserializedHash.id)) {
-      throw new Error('value is not a scrypt hash')
+      throw new Error('Value is not a scrypt hash')
     }
 
     return Object.keys(this.params).some((key) => {
