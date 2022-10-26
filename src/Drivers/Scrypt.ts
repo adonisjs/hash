@@ -121,14 +121,12 @@ export class Scrypt implements ScryptContract {
 
     // Identifier Validation
     if (!this.ids.includes(deserializedHash.id)) {
-      return Promise.reject(
-        new TypeError(`Incompatible ${deserializedHash.id} identifier found in the hash`)
-      )
+      throw new TypeError(`Incompatible ${deserializedHash.id} identifier found in the hash`)
     }
 
     // Parameters Existence Validation
     if (typeof deserializedHash.params !== 'object') {
-      return Promise.reject(new TypeError('The param section cannot be empty'))
+      throw new TypeError('The param section cannot be empty')
     }
 
     // Cost Validation
@@ -136,7 +134,7 @@ export class Scrypt implements ScryptContract {
       typeof deserializedHash.params.n !== 'number' ||
       !Number.isInteger(deserializedHash.params.n)
     ) {
-      return Promise.reject(new TypeError("The 'n' param must be an integer"))
+      throw new TypeError("The 'n' param must be an integer")
     }
 
     // Block size Validation
@@ -144,7 +142,7 @@ export class Scrypt implements ScryptContract {
       typeof deserializedHash.params.r !== 'number' ||
       !Number.isInteger(deserializedHash.params.r)
     ) {
-      return Promise.reject(new TypeError("The 'r' param must be an integer"))
+      throw new TypeError("The 'r' param must be an integer")
     }
 
     // Parallelization Validation
@@ -152,17 +150,17 @@ export class Scrypt implements ScryptContract {
       typeof deserializedHash.params.p !== 'number' ||
       !Number.isInteger(deserializedHash.params.p)
     ) {
-      return Promise.reject(new TypeError("The 'p' param must be an integer"))
+      throw new TypeError("The 'p' param must be an integer")
     }
 
     // Salt Validation
     if (typeof deserializedHash.salt === 'undefined') {
-      return Promise.reject(new TypeError('No salt found in the given string'))
+      throw new TypeError('No salt found in the given string')
     }
 
     // Hash Validation
     if (typeof deserializedHash.hash === 'undefined') {
-      return Promise.reject(new TypeError('No hash found in the given string'))
+      throw new TypeError('No hash found in the given string')
     }
 
     const derivedKey = await scryptAsync(
