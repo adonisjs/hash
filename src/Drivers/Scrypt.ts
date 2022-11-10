@@ -1,17 +1,18 @@
 /*
  * @adonisjs/hash
  *
- * (c) Harminder Virk <virk@adonisjs.com>
+ * (c) AdonisJS
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-import { scrypt, timingSafeEqual } from 'crypto'
 import phc from '@phc/format'
-import { kMaxUint24, randomBytesAsync } from '../utils'
+import { scrypt, timingSafeEqual } from 'crypto'
 import type { BinaryLike, ScryptOptions } from 'crypto'
 import type { ScryptConfig, ScryptContract } from '@ioc:Adonis/Core/Hash'
+
+import { kMaxUint24, randomBytesAsync } from '../utils'
 
 const defaultConfig = Object.freeze({
   cost: 16384,
