@@ -104,6 +104,15 @@ export class Hash<Config extends HashConfig>
   }
 
   /**
+   * Creating scrypt driver. The manager will call this method anytime
+   * someone will ask for the `scrypt` driver.
+   */
+  protected createScrypt(_: string, config: any) {
+    const { Scrypt } = require('../Drivers/Scrypt')
+    return new Scrypt(config)
+  }
+
+  /**
    * Creating fake driver. The manager will call this method anytime
    * someone will ask for the `fake` driver.
    */
