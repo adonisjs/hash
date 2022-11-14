@@ -156,6 +156,10 @@ declare module '@ioc:Adonis/Core/Hash' {
       config: ArgonConfig
       implementation: ArgonContract
     }
+    scrypt: {
+      config: ScryptConfig
+      implementation: ScryptContract
+    }
   }
 
   /**
