@@ -2,121 +2,92 @@
   "name": "@adonisjs/hash",
   "version": "7.2.2",
   "description": "Multi driver hash module with support for PHC string formats",
-  "main": "build/providers/HashProvider",
+  "main": "build/index.js",
+  "type": "module",
   "files": [
-    "build/adonis-typings",
-    "build/providers",
     "build/src",
-    "build/config.d.ts",
-    "build/config.js",
-    "build/standalone.d.ts",
-    "build/standalone.js"
+    "build/index.d.ts",
+    "build/index.js"
   ],
+  "exports": {
+    ".": "./build/index.js",
+    "./types": "./build/src/types.js"
+  },
   "scripts": {
-    "mrm": "mrm --preset=@adonisjs/mrm-preset",
     "pretest": "npm run lint",
-    "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
-    "clean": "del build",
+    "test": "c8 npm run vscode:test",
+    "clean": "del-cli build",
     "compile": "npm run lint && npm run clean && tsc",
     "build": "npm run compile",
-    "commit": "git-cz",
-    "release": "np --message=\"chore(release): %s\"",
+    "release": "np",
     "version": "npm run build",
     "format": "prettier --write .",
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext=.ts",
-    "sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json adonisjs/hash"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/poppinss/hash.git"
+    "sync-labels": "github-label-sync --labels .github/labels.json adonisjs/hash",
+    "vscode:test": "node --loader=ts-node/esm bin/test.ts"
   },
   "keywords": [
     "hash",
     "bcrypt",
     "argon2"
   ],
-  "author": "poppinss,virk",
+  "author": "adonisjs,virk",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/poppinss/hash/issues"
-  },
-  "homepage": "https://github.com/poppinss/hash#readme",
   "devDependencies": {
-    "@adonisjs/application": "^5.2.5",
-    "@adonisjs/mrm-preset": "^5.0.3",
-    "@adonisjs/require-ts": "^2.0.13",
+    "@adonisjs/application": "^5.3.0",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
     "@japa/assert": "^1.3.6",
+    "@japa/expect-type": "^1.0.2",
     "@japa/run-failed-tests": "^1.1.0",
     "@japa/runner": "^2.2.2",
     "@japa/spec-reporter": "^1.3.2",
     "@poppinss/dev-utils": "^2.0.3",
+    "@swc/core": "^1.3.19",
+    "@types/bcrypt": "^5.0.0",
     "@types/node": "^18.11.9",
+    "@types/sinon": "^10.0.13",
     "argon2": "^0.30.2",
     "bcrypt": "^5.0.1",
-    "commitizen": "^4.2.5",
-    "cz-conventional-changelog": "^3.3.0",
+    "c8": "^7.12.0",
     "del-cli": "^5.0.0",
-    "eslint": "^8.27.0",
+    "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-adonis": "^2.1.1",
+    "eslint-plugin-adonis": "^3.0.3",
     "eslint-plugin-prettier": "^4.2.1",
     "github-label-sync": "^2.2.0",
     "husky": "^8.0.2",
-    "mrm": "^4.1.13",
     "np": "^7.6.2",
-    "phc-argon2": "^1.1.3",
-    "phc-bcrypt": "^1.0.8",
     "prettier": "^2.7.1",
-    "typescript": "^4.8.4"
-  },
-  "nyc": {
-    "exclude": [
-      "test"
-    ],
-    "extension": [
-      ".ts"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "node ./node_modules/@adonisjs/mrm-preset/validateCommit/conventional/validate.js"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "np": {
-    "contents": ".",
-    "anyBranch": false
+    "sinon": "^14.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
   },
   "dependencies": {
     "@phc/format": "^1.0.0",
-    "@poppinss/manager": "^5.0.2",
-    "@poppinss/utils": "^5.0.0"
+    "@poppinss/utils": "^6.0.1-0"
   },
   "peerDependencies": {
-    "@adonisjs/application": "^5.0.0"
+    "argon2": "^0.30.2",
+    "bcrypt": "^5.0.1"
   },
-  "publishConfig": {
-    "access": "public",
-    "tag": "latest"
+  "peerDependenciesMeta": {
+    "argon2": {
+      "optional": true
+    },
+    "bcrypt": {
+      "optional": true
+    }
   },
-  "mrmConfig": {
-    "core": true,
-    "license": "MIT",
-    "services": [
-      "github-actions"
-    ],
-    "minNodeVersion": "14.15.4",
-    "probotApps": [
-      "stale",
-      "lock"
-    ],
-    "runGhActionsOnWindows": false
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/poppinss/hash.git"
   },
+  "bugs": {
+    "url": "https://github.com/poppinss/hash/issues"
+  },
+  "homepage": "https://github.com/poppinss/hash#readme",
   "eslintConfig": {
     "extends": [
       "plugin:adonis/typescriptPackage",
@@ -146,5 +117,30 @@
     "bracketSpacing": true,
     "arrowParens": "always",
     "printWidth": 100
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  },
+  "np": {
+    "message": "chore(release): %s",
+    "tag": "next",
+    "branch": "main",
+    "anyBranch": false
+  },
+  "c8": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**",
+      "src/legacy/**"
+    ]
   }
 }
