@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-// @ts-expect-error
 import * as bcryptBase64 from '../legacy/bcrypt_base64.cjs'
 
 import type bcrypt from 'bcrypt'

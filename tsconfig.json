@@ -7,6 +7,7 @@
     "noUnusedParameters": true,
     "isolatedModules": true,
     "removeComments": true,
+    "allowJs": true,
     "declaration": true,
     "rootDir": "./",
     "outDir": "./build",
