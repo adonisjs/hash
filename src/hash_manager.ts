@@ -11,6 +11,7 @@ import { Hash } from './hash.js'
 import { Argon } from './drivers/argon.js'
 import { Bcrypt } from './drivers/bcrypt.js'
 import { Scrypt } from './drivers/scrypt.js'
+
 import type {
   HashDriverContract,
   HashManagerConfig,
@@ -18,7 +19,10 @@ import type {
   ManagerDriverFactory,
   ManagerDriversConfig,
 } from './types.js'
+
+import debug from './debug.js'
 import { Fake } from './drivers/fake.js'
+import { RuntimeException } from '@poppinss/utils'
 
 /**
  * HashManager implements the manager/builder pattern to create a use multiple
@@ -69,6 +73,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
 
   constructor(config: HashManagerConfig<KnownHashers>) {
     this.#config = config
+    debug('creating hash manager. config: %o', this.#config)
   }
 
   /**
@@ -105,7 +110,9 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
   use<Hasher extends keyof KnownHashers>(hasher?: Hasher): Hash {
     let hasherToUse: keyof KnownHashers | undefined = hasher || this.#config.default
     if (!hasherToUse) {
-      throw new Error('Cannot create hash instance. No default hasher is defined in the config')
+      throw new RuntimeException(
+        'Cannot create hash instance. No default hasher is defined in the config'
+      )
     }
 
     /**
@@ -122,6 +129,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
      */
     const cachedHasher = this.#hashersCache[config.driver]
     if (cachedHasher) {
+      debug('using hasher from cache. name: "%s"', hasherToUse)
       return cachedHasher
     }
 
@@ -129,6 +137,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
      * Create a new instance of Hash class with the selected
      * driver and cache it
      */
+    debug('creating hash driver. name: "%s", config: %o', hasherToUse, config)
     const hash = new Hash(this.#createDriver(config.driver, config))
     this.#hashersCache[config.driver] = hash
     return hash
@@ -138,6 +147,8 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
    * Fake hash drivers to disable hashing values
    */
   fake(): void {
+    debug('enabled fakes')
+
     if (!this.#fakeHasher) {
       this.#fakeHasher = new Hash(new Fake())
     }
@@ -148,6 +159,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
    */
   restore() {
     this.#fakeHasher = undefined
+    debug('restored fakes')
   }
 
   /**
@@ -168,6 +180,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
      * Using any because of this issue
      * https://github.com/microsoft/TypeScript/issues/13995
      */
+    debug('adding custom driver %s', driver)
     this.#drivers[driver] = factory as any
   }
 
