@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import { RuntimeException } from '@poppinss/utils'
 import type { ManagerDriversConfig, HashManagerConfig } from './types.js'
-import { InvalidHashConfigException } from './exceptions/invalid_hash_config.js'
 
 /**
  * Define configuration for the hash manager
@@ -20,7 +20,7 @@ export function defineConfig<KnownHashers extends Record<string, ManagerDriversC
    * List should always be provided
    */
   if (!config.list) {
-    throw new InvalidHashConfigException('Missing "list" property in hash config')
+    throw new RuntimeException('Missing "list" property in hash config')
   }
 
   /**
@@ -28,7 +28,7 @@ export function defineConfig<KnownHashers extends Record<string, ManagerDriversC
    * has one or more items
    */
   if (Object.keys(config.list).length && !config.default) {
-    throw new InvalidHashConfigException(
+    throw new RuntimeException(
       'Missing "default" property in hash config. Specify a default hasher'
     )
   }
@@ -37,7 +37,7 @@ export function defineConfig<KnownHashers extends Record<string, ManagerDriversC
    * The default hasher should be mentioned in the list
    */
   if (config.default && !config.list[config.default]) {
-    throw new InvalidHashConfigException(
+    throw new RuntimeException(
       `Missing "list.${String(config.default)}". It is referenced by the "default" property`
     )
   }
