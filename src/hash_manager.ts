@@ -73,7 +73,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
 
   constructor(config: HashManagerConfig<KnownHashers>) {
     this.#config = config
-    debug('creating hash manager. config: %o', this.#config)
+    debug('creating hash manager. config: %O', this.#config)
   }
 
   /**
@@ -137,7 +137,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
      * Create a new instance of Hash class with the selected
      * driver and cache it
      */
-    debug('creating hash driver. name: "%s", config: %o', hasherToUse, config)
+    debug('creating hash driver. name: "%s", config: %O', hasherToUse, config)
     const hash = new Hash(this.#createDriver(config.driver, config))
     this.#hashersCache[config.driver] = hash
     return hash
@@ -147,7 +147,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
    * Fake hash drivers to disable hashing values
    */
   fake(): void {
-    debug('enabled fakes')
+    debug('enabling fakes')
 
     if (!this.#fakeHasher) {
       this.#fakeHasher = new Hash(new Fake())
@@ -158,8 +158,8 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
    * Restore fake
    */
   restore() {
+    debug('restoring fakes')
     this.#fakeHasher = undefined
-    debug('restored fakes')
   }
 
   /**
