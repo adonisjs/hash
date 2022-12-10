@@ -10,49 +10,51 @@
 import type { HashDriverContract } from './types.js'
 
 /**
- * Hash and verify values using a dedicated hash driver. The Hash
- * works as an adapter across different drivers.
- *
- * ```ts
- * const hash = new Hash(new Argon())
- * const hashedPassword = await hash.make('secret')
- *
- * const isValid = await hash.verify(hashedPassword, 'secret')
- * console.log(isValid)
- * ```
+ * Hash and verify values using a dedicated hash driver. The
+ * abstract implementation must be extended by the
+ * implementation drivers
  */
-export class Hash implements HashDriverContract {
-  #driver: HashDriverContract
-  constructor(driver: HashDriverContract) {
-    this.#driver = driver
-  }
+export abstract class Hash implements HashDriverContract {
+  constructor() {}
 
   /**
    * Check if the value is a valid hash. This method just checks
-   * for the formatting of the hash
+   * for the formatting of the hash.
    */
-  isValidHash(value: string): boolean {
-    return this.#driver.isValidHash(value)
-  }
+  abstract isValidHash(value: string): boolean
 
   /**
-   * Hash plain text value
+   * Hash a plain text value
+   *
+   * ```ts
+   * const hashedValue = await hash.make('password')
+   * ```
    */
-  make(value: string): Promise<string> {
-    return this.#driver.make(value)
-  }
+  abstract make(value: string): Promise<string>
 
   /**
    * Verify the plain text value against an existing hash
+   *
+   * ```ts
+   * if (await hash.verify(hashedValues, plainText)) {
+   *
+   * }
+   * ```
    */
-  verify(hashedValue: string, plainValue: string): Promise<boolean> {
-    return this.#driver.verify(hashedValue, plainValue)
-  }
+  abstract verify(hashedValue: string, plainValue: string): Promise<boolean>
 
   /**
-   * Find if the hash value needs a rehash or not.
+   * Find if the hash value needs a rehash or not. The rehash is
+   * required when.
+   *
+   * ```ts
+   * const isValid = await hash.verify(hashedValue, plainText)
+   *
+   * // Plain password is valid and hash needs a rehash
+   * if (isValid && await needs.needsReHash(hashedValue)) {
+   *   const newHashedValue = await hash.make(plainText)
+   * }
+   * ```
    */
-  needsReHash(hashedValue: string): boolean {
-    return this.#driver.needsReHash(hashedValue)
-  }
+  abstract needsReHash(hashedValue: string): boolean
 }

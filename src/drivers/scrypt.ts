@@ -9,8 +9,9 @@
 
 import { safeEqual } from '@poppinss/utils'
 
+import { Hash } from '../hash.js'
+import type { ScryptConfig } from '../types.js'
 import { PhcFormatter } from '../phc_formatter.js'
-import type { ScryptConfig, HashDriverContract } from '../types.js'
 import { randomBytesAsync, RangeValidator, scryptAsync, MAX_UINT32 } from '../helpers.js'
 
 /**
@@ -27,7 +28,7 @@ import { randomBytesAsync, RangeValidator, scryptAsync, MAX_UINT32 } from '../he
  * // $scrypt$n=16384,r=8,p=1$iILKD1gVSx6bqualYqyLBQ$DNzIISdmTQS6sFdQ1tJ3UCZ7Uun4uGHNjj0x8FHOqB0pf2LYsu9Xaj5MFhHg21qBz8l5q/oxpeV+ZkgTAj+OzQ
  * ```
  */
-export class Scrypt implements HashDriverContract {
+export class Scrypt extends Hash {
   /**
    * Config with defaults merged
    */
@@ -43,6 +44,8 @@ export class Scrypt implements HashDriverContract {
   }>()
 
   constructor(config: ScryptConfig) {
+    super()
+
     this.#config = {
       cost: 16384,
       blockSize: 8,
