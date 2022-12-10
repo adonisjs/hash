@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Hash } from '../hash.js'
+import type { HashDriverContract } from '../types.js'
 
 /**
  * The fake implementation does not generate any hash and
@@ -16,7 +16,7 @@ import { Hash } from '../hash.js'
  *
  * The fake driver is useful for testing.
  */
-export class Fake extends Hash {
+export class Fake implements HashDriverContract {
   /**
    * Always returns true
    */

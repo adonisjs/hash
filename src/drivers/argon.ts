@@ -10,7 +10,6 @@
 import type argon2 from 'argon2'
 import { safeEqual } from '@poppinss/utils'
 
-import { Hash } from '../hash.js'
 import { PhcFormatter } from '../phc_formatter.js'
 import {
   MAX_UINT24,
@@ -19,7 +18,7 @@ import {
   RangeValidator,
   randomBytesAsync,
 } from '../helpers.js'
-import type { ArgonConfig, ArgonVariants } from '../types.js'
+import type { ArgonConfig, ArgonVariants, HashDriverContract } from '../types.js'
 
 /**
  * Hash driver built on top of "argon2" hash algorigthm. Under the hood
@@ -35,7 +34,7 @@ import type { ArgonConfig, ArgonVariants } from '../types.js'
  * // $argon2id$v=19$t=3,m=4096,p=1$drxJBWzWahR5tMubp+a1Sw$L/Oh2uw6QKW77i/KQ8eGuOt3ui52hEmmKlu1KBVBxiM
  * ```
  */
-export class Argon extends Hash {
+export class Argon implements HashDriverContract {
   /**
    * Lazily loaded argon2 binding. Since it is a peer dependency
    * we cannot import it at top level
@@ -67,8 +66,6 @@ export class Argon extends Hash {
   #ids = ['argon2d', 'argon2i', 'argon2id']
 
   constructor(config: ArgonConfig) {
-    super()
-
     this.#config = {
       version: 0x13,
       variant: 'id',

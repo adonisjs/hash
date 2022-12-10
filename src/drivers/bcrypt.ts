@@ -11,10 +11,8 @@ import * as bcryptBase64 from '../legacy/bcrypt_base64.cjs'
 
 import type bcrypt from 'bcrypt'
 import { safeEqual } from '@poppinss/utils'
-
-import { Hash } from '../hash.js'
-import type { BcryptConfig } from '../types.js'
 import { PhcFormatter } from '../phc_formatter.js'
+import type { HashDriverContract, BcryptConfig } from '../types.js'
 import { EnumValidator, randomBytesAsync, RangeValidator } from '../helpers.js'
 
 /**
@@ -31,7 +29,7 @@ import { EnumValidator, randomBytesAsync, RangeValidator } from '../helpers.js'
  * // $bcrypt$v=98$r=10$Jtxi46WJ26OQ0khsYLLlnw$knXGfuRFsSjXdj88JydPOnUIglvm1S8
  * ```
  */
-export class Bcrypt extends Hash {
+export class Bcrypt implements HashDriverContract {
   /**
    * Lazily loaded bcrypt binding. Since it is a peer dependency
    * we cannot import it at top level
@@ -49,8 +47,6 @@ export class Bcrypt extends Hash {
   #phcFormatter = new PhcFormatter<{ r: number }>()
 
   constructor(config: BcryptConfig) {
-    super()
-
     this.#config = {
       rounds: 10,
       saltSize: 16,
