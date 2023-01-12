@@ -59,7 +59,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
   /**
    * Cache of hashers
    */
-  #hashersCache: Partial<Record<keyof HashManagerDrivers, Hash>> = {}
+  #hashersCache: Partial<Record<keyof KnownHashers, Hash>> = {}
 
   /**
    * Drivers implementations. Cannot be async, since the "use"
@@ -94,7 +94,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
     }
 
     /**
-     * Use cache or create an instance of the driver
+     * Create an instance of the driver
      */
     return driver(config)
   }
@@ -122,16 +122,16 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
       return this.#fakeHasher
     }
 
-    const config = this.#config.list[hasherToUse]
-
     /**
      * Use cached copy if exists
      */
-    const cachedHasher = this.#hashersCache[config.driver]
+    const cachedHasher = this.#hashersCache[hasherToUse]
     if (cachedHasher) {
       debug('using hasher from cache. name: "%s"', hasherToUse)
       return cachedHasher
     }
+
+    const config = this.#config.list[hasherToUse]
 
     /**
      * Create a new instance of Hash class with the selected
@@ -139,7 +139,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
      */
     debug('creating hash driver. name: "%s", config: %O', hasherToUse, config)
     const hash = new Hash(this.#createDriver(config.driver, config))
-    this.#hashersCache[config.driver] = hash
+    this.#hashersCache[hasherToUse] = hash
     return hash
   }
 

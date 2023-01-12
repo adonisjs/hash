@@ -50,10 +50,19 @@ test.group('Hash manager', () => {
         argon: {
           driver: 'argon2',
         },
+        argon1: {
+          driver: 'argon2',
+        },
         bcrypt: {
           driver: 'bcrypt',
         },
+        bcrypt1: {
+          driver: 'bcrypt',
+        },
         scrypt: {
+          driver: 'scrypt',
+        },
+        scrypt1: {
           driver: 'scrypt',
         },
       },
@@ -61,15 +70,23 @@ test.group('Hash manager', () => {
 
     expectTypeOf(manager.use)
       .parameter(0)
-      .toEqualTypeOf<'argon' | 'scrypt' | 'bcrypt' | undefined>()
+      .toEqualTypeOf<'argon' | 'argon1' | 'scrypt' | 'scrypt1' | 'bcrypt' | 'bcrypt1' | undefined>()
 
     expectTypeOf(manager.use('argon')).toEqualTypeOf<Hash>()
     expectTypeOf(manager.use('bcrypt')).toEqualTypeOf<Hash>()
     expectTypeOf(manager.use('scrypt')).toEqualTypeOf<Hash>()
+    expectTypeOf(manager.use('argon1')).toEqualTypeOf<Hash>()
+    expectTypeOf(manager.use('bcrypt1')).toEqualTypeOf<Hash>()
+    expectTypeOf(manager.use('scrypt1')).toEqualTypeOf<Hash>()
 
     assert.strictEqual(manager.use('argon'), manager.use('argon'))
+    assert.notStrictEqual(manager.use('argon'), manager.use('argon1'))
+
     assert.strictEqual(manager.use('bcrypt'), manager.use('bcrypt'))
+    assert.notStrictEqual(manager.use('bcrypt'), manager.use('bcrypt1'))
+
     assert.strictEqual(manager.use('scrypt'), manager.use('scrypt'))
+    assert.notStrictEqual(manager.use('scrypt'), manager.use('scrypt1'))
   })
 
   test('use default hasher', ({ assert }) => {
