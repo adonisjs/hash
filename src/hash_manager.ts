@@ -7,22 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import { Hash } from './hash.js'
-import { Argon } from './drivers/argon.js'
-import { Bcrypt } from './drivers/bcrypt.js'
-import { Scrypt } from './drivers/scrypt.js'
-
-import type {
-  HashDriverContract,
-  HashManagerConfig,
-  HashManagerDrivers,
-  ManagerDriverFactory,
-  ManagerDriversConfig,
-} from './types.js'
+import { RuntimeException } from '@poppinss/utils'
 
 import debug from './debug.js'
+import { Hash } from './hash.js'
 import { Fake } from './drivers/fake.js'
-import { RuntimeException } from '@poppinss/utils'
+import type { HashDriverContract, ManagerDriverFactory } from './types.js'
 
 /**
  * HashManager implements the manager/builder pattern to create a use multiple
@@ -32,24 +22,23 @@ import { RuntimeException } from '@poppinss/utils'
  * const manager = new HashManager({
  *   default: 'argon',
  *   list: {
- *     argon: {
- *       driver: 'argon2',
- *     },
- *     bcrypt: {
- *       driver: 'bcrypt',
- *     }
+ *     argon: () => new ArgonDriver(),
+ *     bcrypt: () => new BcryptDriver(),
  *   }
  * })
  * ```
  */
-export class HashManager<KnownHashers extends Record<string, ManagerDriversConfig>>
+export class HashManager<KnownHashers extends Record<string, ManagerDriverFactory>>
   implements HashDriverContract
 {
   /**
    * Hash manager config with the list of hashers in
    * use
    */
-  #config: HashManagerConfig<KnownHashers>
+  #config: {
+    default?: keyof KnownHashers
+    list: KnownHashers
+  }
 
   /**
    * Fake hasher
@@ -61,17 +50,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
    */
   #hashersCache: Partial<Record<keyof KnownHashers, Hash>> = {}
 
-  /**
-   * Drivers implementations. Cannot be async, since the "use"
-   * method is not async
-   */
-  #drivers: { [Driver in keyof HashManagerDrivers]?: ManagerDriverFactory<Driver> } = {
-    bcrypt: (config) => new Bcrypt(config),
-    argon2: (config) => new Argon(config),
-    scrypt: (config) => new Scrypt(config),
-  }
-
-  constructor(config: HashManagerConfig<KnownHashers>) {
+  constructor(config: { default?: keyof KnownHashers; list: KnownHashers }) {
     this.#config = config
     debug('creating hash manager. config: %O', this.#config)
   }
@@ -79,24 +58,10 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
   /**
    * Creates an instance of a hash driver
    */
-  #createDriver<Driver extends keyof HashManagerDrivers>(
-    name: Driver,
-    config: { driver: Driver } & HashManagerDrivers[Driver]['config']
-  ): HashManagerDrivers[Driver]['implementation'] {
-    /**
-     * Ensure the driver exists
-     */
-    const driver = this.#drivers[name]
-    if (!driver) {
-      throw new Error(
-        `Unknown hash driver "${name}". Make sure the driver is registered with HashManager`
-      )
-    }
-
-    /**
-     * Create an instance of the driver
-     */
-    return driver(config)
+  #createDriver<DriverFactory extends ManagerDriverFactory>(
+    factory: DriverFactory
+  ): ReturnType<DriverFactory> {
+    return factory() as ReturnType<DriverFactory>
   }
 
   /**
@@ -131,14 +96,14 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
       return cachedHasher
     }
 
-    const config = this.#config.list[hasherToUse]
+    const driverFactory = this.#config.list[hasherToUse]
 
     /**
      * Create a new instance of Hash class with the selected
      * driver and cache it
      */
-    debug('creating hash driver. name: "%s", config: %O', hasherToUse, config)
-    const hash = new Hash(this.#createDriver(config.driver, config))
+    debug('creating hash driver. name: "%s"', hasherToUse)
+    const hash = new Hash(this.#createDriver(driverFactory))
     this.#hashersCache[hasherToUse] = hash
     return hash
   }
@@ -160,28 +125,6 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriversConfi
   restore() {
     debug('restoring fakes')
     this.#fakeHasher = undefined
-  }
-
-  /**
-   * Extend manager to add custom drivers. The driver typings must be
-   * registered first (if using typescript).
-   *
-   * ```ts
-   * manager.extend('bcrypt', (config) => {
-   *   return new Bcrypt(config)
-   * })
-   * ```
-   */
-  extend<Driver extends keyof HashManagerDrivers>(
-    driver: Driver,
-    factory: ManagerDriverFactory<Driver>
-  ) {
-    /**
-     * Using any because of this issue
-     * https://github.com/microsoft/TypeScript/issues/13995
-     */
-    debug('adding custom driver %s', driver)
-    this.#drivers[driver] = factory as any
   }
 
   /**

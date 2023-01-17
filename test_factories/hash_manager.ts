@@ -7,41 +7,46 @@
  * file that was distributed with this source code.
  */
 
-import { HashManager } from '../index.js'
-import type { HashManagerConfig, ManagerDriversConfig } from '../src/types.js'
+import { HashManager, Scrypt } from '../index.js'
+import { ManagerDriverFactory } from '../src/types.js'
+
+type Config<KnownHashers extends Record<string, ManagerDriverFactory>> = {
+  default?: keyof KnownHashers
+  list: KnownHashers
+}
 
 /**
  * Hash manager factory is used to create an instance of hash manager
  * for testing
  */
 export class HashMangerFactory<
-  KnownHashers extends Record<string, ManagerDriversConfig> = { scrypt: { driver: 'scrypt' } }
+  KnownHashers extends Record<string, ManagerDriverFactory> = {
+    scrypt: () => Scrypt
+  }
 > {
   /**
    * Config accepted by hash manager
    */
-  #config: HashManagerConfig<KnownHashers>
+  #config: Config<KnownHashers>
 
-  constructor(config?: HashManagerConfig<KnownHashers>) {
+  constructor(config?: { default?: keyof KnownHashers; list: KnownHashers }) {
     this.#config =
       config ||
       ({
         default: 'scrypt',
         list: {
-          scrypt: {
-            driver: 'scrypt',
-          },
+          scrypt: () => new Scrypt({}),
         },
-      } as unknown as HashManagerConfig<KnownHashers>)
+      } as unknown as Config<KnownHashers>)
   }
 
   /**
    * Merge factory parameters
    */
-  merge<Hashers extends Record<string, ManagerDriversConfig>>(options: {
-    config: HashManagerConfig<Hashers>
-  }): HashMangerFactory<Hashers> {
-    return new HashMangerFactory(options.config)
+  merge<Hashers extends Record<string, ManagerDriverFactory>>(
+    config: Config<Hashers>
+  ): HashMangerFactory<Hashers> {
+    return new HashMangerFactory(config)
   }
 
   /**

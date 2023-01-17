@@ -25,13 +25,9 @@ test.group('Hash manager factory', () => {
   test('create instance of hash manager with custom config', async ({ assert }) => {
     const hash = new HashMangerFactory()
       .merge({
-        config: {
-          default: 'bcrypt',
-          list: {
-            bcrypt: {
-              driver: 'bcrypt',
-            },
-          },
+        default: 'bcrypt',
+        list: {
+          bcrypt: () => new Bcrypt({}),
         },
       })
       .create()

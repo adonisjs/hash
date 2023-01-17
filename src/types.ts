@@ -7,10 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import type { Argon } from './drivers/argon.js'
-import type { Bcrypt } from './drivers/bcrypt.js'
-import type { Scrypt } from './drivers/scrypt.js'
-
 /**
  * The contract Hash drivers should adhere to
  */
@@ -190,44 +186,8 @@ export type ScryptConfig = {
 }
 
 /**
- * Known hash drivers. One can extend the interface to add
- * custom drivers as well
- */
-export interface HashManagerDrivers {
-  bcrypt: {
-    config: BcryptConfig
-    implementation: Bcrypt
-  }
-  argon2: {
-    config: ArgonConfig
-    implementation: Argon
-  }
-  scrypt: {
-    config: ScryptConfig
-    implementation: Scrypt
-  }
-}
-
-/**
- * Union of config extracted from known hash drivers
- */
-export type ManagerDriversConfig = {
-  [K in keyof HashManagerDrivers]: { driver: K } & HashManagerDrivers[K]['config']
-}[keyof HashManagerDrivers]
-
-/**
  * Factory function to return the driver implementation. The method
  * cannot be async, because the API that calls this method is not
  * async in first place.
  */
-export type ManagerDriverFactory<K extends keyof HashManagerDrivers> = (
-  config: { driver: K } & HashManagerDrivers[K]['config']
-) => HashManagerDrivers[K]['implementation']
-
-/**
- * Config accepted by the hash manager
- */
-export type HashManagerConfig<KnownHashers extends Record<string, ManagerDriversConfig>> = {
-  default?: keyof KnownHashers
-  list: KnownHashers
-}
+export type ManagerDriverFactory = () => HashDriverContract
