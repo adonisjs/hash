@@ -68,7 +68,7 @@
   },
   "dependencies": {
     "@phc/format": "^1.0.0",
-    "@poppinss/utils": "^6.3.1-0"
+    "@poppinss/utils": "^6.4.0-0"
   },
   "peerDependencies": {
     "argon2": "^0.30.3",
