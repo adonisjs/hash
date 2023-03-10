@@ -155,4 +155,18 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
   needsReHash(hashedValue: string): boolean {
     return this.use().needsReHash(hashedValue)
   }
+
+  /**
+   * Assert the plain value passes the hash verification
+   */
+  async assertEquals(hashedValue: string, plainValue: string): Promise<void> {
+    return this.use().assertEquals(hashedValue, plainValue)
+  }
+
+  /**
+   * Assert the plain value fails the hash verification
+   */
+  async assertNotEquals(hashedValue: string, plainValue: string): Promise<void> {
+    return this.use().assertNotEquals(hashedValue, plainValue)
+  }
 }

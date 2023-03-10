@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { AssertionError } from 'node:assert'
 import type { HashDriverContract } from './types.js'
 
 /**
@@ -54,5 +55,37 @@ export class Hash implements HashDriverContract {
    */
   needsReHash(hashedValue: string): boolean {
     return this.#driver.needsReHash(hashedValue)
+  }
+
+  /**
+   * Assert the plain value passes the hash verification
+   */
+  async assertEquals(hashedValue: string, plainValue: string): Promise<void> {
+    const isEqual = await this.#driver.verify(hashedValue, plainValue)
+    if (!isEqual) {
+      throw new AssertionError({
+        message: `Expected "${plainValue}" to pass hash verification`,
+        expected: true,
+        actual: false,
+        operator: 'strictEqual',
+        stackStartFn: this.assertEquals,
+      })
+    }
+  }
+
+  /**
+   * Assert the plain value fails the hash verification
+   */
+  async assertNotEquals(hashedValue: string, plainValue: string): Promise<void> {
+    const isEqual = await this.#driver.verify(hashedValue, plainValue)
+    if (isEqual) {
+      throw new AssertionError({
+        message: `Expected "${plainValue}" to fail hash verification`,
+        expected: false,
+        actual: true,
+        operator: 'strictEqual',
+        stackStartFn: this.assertNotEquals,
+      })
+    }
   }
 }

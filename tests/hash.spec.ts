@@ -35,4 +35,22 @@ test.group('Hash', () => {
     const hashedValue = await hash.make('secret')
     assert.isFalse(hash.needsReHash(hashedValue))
   })
+
+  test('assert hashed value against plain value', async ({ assert }) => {
+    const argon = new Argon({})
+    const hash = new Hash(argon)
+
+    const hashedValue = await hash.make('secret')
+    await assert.doesNotRejects(() => hash.assertEquals(hashedValue, 'secret'))
+    await assert.rejects(
+      () => hash.assertEquals(hashedValue, 'seret'),
+      'Expected "seret" to pass hash verification'
+    )
+
+    await assert.doesNotRejects(() => hash.assertNotEquals(hashedValue, 'seret'))
+    await assert.rejects(
+      () => hash.assertNotEquals(hashedValue, 'secret'),
+      'Expected "secret" to fail hash verification'
+    )
+  })
 })

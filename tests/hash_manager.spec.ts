@@ -156,4 +156,26 @@ test.group('Hash manager', () => {
     const hashedValue = await manager.make('secret')
     assert.isFalse(manager.needsReHash(hashedValue))
   })
+
+  test('assert hashed value against plain value', async ({ assert }) => {
+    const manager = new HashManager({
+      default: 'argon',
+      list: {
+        argon: () => new Argon({}),
+      },
+    })
+
+    const hashedValue = await manager.make('secret')
+    await assert.doesNotRejects(() => manager.assertEquals(hashedValue, 'secret'))
+    await assert.rejects(
+      () => manager.assertEquals(hashedValue, 'seret'),
+      'Expected "seret" to pass hash verification'
+    )
+
+    await assert.doesNotRejects(() => manager.assertNotEquals(hashedValue, 'seret'))
+    await assert.rejects(
+      () => manager.assertNotEquals(hashedValue, 'secret'),
+      'Expected "secret" to fail hash verification'
+    )
+  })
 })
