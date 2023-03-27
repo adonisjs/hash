@@ -1,4 +1,4 @@
-# @adonisjs/events
+# @adonisjs/hash
 
 <br />
 
