@@ -2,7 +2,7 @@
 
 <br />
 
-[![gh-workflow-image]][gh-workflow-url] [![npm-image]][npm-url] ![][typescript-image] [![license-image]][license-url] [![synk-image]][synk-url]
+[![gh-workflow-image]][gh-workflow-url] [![npm-image]][npm-url] ![][typescript-image] [![license-image]][license-url]
 
 ## Introduction
 AdonisJS hash is a driver based hashing library. We ship with `argon2`, `bcrypt` and `scrypt` drivers. The generated hash from all the drivers are formatted using the [PHC string format](https://github.com/P-H-C/phc-string-format/blob/master/phc-sf-spec.md)
@@ -21,8 +21,8 @@ In order to ensure that the AdonisJS community is welcoming to all, please revie
 ## License
 AdonisJS hash is open-sourced software licensed under the [MIT license](LICENSE.md).
 
-[gh-workflow-image]: https://img.shields.io/github/actions/workflow/status/adonisjs/hash/test.yml?style=for-the-badge
-[gh-workflow-url]: https://github.com/adonisjs/hash/actions/workflows/test.yml "Github action"
+[gh-workflow-image]: https://img.shields.io/github/actions/workflow/status/adonisjs/hash/checks.yml?style=for-the-badge
+[gh-workflow-url]: https://github.com/adonisjs/hash/actions/workflows/checks.yml "Github action"
 
 [typescript-image]: https://img.shields.io/badge/Typescript-294E80.svg?style=for-the-badge&logo=typescript
 [typescript-url]:  "typescript"
@@ -32,6 +32,3 @@ AdonisJS hash is open-sourced software licensed under the [MIT license](LICENSE.
 
 [license-image]: https://img.shields.io/npm/l/@adonisjs/hash?color=blueviolet&style=for-the-badge
 [license-url]: LICENSE.md "license"
-
-[synk-image]: https://img.shields.io/snyk/vulnerabilities/github/adonisjs/hash?label=Synk%20Vulnerabilities&style=for-the-badge
-[synk-url]: https://snyk.io/test/github/adonisjs/hash?targetFile=package.json "synk"
