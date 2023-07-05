@@ -9,11 +9,11 @@
 
 import { test } from '@japa/runner'
 import { Bcrypt, Hash, Scrypt } from '../index.js'
-import { HashMangerFactory } from '../test_factories/hash_manager.js'
+import { HashManagerFactory } from '../factories/hash_manager.js'
 
 test.group('Hash manager factory', () => {
   test('create instance of hash manager using factory', async ({ assert, expectTypeOf }) => {
-    const hash = new HashMangerFactory().create()
+    const hash = new HashManagerFactory().create()
 
     assert.instanceOf(hash.use(), Hash)
     expectTypeOf(hash.use()).toMatchTypeOf<Hash>()
@@ -23,7 +23,7 @@ test.group('Hash manager factory', () => {
   })
 
   test('create instance of hash manager with custom config', async ({ assert }) => {
-    const hash = new HashMangerFactory()
+    const hash = new HashManagerFactory()
       .merge({
         default: 'bcrypt',
         list: {

@@ -19,7 +19,7 @@ type Config<KnownHashers extends Record<string, ManagerDriverFactory>> = {
  * Hash manager factory is used to create an instance of hash manager
  * for testing
  */
-export class HashMangerFactory<
+export class HashManagerFactory<
   KnownHashers extends Record<string, ManagerDriverFactory> = {
     scrypt: () => Scrypt
   }
@@ -27,7 +27,7 @@ export class HashMangerFactory<
   /**
    * Config accepted by hash manager
    */
-  #config: Config<KnownHashers>
+  readonly #config: Config<KnownHashers>
 
   constructor(config?: { default?: keyof KnownHashers; list: KnownHashers }) {
     this.#config =
@@ -45,8 +45,8 @@ export class HashMangerFactory<
    */
   merge<Hashers extends Record<string, ManagerDriverFactory>>(
     config: Config<Hashers>
-  ): HashMangerFactory<Hashers> {
-    return new HashMangerFactory(config)
+  ): HashManagerFactory<Hashers> {
+    return new HashManagerFactory(config)
   }
 
   /**
