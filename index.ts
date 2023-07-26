@@ -9,4 +9,3 @@
 
 export { Hash } from './src/hash.js'
 export { HashManager } from './src/hash_manager.js'
-export { PhcFormatter } from './src/phc_formatter.js'

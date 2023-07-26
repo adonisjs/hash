@@ -16,6 +16,7 @@
     "./drivers/argon": "./build/src/drivers/argon.js",
     "./drivers/bcrypt": "./build/src/drivers/bcrypt.js",
     "./drivers/scrypt": "./build/src/drivers/scrypt.js",
+    "./phc_formatter": "./build/src/phc_formatter.js",
     "./factories": "./build/factories/main.js"
   },
   "engines": {
