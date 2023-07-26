@@ -37,7 +37,7 @@ export interface HashDriverContract {
  * Shape of deserialized phc node
  */
 export type PhcNode<
-  Params extends Record<string, string | number> = Record<string, string | number>
+  Params extends Record<string, string | number> = Record<string, string | number>,
 > = {
   id: string
   salt: Buffer

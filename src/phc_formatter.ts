@@ -16,7 +16,7 @@ import { PhcNode } from './types.js'
  * deserialize it back to a PHC object.
  */
 export class PhcFormatter<
-  Params extends Record<string, string | number> = Record<string, string | number>
+  Params extends Record<string, string | number> = Record<string, string | number>,
 > {
   /**
    * Serialize salt and hash with predefined options.

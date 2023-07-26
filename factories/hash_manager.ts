@@ -22,7 +22,7 @@ type Config<KnownHashers extends Record<string, ManagerDriverFactory>> = {
 export class HashManagerFactory<
   KnownHashers extends Record<string, ManagerDriverFactory> = {
     scrypt: () => Scrypt
-  }
+  },
 > {
   /**
    * Config accepted by hash manager
