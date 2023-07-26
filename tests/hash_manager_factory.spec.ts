@@ -8,7 +8,9 @@
  */
 
 import { test } from '@japa/runner'
-import { Bcrypt, Hash, Scrypt } from '../index.js'
+import { Hash } from '../index.js'
+import { Bcrypt } from '../src/drivers/bcrypt.js'
+import { Scrypt } from '../src/drivers/scrypt.js'
 import { HashManagerFactory } from '../factories/hash_manager.js'
 
 test.group('Hash manager factory', () => {

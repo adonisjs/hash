@@ -9,8 +9,10 @@
 
 import { test } from '@japa/runner'
 import { Hash } from '../src/hash.js'
+import { Argon } from '../src/drivers/argon.js'
+import { Bcrypt } from '../src/drivers/bcrypt.js'
+import { Scrypt } from '../src/drivers/scrypt.js'
 import { HashManager } from '../src/hash_manager.js'
-import { Argon, Bcrypt, Scrypt } from '../index.js'
 
 test.group('Hash manager', () => {
   test('create hash instance from the manager', ({ assert, expectTypeOf }) => {
