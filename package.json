@@ -13,6 +13,9 @@
   "exports": {
     ".": "./build/index.js",
     "./types": "./build/src/types.js",
+    "./drivers/argon": "./build/src/drivers/argon.js",
+    "./drivers/bcrypt": "./build/src/drivers/bcrypt.js",
+    "./drivers/scrypt": "./build/src/drivers/scrypt.js",
     "./factories": "./build/factories/main.js"
   },
   "engines": {

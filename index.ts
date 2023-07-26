@@ -8,8 +8,5 @@
  */
 
 export { Hash } from './src/hash.js'
-export { Argon } from './src/drivers/argon.js'
-export { Bcrypt } from './src/drivers/bcrypt.js'
-export { Scrypt } from './src/drivers/scrypt.js'
 export { HashManager } from './src/hash_manager.js'
 export { PhcFormatter } from './src/phc_formatter.js'
