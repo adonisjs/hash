@@ -5,10 +5,7 @@
   "main": "build/index.js",
   "type": "module",
   "files": [
-    "build/src",
-    "build/factories",
-    "build/index.d.ts",
-    "build/index.js"
+    "build"
   ],
   "exports": {
     ".": "./build/index.js",
@@ -27,7 +24,7 @@
     "test": "cross-env NODE_DEBUG=adonisjs:hash c8 npm run vscode:test",
     "clean": "del-cli build",
     "typecheck": "tsc --noEmit",
-    "compile": "npm run lint && npm run clean && tsc",
+    "compile": "npm run lint && npm run clean && tsup-node",
     "build": "npm run compile",
     "release": "np",
     "version": "npm run build",
@@ -67,6 +64,7 @@
     "np": "^8.0.4",
     "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
+    "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
@@ -121,5 +119,21 @@
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/package"
   },
-  "prettier": "@adonisjs/prettier-config"
+  "prettier": "@adonisjs/prettier-config",
+   "tsup": {
+    "entry": [
+      "./index.ts",
+      "./src/drivers/argon.ts",
+      "./src/drivers/bcrypt.ts",
+      "./src/drivers/scrypt.ts",
+      "./src/phc_formatter.ts",
+      "./src/types.ts",
+      "./factories/main.ts"
+    ],
+    "outDir": "./build",
+    "clean": true,
+    "format": "esm",
+    "dts": true,
+    "target": "esnext"
+  }
 }
