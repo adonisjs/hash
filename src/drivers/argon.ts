@@ -281,6 +281,7 @@ export class Argon implements HashDriverContract {
    * 3. The memory value is changed
    * 4. The parellelism value is changed
    * 5. The argon variant is changed
+   * 6. The provided hash has not been hashed with argon
    *
    * ```ts
    * const isValid = await argon.verify(hash, plainText)
@@ -294,7 +295,7 @@ export class Argon implements HashDriverContract {
   needsReHash(value: string): boolean {
     const phcNode = this.#phcFormatter.deserialize(value)
     if (!this.#ids.includes(phcNode.id)) {
-      throw new TypeError('Value is not a valid argon hash')
+      return true
     }
 
     /**

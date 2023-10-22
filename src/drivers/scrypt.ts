@@ -226,6 +226,7 @@ export class Scrypt implements HashDriverContract {
    * 1. The cost value is changed
    * 2. The blockSize value is changed
    * 3. The parallelization value is changed
+   * 4. The provided hash has not been hashed with scrypt
    *
    * ```ts
    * const isValid = await scrypt.verify(hash, plainText)
@@ -239,7 +240,7 @@ export class Scrypt implements HashDriverContract {
   needsReHash(value: string): boolean {
     const phcNode = this.#phcFormatter.deserialize(value)
     if (phcNode.id !== 'scrypt') {
-      throw new TypeError('Value is not a valid scrypt hash')
+      return true
     }
 
     /**

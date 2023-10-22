@@ -306,15 +306,13 @@ test.group('scrypt | needsRehash', () => {
     await assert.rejects(() => scrypt.needsReHash('foo'), 'pchstr must contain a $ as first char')
   })
 
-  test('throw error when identifier is invalid', async ({ assert }) => {
+  test('return true when not a valid scrypt identifier', async ({ assert }) => {
     const scrypt = new Scrypt({
       cost: 16384,
     })
 
-    const hash =
-      '$script$n=16384,r=8,p=1$YhdCGu1G+vTC6F9oJZ16lg$IDWTbizFCq5n9YvPiy3YTPdUD12Nf1Iit8aQeGyWZdA9k9L8rKk9Ii5jQxSkV0MJyxr3/nzOHh+VTht0KFxiBA'
-
-    await assert.rejects(() => scrypt.needsReHash(hash), 'Value is not a valid scrypt hash')
+    const hash = '$argon2id$v=98$r=10$Jtxi46WJ26OQ0khsYLLlnw$knXGfuRFsSjXdj88JydPOnUIglvm1S8'
+    assert.isTrue(scrypt.needsReHash(hash))
   })
 })
 
