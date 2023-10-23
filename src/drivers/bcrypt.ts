@@ -227,6 +227,7 @@ export class Bcrypt implements HashDriverContract {
    * 1. The bcrypt version is changed
    * 2. Number of rounds are changed
    * 3. Bcrypt hash is not using MCF hash format
+   * 4. The provided hash has not been hashed with bcrypt
    *
    * ```ts
    * const isValid = await bcrypt.verify(hash, plainText)
@@ -244,7 +245,7 @@ export class Bcrypt implements HashDriverContract {
 
     const phcNode = this.#phcFormatter.deserialize(value)
     if (phcNode.id !== 'bcrypt') {
-      throw new TypeError('Value is not a valid bcrypt hash')
+      return true
     }
 
     /**

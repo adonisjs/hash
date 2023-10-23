@@ -414,7 +414,7 @@ test.group('argon | needsRehash', () => {
     )
   })
 
-  test('throw error when not a valid argon identifier', async ({ assert }) => {
+  test('return true when not a valid argon identifier', async ({ assert }) => {
     const hash =
       '$bcrypt$v=19$m=4096,t=3,p=1$PcEZHj1maR/+ZQynyJHWZg$2jEN4xcww7CYp1jakZB1rxbYsZ55XH2HgjYRtdZtubI'
 
@@ -426,7 +426,7 @@ test.group('argon | needsRehash', () => {
       saltSize: 16,
     })
 
-    await assert.rejects(() => argon.needsReHash(hash), 'Value is not a valid argon hash')
+    assert.isTrue(argon.needsReHash(hash))
   })
 
   test('return true when using argon2 directly', async ({ assert }) => {

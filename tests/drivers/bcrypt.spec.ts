@@ -236,13 +236,13 @@ test.group('bcrypt | needsRehash', () => {
     )
   })
 
-  test('throw error when identifier is invalid', async ({ assert }) => {
+  test('return true when not a valid bcrypt identifier', async ({ assert }) => {
     const bcrypt = new Bcrypt({
       rounds: 10,
     })
 
     const hash = '$argon2id$v=98$r=10$Jtxi46WJ26OQ0khsYLLlnw$knXGfuRFsSjXdj88JydPOnUIglvm1S8'
-    await assert.rejects(() => bcrypt.needsReHash(hash), 'Value is not a valid bcrypt hash')
+    assert.isTrue(bcrypt.needsReHash(hash))
   })
 })
 
