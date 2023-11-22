@@ -56,15 +56,6 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
   }
 
   /**
-   * Creates an instance of a hash driver
-   */
-  #createDriver<DriverFactory extends ManagerDriverFactory>(
-    factory: DriverFactory
-  ): ReturnType<DriverFactory> {
-    return factory() as ReturnType<DriverFactory>
-  }
-
-  /**
    * Use one of the registered hashers to hash values.
    *
    * ```ts
@@ -103,7 +94,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
      * driver and cache it
      */
     debug('creating hash driver. name: "%s"', hasherToUse)
-    const hash = new Hash(this.#createDriver(driverFactory))
+    const hash = new Hash(driverFactory())
     this.#hashersCache[hasherToUse] = hash
     return hash
   }
