@@ -1,150 +1,144 @@
 {
   "name": "@adonisjs/hash",
-  "version": "7.2.2",
-  "description": "Multi driver hash module with support for PHC string formats",
-  "main": "build/providers/HashProvider",
+  "version": "8.3.1-9",
+  "description": "Framework agnostic Password hashing package with support for PHC string format",
+  "main": "build/index.js",
+  "type": "module",
   "files": [
-    "build/adonis-typings",
-    "build/providers",
-    "build/src",
-    "build/config.d.ts",
-    "build/config.js",
-    "build/standalone.d.ts",
-    "build/standalone.js"
+    "build",
+    "!build/bin",
+    "!build/coverage",
+    "!build/tests"
   ],
+  "exports": {
+    ".": "./build/index.js",
+    "./types": "./build/src/types.js",
+    "./drivers/argon": "./build/src/drivers/argon.js",
+    "./drivers/bcrypt": "./build/src/drivers/bcrypt.js",
+    "./drivers/scrypt": "./build/src/drivers/scrypt.js",
+    "./phc_formatter": "./build/src/phc_formatter.js",
+    "./factories": "./build/factories/main.js"
+  },
+  "engines": {
+    "node": ">=18.16.0"
+  },
   "scripts": {
-    "mrm": "mrm --preset=@adonisjs/mrm-preset",
     "pretest": "npm run lint",
-    "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
-    "clean": "del build",
-    "compile": "npm run lint && npm run clean && tsc",
+    "test": "cross-env NODE_DEBUG=adonisjs:hash c8 npm run quick:test",
+    "clean": "del-cli build",
+    "typecheck": "tsc --noEmit",
+    "precompile": "npm run lint && npm run clean",
+    "compile": "tsup-node && tsc --emitDeclarationOnly --declaration",
     "build": "npm run compile",
-    "commit": "git-cz",
-    "release": "np --message=\"chore(release): %s\"",
+    "release": "np",
     "version": "npm run build",
     "format": "prettier --write .",
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext=.ts",
-    "sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json adonisjs/hash"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/poppinss/hash.git"
+    "sync-labels": "github-label-sync --labels .github/labels.json adonisjs/hash",
+    "quick:test": "node --loader=ts-node/esm bin/test.ts"
   },
   "keywords": [
     "hash",
     "bcrypt",
     "argon2"
   ],
-  "author": "poppinss,virk",
+  "author": "adonisjs,virk",
   "license": "MIT",
+  "devDependencies": {
+    "@adonisjs/eslint-config": "^1.2.1",
+    "@adonisjs/prettier-config": "^1.2.1",
+    "@adonisjs/tsconfig": "^1.2.1",
+    "@commitlint/cli": "^18.4.4",
+    "@commitlint/config-conventional": "^18.4.4",
+    "@japa/assert": "^2.1.0",
+    "@japa/expect-type": "^2.0.1",
+    "@japa/runner": "^3.1.1",
+    "@swc/core": "^1.3.102",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.10.6",
+    "argon2": "^0.31.2",
+    "bcrypt": "^5.1.1",
+    "c8": "^9.0.0",
+    "cross-env": "^7.0.3",
+    "del-cli": "^5.1.0",
+    "eslint": "^8.56.0",
+    "github-label-sync": "^2.3.1",
+    "husky": "^8.0.3",
+    "np": "^9.2.0",
+    "prettier": "^3.1.1",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@phc/format": "^1.0.0",
+    "@poppinss/utils": "^6.7.0"
+  },
+  "peerDependencies": {
+    "argon2": "^0.31.2",
+    "bcrypt": "^5.1.1"
+  },
+  "peerDependenciesMeta": {
+    "argon2": {
+      "optional": true
+    },
+    "bcrypt": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/poppinss/hash.git"
+  },
   "bugs": {
     "url": "https://github.com/poppinss/hash/issues"
   },
   "homepage": "https://github.com/poppinss/hash#readme",
-  "devDependencies": {
-    "@adonisjs/application": "^5.2.5",
-    "@adonisjs/mrm-preset": "^5.0.3",
-    "@adonisjs/require-ts": "^2.0.13",
-    "@japa/assert": "^1.3.6",
-    "@japa/run-failed-tests": "^1.1.0",
-    "@japa/runner": "^2.2.2",
-    "@japa/spec-reporter": "^1.3.2",
-    "@poppinss/dev-utils": "^2.0.3",
-    "@types/node": "^18.11.9",
-    "argon2": "^0.30.2",
-    "bcrypt": "^5.0.1",
-    "commitizen": "^4.2.5",
-    "cz-conventional-changelog": "^3.3.0",
-    "del-cli": "^5.0.0",
-    "eslint": "^8.27.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-adonis": "^2.1.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "github-label-sync": "^2.2.0",
-    "husky": "^8.0.2",
-    "mrm": "^4.1.13",
-    "np": "^7.6.2",
-    "phc-argon2": "^1.1.3",
-    "phc-bcrypt": "^1.0.8",
-    "prettier": "^2.7.1",
-    "typescript": "^4.8.4"
-  },
-  "nyc": {
-    "exclude": [
-      "test"
-    ],
-    "extension": [
-      ".ts"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "node ./node_modules/@adonisjs/mrm-preset/validateCommit/conventional/validate.js"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "np": {
-    "contents": ".",
-    "anyBranch": false
-  },
-  "dependencies": {
-    "@phc/format": "^1.0.0",
-    "@poppinss/manager": "^5.0.2",
-    "@poppinss/utils": "^5.0.0"
-  },
-  "peerDependencies": {
-    "@adonisjs/application": "^5.0.0"
   },
   "publishConfig": {
     "access": "public",
-    "tag": "latest"
+    "tag": "next"
   },
-  "mrmConfig": {
-    "core": true,
-    "license": "MIT",
-    "services": [
-      "github-actions"
+  "np": {
+    "message": "chore(release): %s",
+    "tag": "next",
+    "branch": "main",
+    "anyBranch": false
+  },
+  "c8": {
+    "reporter": [
+      "text",
+      "html"
     ],
-    "minNodeVersion": "14.15.4",
-    "probotApps": [
-      "stale",
-      "lock"
-    ],
-    "runGhActionsOnWindows": false
+    "exclude": [
+      "tests/**",
+      "src/legacy/**"
+    ]
   },
   "eslintConfig": {
-    "extends": [
-      "plugin:adonis/typescriptPackage",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "endOfLine": "auto"
-        }
-      ]
-    }
+    "extends": "@adonisjs/eslint-config/package"
   },
-  "eslintIgnore": [
-    "build"
-  ],
-  "prettier": {
-    "trailingComma": "es5",
-    "semi": false,
-    "singleQuote": true,
-    "useTabs": false,
-    "quoteProps": "consistent",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "printWidth": 100
+  "prettier": "@adonisjs/prettier-config",
+  "tsup": {
+    "entry": [
+      "./index.ts",
+      "./src/drivers/argon.ts",
+      "./src/drivers/bcrypt.ts",
+      "./src/drivers/scrypt.ts",
+      "./src/phc_formatter.ts",
+      "./src/types.ts",
+      "./factories/main.ts"
+    ],
+    "outDir": "./build",
+    "clean": true,
+    "format": "esm",
+    "dts": false,
+    "sourcemap": true,
+    "target": "esnext"
   }
 }
