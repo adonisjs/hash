@@ -32,15 +32,6 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
   implements HashDriverContract
 {
   /**
-   * Hash manager config with the list of hashers in
-   * use
-   */
-  #config: {
-    default?: keyof KnownHashers
-    list: KnownHashers
-  }
-
-  /**
    * Fake hasher
    */
   #fakeHasher?: Hash
@@ -50,9 +41,8 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
    */
   #hashersCache: Partial<Record<keyof KnownHashers, Hash>> = {}
 
-  constructor(config: { default?: keyof KnownHashers; list: KnownHashers }) {
-    this.#config = config
-    debug('creating hash manager. config: %O', this.#config)
+  constructor(public config: { default?: keyof KnownHashers; list: KnownHashers }) {
+    debug('creating hash manager. config: %O', this.config)
   }
 
   /**
@@ -64,7 +54,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
    * ```
    */
   use<Hasher extends keyof KnownHashers>(hasher?: Hasher): Hash {
-    let hasherToUse: keyof KnownHashers | undefined = hasher || this.#config.default
+    let hasherToUse: keyof KnownHashers | undefined = hasher || this.config.default
     if (!hasherToUse) {
       throw new RuntimeException(
         'Cannot create hash instance. No default hasher is defined in the config'
@@ -87,7 +77,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
       return cachedHasher
     }
 
-    const driverFactory = this.#config.list[hasherToUse]
+    const driverFactory = this.config.list[hasherToUse]
 
     /**
      * Create a new instance of Hash class with the selected
