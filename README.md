@@ -8,7 +8,7 @@
 AdonisJS hash is a driver based hashing library. We ship with `argon2`, `bcrypt` and `scrypt` drivers. The generated hash from all the drivers are formatted using the [PHC string format](https://github.com/P-H-C/phc-string-format/blob/master/phc-sf-spec.md)
 
 ## Official Documentation
-The documentation is available on the [AdonisJS website](https://docs.adonisjs.com/guides/hash)
+The documentation is available on the [AdonisJS website](https://docs.adonisjs.com/guides/hashing)
 
 ## Contributing
 One of the primary goals of AdonisJS is to have a vibrant community of users and contributors who believes in the principles of the framework.
