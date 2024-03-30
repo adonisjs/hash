@@ -30,7 +30,7 @@
     "precompile": "npm run lint && npm run clean",
     "compile": "tsup-node && tsc --emitDeclarationOnly --declaration",
     "build": "npm run compile",
-    "release": "np",
+    "release": "npx release-it",
     "version": "npm run build",
     "format": "prettier --write .",
     "prepublishOnly": "npm run build",
