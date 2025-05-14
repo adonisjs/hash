@@ -1,6 +1,6 @@
 {
   "name": "@adonisjs/hash",
-  "version": "9.0.5",
+  "version": "9.1.0",
   "description": "Framework agnostic Password hashing package with support for PHC string format",
   "main": "build/index.js",
   "type": "module",
@@ -95,7 +95,7 @@
     "access": "public",
     "provenance": true
   },
-    "tsup": {
+  "tsup": {
     "entry": [
       "./index.ts",
       "./src/drivers/argon.ts",
