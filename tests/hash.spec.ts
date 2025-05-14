@@ -41,16 +41,16 @@ test.group('Hash', () => {
     const hash = new Hash(argon)
 
     const hashedValue = await hash.make('secret')
-    await assert.doesNotRejects(() => hash.assertEquals(hashedValue, 'secret'))
+    await assert.doesNotReject(() => hash.assertEquals(hashedValue, 'secret'))
     await assert.rejects(
       () => hash.assertEquals(hashedValue, 'seret'),
-      'Expected "seret" to pass hash verification'
+      /Expected "seret" to pass hash verification/
     )
 
-    await assert.doesNotRejects(() => hash.assertNotEquals(hashedValue, 'seret'))
+    await assert.doesNotReject(() => hash.assertNotEquals(hashedValue, 'seret'))
     await assert.rejects(
       () => hash.assertNotEquals(hashedValue, 'secret'),
-      'Expected "secret" to fail hash verification'
+      /Expected "secret" to fail hash verification/
     )
   })
 })

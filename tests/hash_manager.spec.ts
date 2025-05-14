@@ -168,16 +168,16 @@ test.group('Hash manager', () => {
     })
 
     const hashedValue = await manager.make('secret')
-    await assert.doesNotRejects(() => manager.assertEquals(hashedValue, 'secret'))
+    await assert.doesNotReject(() => manager.assertEquals(hashedValue, 'secret'))
     await assert.rejects(
       () => manager.assertEquals(hashedValue, 'seret'),
-      'Expected "seret" to pass hash verification'
+      /Expected "seret" to pass hash verification/
     )
 
-    await assert.doesNotRejects(() => manager.assertNotEquals(hashedValue, 'seret'))
+    await assert.doesNotReject(() => manager.assertNotEquals(hashedValue, 'seret'))
     await assert.rejects(
       () => manager.assertNotEquals(hashedValue, 'secret'),
-      'Expected "secret" to fail hash verification'
+      /Expected "secret" to fail hash verification/
     )
   })
 })
