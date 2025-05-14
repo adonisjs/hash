@@ -25,26 +25,18 @@
   "scripts": {
     "pretest": "npm run lint",
     "test": "cross-env NODE_DEBUG=adonisjs:hash c8 npm run quick:test",
-    "clean": "del-cli build",
+    "lint": "eslint .",
+    "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
+    "clean": "del-cli build",
     "precompile": "npm run lint && npm run clean",
     "compile": "tsup-node && tsc --emitDeclarationOnly --declaration",
     "build": "npm run compile",
-    "release": "release-it",
     "version": "npm run build",
-    "format": "prettier --write .",
     "prepublishOnly": "npm run build",
-    "lint": "eslint .",
-    "sync-labels": "github-label-sync --labels .github/labels.json adonisjs/hash",
+    "release": "release-it",
     "quick:test": "node --import=ts-node-maintained/register/esm --enable-source-maps bin/test.ts"
   },
-  "keywords": [
-    "hash",
-    "bcrypt",
-    "argon2"
-  ],
-  "author": "adonisjs,virk",
-  "license": "MIT",
   "devDependencies": {
     "@adonisjs/eslint-config": "^2.0.0",
     "@adonisjs/prettier-config": "^1.4.4",
@@ -84,6 +76,7 @@
       "optional": true
     }
   },
+  "homepage": "https://github.com/adonisjs/hash#readme",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/adonisjs/hash.git"
@@ -91,9 +84,33 @@
   "bugs": {
     "url": "https://github.com/adonisjs/hash/issues"
   },
-  "homepage": "https://github.com/adonisjs/hash#readme",
+  "keywords": [
+    "hash",
+    "bcrypt",
+    "argon2"
+  ],
+  "author": "Harminder Virk <virk@adonisjs.com>",
+  "license": "MIT",
   "publishConfig": {
+    "access": "public",
     "provenance": true
+  },
+    "tsup": {
+    "entry": [
+      "./index.ts",
+      "./src/drivers/argon.ts",
+      "./src/drivers/bcrypt.ts",
+      "./src/drivers/scrypt.ts",
+      "./src/phc_formatter.ts",
+      "./src/types.ts",
+      "./factories/main.ts"
+    ],
+    "outDir": "./build",
+    "clean": true,
+    "format": "esm",
+    "dts": false,
+    "sourcemap": false,
+    "target": "esnext"
   },
   "release-it": {
     "git": {
@@ -129,22 +146,5 @@
       "src/legacy/**"
     ]
   },
-  "prettier": "@adonisjs/prettier-config",
-  "tsup": {
-    "entry": [
-      "./index.ts",
-      "./src/drivers/argon.ts",
-      "./src/drivers/bcrypt.ts",
-      "./src/drivers/scrypt.ts",
-      "./src/phc_formatter.ts",
-      "./src/types.ts",
-      "./factories/main.ts"
-    ],
-    "outDir": "./build",
-    "clean": true,
-    "format": "esm",
-    "dts": false,
-    "sourcemap": true,
-    "target": "esnext"
-  }
+  "prettier": "@adonisjs/prettier-config"
 }
