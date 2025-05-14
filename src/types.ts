@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import type { Secret } from '@poppinss/utils'
+
 /**
  * The contract Hash drivers should adhere to
  */
@@ -101,6 +103,15 @@ export type ArgonConfig = {
    * Default is 16
    */
   saltSize?: number
+
+  /**
+   * Specify a custom secret (known as "pepper") when hashing the value. Remember, the
+   * secret is not encoded within the hash, therefore it makes the hash verification
+   * also require the same secret.
+   *
+   * If you loose the secret, then you won't be able to verify the hashes.
+   */
+  secret?: Secret<string>
 
   /**
    * Maximum length for the raw hash in bytes. The serialized output will always

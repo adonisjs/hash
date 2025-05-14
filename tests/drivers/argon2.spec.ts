@@ -9,6 +9,8 @@
 
 import argon2 from 'argon2'
 import { test } from '@japa/runner'
+import { Secret } from '@poppinss/utils'
+import string from '@poppinss/utils/string'
 import { Argon } from '../../src/drivers/argon.js'
 import { PhcFormatter } from '../../src/phc_formatter.js'
 
@@ -121,6 +123,27 @@ test.group('argon | hash', () => {
       memory: 4096,
       parallelism: 1,
       saltSize: 16,
+    })
+
+    const hashed = await argon.make('hello-world')
+    const values = new PhcFormatter().deserialize(hashed)
+
+    assert.properties(values, ['hash', 'salt'])
+    assert.equal(values.id, 'argon2id')
+    assert.equal(values.version, 19)
+    assert.deepEqual(values.params, { t: 3, m: 4096, p: 1 })
+    assert.lengthOf(values.salt, 16)
+  })
+
+  test('hash value using a custom secret', async ({ assert }) => {
+    const secret = string.random(32)
+    const argon = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+      secret: new Secret(secret),
     })
 
     const hashed = await argon.make('hello-world')
@@ -398,6 +421,69 @@ test.group('argon | verify', () => {
     })
 
     assert.isFalse(await argon.verify(wrong, 'password'))
+  })
+
+  test('verify hash created using a secret', async ({ assert }) => {
+    const secret = string.random(32)
+    const argon = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+      secret: new Secret(secret),
+    })
+
+    const hashed = await argon.make('hello-world')
+    assert.isTrue(await argon.verify(hashed, 'hello-world'))
+  })
+
+  test('fail to verify hash when secret is missing', async ({ assert }) => {
+    const secret = string.random(32)
+    const argon = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+      secret: new Secret(secret),
+    })
+
+    const argon1 = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+    })
+
+    const hashed = await argon.make('hello-world')
+    assert.isFalse(await argon1.verify(hashed, 'hello-world'))
+  })
+
+  test('fail to verify hash when secret is different', async ({ assert }) => {
+    const secret = string.random(32)
+    const secret1 = string.random(32)
+    const argon = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+      secret: new Secret(secret),
+    })
+
+    const argon1 = new Argon({
+      variant: 'id',
+      iterations: 3,
+      memory: 4096,
+      parallelism: 1,
+      saltSize: 16,
+      secret: new Secret(secret1),
+    })
+
+    const hashed = await argon.make('hello-world')
+    assert.isFalse(await argon1.verify(hashed, 'hello-world'))
   })
 })
 

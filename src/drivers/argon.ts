@@ -9,7 +9,7 @@
 
 import type argon2 from 'argon2'
 import { argon2i, argon2d, argon2id } from 'argon2'
-import { safeEqual } from '@poppinss/utils'
+import { safeEqual, type Secret } from '@poppinss/utils'
 
 import { PhcFormatter } from '../phc_formatter.js'
 import {
@@ -45,7 +45,9 @@ export class Argon implements HashDriverContract {
   /**
    * Config with defaults merged
    */
-  #config: Required<ArgonConfig>
+  #config: Required<Omit<ArgonConfig, 'secret'>> & {
+    secret?: Secret<string>
+  }
 
   /**
    * Formatter to serialize and deserialize phc string
@@ -213,6 +215,7 @@ export class Argon implements HashDriverContract {
       memoryCost: this.#config.memory,
       parallelism: this.#config.parallelism,
       hashLength: this.#config.hashLength,
+      secret: this.#config.secret ? Buffer.from(this.#config.secret.release()) : undefined,
       raw: true,
     })
 
@@ -261,6 +264,7 @@ export class Argon implements HashDriverContract {
         memoryCost: phcNode.params.m,
         parallelism: phcNode.params.p,
         hashLength: phcNode.hash.byteLength,
+        secret: this.#config.secret ? Buffer.from(this.#config.secret.release()) : undefined,
         raw: true,
       })
 
