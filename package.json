@@ -1,6 +1,6 @@
 {
   "name": "@adonisjs/hash",
-  "version": "9.1.1",
+  "version": "10.0.0-next.0",
   "description": "Framework agnostic Password hashing package with support for PHC string format",
   "main": "build/index.js",
   "type": "module",
