@@ -9,7 +9,7 @@
 
 import { HashManager } from '../index.js'
 import { Scrypt } from '../src/drivers/scrypt.js'
-import { ManagerDriverFactory } from '../src/types.js'
+import { type ManagerDriverFactory } from '../src/types.js'
 
 type Config<KnownHashers extends Record<string, ManagerDriverFactory>> = {
   default?: keyof KnownHashers
