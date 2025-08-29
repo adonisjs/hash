@@ -32,16 +32,25 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
   implements HashDriverContract
 {
   /**
+   * Fake hasher instance used for testing
+   */
+  /**
    * Fake hasher
    */
   #fakeHasher?: Hash
 
   /**
-   * Cache of hashers
+   * Cache of hasher instances to avoid recreating them
    */
   #hashersCache: Partial<Record<keyof KnownHashers, Hash>> = {}
 
-  constructor(public config: { default?: keyof KnownHashers; list: KnownHashers }) {
+  /**
+   * Configuration object containing default hasher and list of available hashers
+   */
+  config: { default?: keyof KnownHashers; list: KnownHashers }
+
+  constructor(config: { default?: keyof KnownHashers; list: KnownHashers }) {
+    this.config = config
     debug('creating hash manager. config: %O', this.config)
   }
 
@@ -52,6 +61,9 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
    * manager.use() // returns default hasher
    * manager.use('argon')
    * ```
+   *
+   * @param hasher - The name of the hasher to use, defaults to the configured default
+   * @return Hash instance for the specified hasher
    */
   use<Hasher extends keyof KnownHashers>(hasher?: Hasher): Hash {
     let hasherToUse: keyof KnownHashers | undefined = hasher || this.config.default
@@ -90,7 +102,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
   }
 
   /**
-   * Fake hash drivers to disable hashing values
+   * Enable fake hash drivers to disable actual hashing for testing
    */
   fake(): void {
     debug('enabling fakes')
@@ -101,7 +113,7 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
   }
 
   /**
-   * Restore fake
+   * Restore normal hashing behavior by disabling fake mode
    */
   restore() {
     debug('restoring fakes')
@@ -111,13 +123,19 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
   /**
    * Check if the value is a valid hash. This method just checks
    * for the formatting of the hash
+   *
+   * @param value - The value to check
+   * @return True if the value is a valid hash format
    */
   isValidHash(value: string): boolean {
     return this.use().isValidHash(value)
   }
 
   /**
-   * Hash plain text value
+   * Hash plain text value using the default hasher
+   *
+   * @param value - The plain text value to hash
+   * @return Promise resolving to the hashed value
    */
   make(value: string): Promise<string> {
     return this.use().make(value)
@@ -125,6 +143,10 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
 
   /**
    * Verify the plain text value against an existing hash
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise resolving to true if verification succeeds
    */
   verify(hashedValue: string, plainValue: string): Promise<boolean> {
     return this.use().verify(hashedValue, plainValue)
@@ -132,6 +154,9 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
 
   /**
    * Find if the hash value needs a rehash or not.
+   *
+   * @param hashedValue - The hashed value to check
+   * @return True if the hash needs to be rehashed
    */
   needsReHash(hashedValue: string): boolean {
     return this.use().needsReHash(hashedValue)
@@ -139,6 +164,10 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
 
   /**
    * Assert the plain value passes the hash verification
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise that resolves if verification passes, throws if it fails
    */
   async assertEquals(hashedValue: string, plainValue: string): Promise<void> {
     return this.use().assertEquals(hashedValue, plainValue)
@@ -146,6 +175,10 @@ export class HashManager<KnownHashers extends Record<string, ManagerDriverFactor
 
   /**
    * Assert the plain value fails the hash verification
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise that resolves if verification fails, throws if it passes
    */
   async assertNotEquals(hashedValue: string, plainValue: string): Promise<void> {
     return this.use().assertNotEquals(hashedValue, plainValue)

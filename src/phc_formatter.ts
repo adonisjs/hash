@@ -19,6 +19,14 @@ export class PhcFormatter<
   Params extends Record<string, string | number> = Record<string, string | number>,
 > {
   /**
+   * Serialize salt and hash with predefined options into a PHC string
+   *
+   * @param salt - The salt buffer
+   * @param hash - The hash buffer
+   * @param options - Serialization options including id, params, and version
+   * @return The serialized PHC string
+   */
+  /**
    * Serialize salt and hash with predefined options.
    */
   serialize(
@@ -37,6 +45,9 @@ export class PhcFormatter<
 
   /**
    * Deserialize a PHC string to an object
+   *
+   * @param phcString - The PHC string to deserialize
+   * @return The deserialized PHC node object
    */
   deserialize(phcString: string): PhcNode<Params> {
     return phc.deserialize(phcString)

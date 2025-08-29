@@ -23,7 +23,15 @@ import type { HashDriverContract } from './types.ts'
  * ```
  */
 export class Hash implements HashDriverContract {
+  /**
+   * The underlying hash driver implementation
+   */
   #driver: HashDriverContract
+  /**
+   * Create a new Hash instance with the specified driver
+   *
+   * @param driver - The hash driver implementation to use
+   */
   constructor(driver: HashDriverContract) {
     this.#driver = driver
   }
@@ -31,6 +39,9 @@ export class Hash implements HashDriverContract {
   /**
    * Check if the value is a valid hash. This method just checks
    * for the formatting of the hash
+   *
+   * @param value - The value to check
+   * @return True if the value is a valid hash format
    */
   isValidHash(value: string): boolean {
     return this.#driver.isValidHash(value)
@@ -38,6 +49,9 @@ export class Hash implements HashDriverContract {
 
   /**
    * Hash plain text value
+   *
+   * @param value - The plain text value to hash
+   * @return Promise resolving to the hashed value
    */
   make(value: string): Promise<string> {
     return this.#driver.make(value)
@@ -45,6 +59,10 @@ export class Hash implements HashDriverContract {
 
   /**
    * Verify the plain text value against an existing hash
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise resolving to true if verification succeeds
    */
   verify(hashedValue: string, plainValue: string): Promise<boolean> {
     return this.#driver.verify(hashedValue, plainValue)
@@ -52,6 +70,9 @@ export class Hash implements HashDriverContract {
 
   /**
    * Find if the hash value needs a rehash or not.
+   *
+   * @param hashedValue - The hashed value to check
+   * @return True if the hash needs to be rehashed
    */
   needsReHash(hashedValue: string): boolean {
     return this.#driver.needsReHash(hashedValue)
@@ -59,6 +80,10 @@ export class Hash implements HashDriverContract {
 
   /**
    * Assert the plain value passes the hash verification
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise that resolves if verification passes, throws if it fails
    */
   async assertEquals(hashedValue: string, plainValue: string): Promise<void> {
     const isEqual = await this.#driver.verify(hashedValue, plainValue)
@@ -75,6 +100,10 @@ export class Hash implements HashDriverContract {
 
   /**
    * Assert the plain value fails the hash verification
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise that resolves if verification fails, throws if it passes
    */
   async assertNotEquals(hashedValue: string, plainValue: string): Promise<void> {
     const isEqual = await this.#driver.verify(hashedValue, plainValue)

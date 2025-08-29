@@ -40,22 +40,26 @@ export class Argon implements HashDriverContract {
    * Lazily loaded argon2 binding. Since it is a peer dependency
    * we cannot import it at top level
    */
+  /**
+   * Lazily loaded argon2 binding. Since it is a peer dependency
+   * we cannot import it at top level
+   */
   #binding?: typeof argon2
 
   /**
-   * Config with defaults merged
+   * Configuration object with defaults merged
    */
   #config: Required<Omit<ArgonConfig, 'secret'>> & {
     secret?: Secret<string>
   }
 
   /**
-   * Formatter to serialize and deserialize phc string
+   * PHC formatter instance for serializing and deserializing PHC strings
    */
   #phcFormatter = new PhcFormatter<{ t: number; m: number; p: number }>()
 
   /**
-   * Supported variants
+   * Mapping of Argon2 variants to their numeric identifiers
    */
   #variants: { [K in ArgonVariants]: 0 | 1 | 2 } = {
     i: argon2i,
@@ -64,10 +68,15 @@ export class Argon implements HashDriverContract {
   }
 
   /**
-   * A list of supported argon ids
+   * Array of supported Argon2 algorithm identifiers
    */
   #ids = ['argon2d', 'argon2i', 'argon2id']
 
+  /**
+   * Create a new Argon hash driver instance
+   *
+   * @param config - Configuration options for the Argon2 hasher
+   */
   constructor(config: ArgonConfig) {
     this.#config = {
       version: 0x13,
@@ -84,7 +93,9 @@ export class Argon implements HashDriverContract {
   }
 
   /**
-   * Dynamically importing underlying binding
+   * Dynamically import the underlying argon2 binding
+   *
+   * @return Promise resolving to the argon2 module
    */
   async #importBinding() {
     if (this.#binding) {
@@ -96,7 +107,7 @@ export class Argon implements HashDriverContract {
   }
 
   /**
-   * Validate configuration options
+   * Validate the provided configuration options
    */
   #validateConfig() {
     RangeValidator.validate('iterations', this.#config.iterations, [2, MAX_UINT32])
@@ -115,7 +126,10 @@ export class Argon implements HashDriverContract {
   }
 
   /**
-   * Validate phc hash string
+   * Validate and parse a PHC hash string
+   *
+   * @param phcString - The PHC hash string to validate
+   * @return Validated PHC node object
    */
   #validatePhcString(phcString: string) {
     const phcNode = this.#phcFormatter.deserialize(phcString)
@@ -183,6 +197,9 @@ export class Argon implements HashDriverContract {
    * argon.isValidHash('hello world') // false
    * argon.isValidHash('$argon2id$v=19$t=3,m=4096,p=1$drxJBWzWahR5tMubp+a1Sw$L/Oh2uw6QKW77i/KQ8eGuOt3ui52hEmmKlu1KBVBxiM')
    * ```
+   *
+   * @param value - The value to check
+   * @return True if the value is a valid Argon2 hash format
    */
   isValidHash(value: string): boolean {
     try {
@@ -199,6 +216,9 @@ export class Argon implements HashDriverContract {
    * ```ts
    * const hash = await argon.make('password')
    * ```
+   *
+   * @param value - The plain text value to hash
+   * @return Promise resolving to the Argon2 hash
    */
   async make(value: string) {
     const driver = await this.#importBinding()
@@ -241,6 +261,10 @@ export class Argon implements HashDriverContract {
    *
    * }
    * ```
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise resolving to true if verification succeeds
    */
   async verify(hashedValue: string, plainValue: string): Promise<boolean> {
     const driver = await this.#importBinding()
@@ -296,6 +320,9 @@ export class Argon implements HashDriverContract {
    *   const newHash = await argon.make(plainText)
    * }
    * ```
+   *
+   * @param value - The hashed value to check
+   * @return True if the hash needs to be rehashed
    */
   needsReHash(value: string): boolean {
     const phcNode = this.#phcFormatter.deserialize(value)

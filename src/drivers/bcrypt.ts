@@ -34,18 +34,27 @@ export class Bcrypt implements HashDriverContract {
    * Lazily loaded bcrypt binding. Since it is a peer dependency
    * we cannot import it at top level
    */
+  /**
+   * Lazily loaded bcrypt binding. Since it is a peer dependency
+   * we cannot import it at top level
+   */
   #binding?: typeof bcrypt
 
   /**
-   * Config with defaults merged
+   * Configuration object with defaults merged
    */
   #config: Required<BcryptConfig>
 
   /**
-   * Formatter to serialize and deserialize phc string
+   * PHC formatter instance for serializing and deserializing PHC strings
    */
   #phcFormatter = new PhcFormatter<{ r: number }>()
 
+  /**
+   * Create a new Bcrypt hash driver instance
+   *
+   * @param config - Configuration options for the Bcrypt hasher
+   */
   constructor(config: BcryptConfig) {
     this.#config = {
       rounds: 10,
@@ -58,7 +67,9 @@ export class Bcrypt implements HashDriverContract {
   }
 
   /**
-   * Dynamically importing underlying binding
+   * Dynamically import the underlying bcrypt binding
+   *
+   * @return Promise resolving to the bcrypt module
    */
   async #importBinding() {
     if (this.#binding) {
@@ -70,7 +81,12 @@ export class Bcrypt implements HashDriverContract {
   }
 
   /**
-   * Generates salt for bcrypt
+   * Generate a bcrypt-formatted salt string
+   *
+   * @param salt - The salt buffer
+   * @param version - The bcrypt version
+   * @param rounds - The number of rounds
+   * @return The bcrypt-formatted salt string
    */
   #generateBcryptSalt(salt: Buffer, version: number, rounds: number) {
     const bcryptVersionCharCode = String.fromCharCode(version)
@@ -79,7 +95,7 @@ export class Bcrypt implements HashDriverContract {
   }
 
   /**
-   * Validate config
+   * Validate the provided configuration options
    */
   #validateConfig() {
     RangeValidator.validate('rounds', this.#config.rounds, [4, 31])
@@ -89,7 +105,10 @@ export class Bcrypt implements HashDriverContract {
   }
 
   /**
-   * Validate phc hash string
+   * Validate and parse a PHC hash string
+   *
+   * @param phcString - The PHC hash string to validate
+   * @return Validated PHC node object
    */
   #validatePhcString(phcString: string) {
     const phcNode = this.#phcFormatter.deserialize(phcString)
@@ -146,6 +165,9 @@ export class Bcrypt implements HashDriverContract {
    * bcrypt.isValidHash('hello world') // false
    * bcrypt.isValidHash('$bcrypt$v=98$r=10$Jtxi46WJ26OQ0khsYLLlnw$knXGfuRFsSjXdj88JydPOnUIglvm1S8')
    * ```
+   *
+   * @param value - The value to check
+   * @return True if the value is a valid Bcrypt hash format
    */
   isValidHash(value: string): boolean {
     try {
@@ -162,6 +184,9 @@ export class Bcrypt implements HashDriverContract {
    * ```ts
    * const hash = await bcrypt.make('password')
    * ```
+   *
+   * @param value - The plain text value to hash
+   * @return Promise resolving to the Bcrypt hash
    */
   async make(value: string) {
     const driver = await this.#importBinding()
@@ -195,6 +220,10 @@ export class Bcrypt implements HashDriverContract {
    *
    * }
    * ```
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise resolving to true if verification succeeds
    */
   async verify(hashedValue: string, plainValue: string): Promise<boolean> {
     const driver = await this.#importBinding()
@@ -237,6 +266,9 @@ export class Bcrypt implements HashDriverContract {
    *   const newHash = await bcrypt.make(plainText)
    * }
    * ```
+   *
+   * @param value - The hashed value to check
+   * @return True if the hash needs to be rehashed
    */
   needsReHash(value: string): boolean {
     if (value.startsWith('$2b') || value.startsWith('$2a')) {

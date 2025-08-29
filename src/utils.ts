@@ -17,6 +17,13 @@ export const MAX_UINT24 = 2 ** 24 - 1
  * Validates a number to be within a given range.
  */
 export class RangeValidator {
+  /**
+   * Validates that a value is a number within the specified range
+   *
+   * @param label - The label for the value being validated
+   * @param value - The value to validate
+   * @param range - The min and max range values
+   */
   static validate(label: string, value: unknown, range: [number, number]) {
     if (typeof value !== 'number' || !Number.isInteger(value)) {
       throw new TypeError(`The "${label}" option must be an integer`)
@@ -36,6 +43,13 @@ export class RangeValidator {
  * Validates a value to be one of the allowed values
  */
 export class EnumValidator {
+  /**
+   * Validates that a value is one of the allowed values
+   *
+   * @param label - The label for the value being validated
+   * @param value - The value to validate
+   * @param allowedValues - Array of allowed values
+   */
   static validate(label: string, value: unknown, allowedValues: any[]) {
     if (!allowedValues.includes(value)) {
       throw new TypeError(`The "${label}" option must be one of: ${allowedValues}`)

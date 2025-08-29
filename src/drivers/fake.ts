@@ -18,6 +18,12 @@ import type { HashDriverContract } from '../types.ts'
  */
 export class Fake implements HashDriverContract {
   /**
+   * Always returns true for any hash format check
+   *
+   * @param _ - The value to check (unused)
+   * @return Always returns true
+   */
+  /**
    * Always returns true
    */
   isValidHash(_: string): boolean {
@@ -25,7 +31,10 @@ export class Fake implements HashDriverContract {
   }
 
   /**
-   * Returns the value as it is
+   * Returns the value as it is without any actual hashing
+   *
+   * @param value - The plain text value
+   * @return The same value without hashing
    */
   async make(value: string) {
     return value
@@ -33,14 +42,21 @@ export class Fake implements HashDriverContract {
 
   /**
    * Checks the hash and the plain text value using
-   * equality check
+   * simple string equality check
+   *
+   * @param hashedValue - The "hashed" value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise resolving to true if values are equal
    */
   async verify(hashedValue: string, plainValue: string): Promise<boolean> {
     return hashedValue === plainValue
   }
 
   /**
-   * Always returns false
+   * Always returns false as fake hashes never need rehashing
+   *
+   * @param _ - The hash value (unused)
+   * @return Always returns false
    */
   needsReHash(_: string): boolean {
     return false

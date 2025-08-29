@@ -29,12 +29,15 @@ import { randomBytesAsync, RangeValidator, scryptAsync, MAX_UINT32 } from '../ut
  */
 export class Scrypt implements HashDriverContract {
   /**
+   * Configuration object with defaults merged
+   */
+  /**
    * Config with defaults merged
    */
   #config: Required<ScryptConfig>
 
   /**
-   * Formatter to serialize and deserialize phc string
+   * PHC formatter instance for serializing and deserializing PHC strings
    */
   #phcFormatter = new PhcFormatter<{
     n: number
@@ -42,6 +45,11 @@ export class Scrypt implements HashDriverContract {
     p: number
   }>()
 
+  /**
+   * Create a new Scrypt hash driver instance
+   *
+   * @param config - Configuration options for the Scrypt hasher
+   */
   constructor(config: ScryptConfig) {
     this.#config = {
       cost: 16384,
@@ -57,7 +65,7 @@ export class Scrypt implements HashDriverContract {
   }
 
   /**
-   * Validate config
+   * Validate the provided configuration options
    */
   #validateConfig() {
     RangeValidator.validate('blockSize', this.#config.blockSize, [1, MAX_UINT32])
@@ -78,7 +86,10 @@ export class Scrypt implements HashDriverContract {
   }
 
   /**
-   * Validate phc hash string
+   * Validate and parse a PHC hash string
+   *
+   * @param phcString - The PHC hash string to validate
+   * @return Validated PHC node object
    */
   #validatePhcString(phcString: string) {
     const phcNode = this.#phcFormatter.deserialize(phcString)
@@ -139,6 +150,9 @@ export class Scrypt implements HashDriverContract {
    * scrypt.isValidHash('hello world') // false
    * scrypt.isValidHash('$scrypt$n=16384,r=8,p=1$iILKD1gVSx6bqualYqyLBQ$DNzIISdmTQS6sFdQ1tJ3UCZ7Uun4uGHNjj0x8FHOqB0pf2LYsu9Xaj5MFhHg21qBz8l5q/oxpeV+ZkgTAj+OzQ')
    * ```
+   *
+   * @param value - The value to check
+   * @return True if the value is a valid Scrypt hash format
    */
   isValidHash(value: string): boolean {
     try {
@@ -155,6 +169,9 @@ export class Scrypt implements HashDriverContract {
    * ```ts
    * const hash = await scrypt.make('password')
    * ```
+   *
+   * @param value - The plain text value to hash
+   * @return Promise resolving to the Scrypt hash
    */
   async make(value: string) {
     const salt = await randomBytesAsync(this.#config.saltSize)
@@ -190,6 +207,10 @@ export class Scrypt implements HashDriverContract {
    *
    * }
    * ```
+   *
+   * @param hashedValue - The hashed value to verify against
+   * @param plainValue - The plain text value to verify
+   * @return Promise resolving to true if verification succeeds
    */
   async verify(hashedValue: string, plainValue: string): Promise<boolean> {
     try {
@@ -236,6 +257,9 @@ export class Scrypt implements HashDriverContract {
    *   const newHash = await scrypt.make(plainText)
    * }
    * ```
+   *
+   * @param value - The hashed value to check
+   * @return True if the hash needs to be rehashed
    */
   needsReHash(value: string): boolean {
     const phcNode = this.#phcFormatter.deserialize(value)
