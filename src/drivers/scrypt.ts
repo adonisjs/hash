@@ -11,7 +11,7 @@ import { safeEqual } from '@poppinss/utils'
 
 import { PhcFormatter } from '../phc_formatter.js'
 import type { ScryptConfig, HashDriverContract } from '../types.js'
-import { randomBytesAsync, RangeValidator, scryptAsync, MAX_UINT32 } from '../helpers.js'
+import { randomBytesAsync, RangeValidator, scryptAsync, MAX_UINT32 } from '../utils.ts'
 
 /**
  * Hash driver built on top of "scrypt" hash algorigthm. Under the hood

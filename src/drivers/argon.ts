@@ -18,7 +18,7 @@ import {
   EnumValidator,
   RangeValidator,
   randomBytesAsync,
-} from '../helpers.js'
+} from '../utils.ts'
 import type { ArgonConfig, ArgonVariants, HashDriverContract } from '../types.js'
 
 /**

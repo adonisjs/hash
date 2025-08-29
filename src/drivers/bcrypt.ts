@@ -13,7 +13,7 @@ import type bcrypt from 'bcrypt'
 import { safeEqual } from '@poppinss/utils'
 import { PhcFormatter } from '../phc_formatter.js'
 import type { HashDriverContract, BcryptConfig } from '../types.js'
-import { EnumValidator, randomBytesAsync, RangeValidator } from '../helpers.js'
+import { EnumValidator, randomBytesAsync, RangeValidator } from '../utils.ts'
 
 /**
  * Hash driver built on top of "bcrypt" hash algorigthm. Under the hood
