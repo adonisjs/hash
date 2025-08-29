@@ -8,10 +8,10 @@
  */
 
 import { test } from '@japa/runner'
-import { Hash } from '../index.js'
-import { Bcrypt } from '../src/drivers/bcrypt.js'
-import { Scrypt } from '../src/drivers/scrypt.js'
-import { HashManagerFactory } from '../factories/hash_manager.js'
+import { Hash } from '../index.ts'
+import { Bcrypt } from '../src/drivers/bcrypt.ts'
+import { Scrypt } from '../src/drivers/scrypt.ts'
+import { HashManagerFactory } from '../factories/hash_manager.ts'
 
 test.group('Hash manager factory', () => {
   test('create instance of hash manager using factory', async ({ assert, expectTypeOf }) => {

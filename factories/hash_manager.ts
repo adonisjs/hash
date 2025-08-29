@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import { HashManager } from '../index.js'
-import { Scrypt } from '../src/drivers/scrypt.js'
-import { type ManagerDriverFactory } from '../src/types.js'
+import { HashManager } from '../index.ts'
+import { Scrypt } from '../src/drivers/scrypt.ts'
+import { type ManagerDriverFactory } from '../src/types.ts'
 
 type Config<KnownHashers extends Record<string, ManagerDriverFactory>> = {
   default?: keyof KnownHashers

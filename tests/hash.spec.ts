@@ -8,8 +8,8 @@
  */
 
 import { test } from '@japa/runner'
-import { Hash } from '../src/hash.js'
-import { Argon } from '../src/drivers/argon.js'
+import { Hash } from '../src/hash.ts'
+import { Argon } from '../src/drivers/argon.ts'
 
 test.group('Hash', () => {
   test('hash text using a driver', async ({ assert }) => {

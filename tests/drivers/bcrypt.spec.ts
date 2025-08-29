@@ -10,8 +10,8 @@
 import { test } from '@japa/runner'
 import bcryptDialect from 'bcrypt'
 
-import { Bcrypt } from '../../src/drivers/bcrypt.js'
-import { PhcFormatter } from '../../src/phc_formatter.js'
+import { Bcrypt } from '../../src/drivers/bcrypt.ts'
+import { PhcFormatter } from '../../src/phc_formatter.ts'
 
 test.group('bcrypt | validate config', () => {
   test('validate rounds property', ({ assert }) => {

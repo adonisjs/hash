@@ -8,7 +8,7 @@
  */
 
 import { test } from '@japa/runner'
-import { Fake } from '../../src/drivers/fake.js'
+import { Fake } from '../../src/drivers/fake.ts'
 
 test.group('Fake', () => {
   test('hash value', async ({ assert }) => {

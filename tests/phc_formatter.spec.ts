@@ -8,7 +8,7 @@
  */
 
 import { test } from '@japa/runner'
-import { PhcFormatter } from '../src/phc_formatter.js'
+import { PhcFormatter } from '../src/phc_formatter.ts'
 
 test.group('Phc formatter', () => {
   test('serialize salt and hash as a phc string', ({ assert }) => {

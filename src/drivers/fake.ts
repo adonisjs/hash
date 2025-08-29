@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import type { HashDriverContract } from '../types.js'
+import type { HashDriverContract } from '../types.ts'
 
 /**
  * The fake implementation does not generate any hash and

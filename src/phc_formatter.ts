@@ -9,7 +9,7 @@
 
 // @ts-expect-error
 import phc from '@phc/format'
-import { type PhcNode } from './types.js'
+import { type PhcNode } from './types.ts'
 
 /**
  * Phc formatter is used to serialize a hash to a phc string and

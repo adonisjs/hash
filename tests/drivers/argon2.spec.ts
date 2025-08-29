@@ -11,8 +11,8 @@ import argon2 from 'argon2'
 import { test } from '@japa/runner'
 import { Secret } from '@poppinss/utils'
 import string from '@poppinss/utils/string'
-import { Argon } from '../../src/drivers/argon.js'
-import { PhcFormatter } from '../../src/phc_formatter.js'
+import { Argon } from '../../src/drivers/argon.ts'
+import { PhcFormatter } from '../../src/phc_formatter.ts'
 
 test.group('argon | validate config', () => {
   test('validate iterations property', async ({ assert }) => {

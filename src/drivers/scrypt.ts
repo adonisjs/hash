@@ -9,8 +9,8 @@
 
 import { safeEqual } from '@poppinss/utils'
 
-import { PhcFormatter } from '../phc_formatter.js'
-import type { ScryptConfig, HashDriverContract } from '../types.js'
+import { PhcFormatter } from '../phc_formatter.ts'
+import type { ScryptConfig, HashDriverContract } from '../types.ts'
 import { randomBytesAsync, RangeValidator, scryptAsync, MAX_UINT32 } from '../utils.ts'
 
 /**

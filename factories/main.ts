@@ -7,4 +7,4 @@
  * file that was distributed with this source code.
  */
 
-export { HashManagerFactory } from './hash_manager.js'
+export { HashManagerFactory } from './hash_manager.ts'

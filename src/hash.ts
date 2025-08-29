@@ -8,7 +8,7 @@
  */
 
 import { AssertionError } from 'node:assert'
-import type { HashDriverContract } from './types.js'
+import type { HashDriverContract } from './types.ts'
 
 /**
  * Hash and verify values using a dedicated hash driver. The Hash

@@ -9,10 +9,10 @@
 
 import { RuntimeException } from '@poppinss/utils/exception'
 
-import debug from './debug.js'
-import { Hash } from './hash.js'
-import { Fake } from './drivers/fake.js'
-import type { HashDriverContract, ManagerDriverFactory } from './types.js'
+import debug from './debug.ts'
+import { Hash } from './hash.ts'
+import { Fake } from './drivers/fake.ts'
+import type { HashDriverContract, ManagerDriverFactory } from './types.ts'
 
 /**
  * HashManager implements the manager/builder pattern to create a use multiple

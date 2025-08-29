@@ -8,11 +8,11 @@
  */
 
 import { test } from '@japa/runner'
-import { Hash } from '../src/hash.js'
-import { Argon } from '../src/drivers/argon.js'
-import { Bcrypt } from '../src/drivers/bcrypt.js'
-import { Scrypt } from '../src/drivers/scrypt.js'
-import { HashManager } from '../src/hash_manager.js'
+import { Hash } from '../src/hash.ts'
+import { Argon } from '../src/drivers/argon.ts'
+import { Bcrypt } from '../src/drivers/bcrypt.ts'
+import { Scrypt } from '../src/drivers/scrypt.ts'
+import { HashManager } from '../src/hash_manager.ts'
 
 test.group('Hash manager', () => {
   test('create hash instance from the manager', ({ assert, expectTypeOf }) => {

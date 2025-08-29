@@ -11,7 +11,7 @@ import type argon2 from 'argon2'
 import { argon2i, argon2d, argon2id } from 'argon2'
 import { safeEqual, type Secret } from '@poppinss/utils'
 
-import { PhcFormatter } from '../phc_formatter.js'
+import { PhcFormatter } from '../phc_formatter.ts'
 import {
   MAX_UINT24,
   MAX_UINT32,
@@ -19,7 +19,7 @@ import {
   RangeValidator,
   randomBytesAsync,
 } from '../utils.ts'
-import type { ArgonConfig, ArgonVariants, HashDriverContract } from '../types.js'
+import type { ArgonConfig, ArgonVariants, HashDriverContract } from '../types.ts'
 
 /**
  * Hash driver built on top of "argon2" hash algorigthm. Under the hood

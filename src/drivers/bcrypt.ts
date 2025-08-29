@@ -11,8 +11,8 @@ import * as bcryptBase64 from '../legacy/bcrypt_base64.cjs'
 
 import type bcrypt from 'bcrypt'
 import { safeEqual } from '@poppinss/utils'
-import { PhcFormatter } from '../phc_formatter.js'
-import type { HashDriverContract, BcryptConfig } from '../types.js'
+import { PhcFormatter } from '../phc_formatter.ts'
+import type { HashDriverContract, BcryptConfig } from '../types.ts'
 import { EnumValidator, randomBytesAsync, RangeValidator } from '../utils.ts'
 
 /**

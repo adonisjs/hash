@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export { Hash } from './src/hash.js'
-export { HashManager } from './src/hash_manager.js'
+export { Hash } from './src/hash.ts'
+export { HashManager } from './src/hash_manager.ts'
