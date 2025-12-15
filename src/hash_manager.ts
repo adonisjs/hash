@@ -28,9 +28,9 @@ import type { HashDriverContract, ManagerDriverFactory } from './types.ts'
  * })
  * ```
  */
-export class HashManager<KnownHashers extends Record<string, ManagerDriverFactory>>
-  implements HashDriverContract
-{
+export class HashManager<
+  KnownHashers extends Record<string, ManagerDriverFactory>,
+> implements HashDriverContract {
   /**
    * Fake hasher instance used for testing
    */
