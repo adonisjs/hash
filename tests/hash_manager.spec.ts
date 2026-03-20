@@ -123,6 +123,22 @@ test.group('Hash manager', () => {
     assert.notEqual(await manager.use('scrypt').make('hello-world'), 'hello-world')
   })
 
+  test('restore fake hashers on Symbol.dispose', async ({ assert }) => {
+    const manager = new HashManager({
+      default: 'argon',
+      list: {
+        argon: () => new Argon({}),
+      },
+    })
+
+    {
+      using _ = manager.fake()
+      assert.equal(await manager.use('argon').make('hello-world'), 'hello-world')
+    }
+
+    assert.notEqual(await manager.use('argon').make('hello-world'), 'hello-world')
+  })
+
   test('hash text using the default driver', async ({ assert }) => {
     const manager = new HashManager({
       default: 'argon',

@@ -104,12 +104,14 @@ export class HashManager<
   /**
    * Enable fake hash drivers to disable actual hashing for testing
    */
-  fake(): void {
+  fake(): { [Symbol.dispose]: () => void } {
     debug('enabling fakes')
 
     if (!this.#fakeHasher) {
       this.#fakeHasher = new Hash(new Fake())
     }
+
+    return { [Symbol.dispose]: () => this.restore() }
   }
 
   /**
