@@ -132,7 +132,8 @@ test.group('Hash manager', () => {
     })
 
     {
-      using _ = manager.fake()
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      using _fake = manager.fake()
       assert.equal(await manager.use('argon').make('hello-world'), 'hello-world')
     }
 

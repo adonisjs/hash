@@ -104,7 +104,7 @@ export class HashManager<
   /**
    * Enable fake hash drivers to disable actual hashing for testing
    */
-  fake(): { [Symbol.dispose]: () => void } {
+  fake() {
     debug('enabling fakes')
 
     if (!this.#fakeHasher) {
